@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    font-family: Asap, sans-serif;
+    height: 100%;
+}
+
+.header {
+    background-color: #0078B5;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    align-items: center;
+}
+
+.brand a {
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.brand button {
+    font-size: 20px;
+    background: none;
+    cursor:pointer;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.brand button:hover {
+    color: coral;
+}
+
+.header-links a {
+    text-decoration: none;
+    color: #ffffff;
+    border: 1px solid white;
+    padding: 5px 20px;
+}
+
+.header-links a:hover {
+    border: 1px solid coral;
+}
+
+.sidebar {
+    position: fixed;
+    transform: translateX(-30rem);
+    width: 20rem;
+    background-color: #f0f0f0;
+    height: 100%;
+    transition: all .5s;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar button {
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    font-size: 30px;
+    padding-top: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    border-radius: 50%;
+    border: 1px #000000 solid;
+}
