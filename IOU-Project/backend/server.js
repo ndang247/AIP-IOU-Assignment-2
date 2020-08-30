@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const port = 8080;
 
 // store the connection's string
-const connString = 'mongodb+srv://dbUser:notapassword@aipiou.d2nlx.mongodb.net/test?retryWrites=true&w=majority';
+const url = 'mongodb+srv://dbUser:notapassword@aipiou.d2nlx.mongodb.net/HDstudents?retryWrites=true&w=majority';
 
 const app = express();
 app.use(express.json()); // Make sure it comes back as json
 
 // connection to the cloud database
-mongoose.connect(connString, {
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true 
 });
