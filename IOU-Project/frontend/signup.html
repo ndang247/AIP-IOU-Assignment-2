@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand">
+                <button onclick="openSidebar()">
+                    &#9776;
+                </button>
+                <a href="index.html">IOU</a>
+            </div>
+
+            <div class="header-links">
+                <a href="signin.html">Sign in</a>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <button onclick="closeSidebar()">x</button>
+        </aside>
+
+        <main>
+            
+        </main>
+        <footer class = 'footer'>
+            All rights reserved
+        </footer>
+    </div>
+
+    <script>
+        function openSidebar() {
+            document.querySelector(".sidebar").classList.add("open");
+        }
+        function closeSidebar() {
+            document.querySelector(".sidebar").classList.remove("open");
+        }
+    </script>
+
+</body>
+</html>
