@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ItemInstance = new mongoose.Schema({
+const itemInstanceSchema = new mongoose.Schema({
     item: {
         type: String, 
         trim: true, 
@@ -14,4 +14,4 @@ const ItemInstance = new mongoose.Schema({
     }
 });
 
-modules.exports = mongoose.model('ItemInstance', ItemInstance);
+modules.exports = mongoose.model('ItemInstance', itemInstanceSchema);

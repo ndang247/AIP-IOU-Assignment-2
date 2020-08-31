@@ -1,5 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+// require the files in routes dir
+const accountsRouter = require('./routes/accounts');
+const favoursRouter = require('./routes/favours');
+const itemInstancesRouter = require('./routes/itemInstances');
+const requesttsRouter = require('./routes/requests');
+const usersRouter = require('./routes/users');
 
 const port = 8080;
 
@@ -7,7 +14,13 @@ const port = 8080;
 const url = 'mongodb+srv://dbUser:notapassword@aipiou.d2nlx.mongodb.net/HDstudents?retryWrites=true&w=majority';
 
 const app = express();
-app.use(express.json()); // Make sure it comes back as json
+// make sure it comes back as json
+app.use(express.json());
+// parsing the URL-encoded data with the querystring library
+// i.e. The value can be string or array
+app.use(bodyParser.urlencoded( {extended: false} ));
+// pass the body as json
+app.use(bodyParser.json());
 
 // connection to the cloud database
 mongoose.connect(url, {
@@ -20,6 +33,13 @@ const connection = mongoose.connection;
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully');  
 });
+
+// when user goes to there end point the file in routes will be used
+app.use('/accounts', accountsRouter);
+app.use('/favours', favoursRouter);
+app.use('/itemInstances', itemInstancesRouter);
+app.use('/requests', requesttsRouter);
+app.use('/users', usersRouter);
 
 app.listen(port, () => { 
   console.log(`Server is running on port ${port}`) 

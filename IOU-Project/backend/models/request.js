@@ -1,9 +1,10 @@
-import Favour from './Favour.js'
-import User from './User.js'
-import ItemInstance from './ItemInstance.js'
+import favourSchema from './favour.js'
+import userSchema from './user.js'
+import itemInstanceSchema from './itemInstance.js'
+
 const mongoose = require('mongoose');
 
-const Request = new mongoose.Schema({
+const requestSchema = new mongoose.Schema({
     task: {
         type: String, 
         maxlength: 20,
@@ -18,19 +19,19 @@ const Request = new mongoose.Schema({
     },
     reward: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ItemInstance',
+        ref: 'itemInstanceSchema',
     }],
     requester: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'userSchema'
     },
     accepter: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'userSchema'
     },
     favour: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Favour'
+        ref: 'favourSchema'
     },
     posted_date: {
         type: Date,
@@ -40,4 +41,4 @@ const Request = new mongoose.Schema({
     },
 });
 
-modules.exports = mongoose.model('Request', Request);
+modules.exports = mongoose.model('Request', requestSchema);
