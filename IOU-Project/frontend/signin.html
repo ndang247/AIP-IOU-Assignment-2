@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>IOU</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="brand">
+                <button onclick="openSidebar()">
+                    &#9776;
+                </button>
+                <a href="index.html">IOU</a>
+            </div>
+
+            <div class="header-links">
+                <a href="index.html">Home</a>
+            </div>
+        </header>
+
+        <aside class="sidebar">
+            <button onclick="closeSidebar()">x</button>
+        </aside>
+
+        <main>
+            <form class = 'form-signin'>  
+                <div>
+                    <h1 class = 'signinTitle'>Account sign in</h1>
+                </div>             
+                <div>  
+                    <input type = 'email' id = "inputEmail" class = "form-control" placeholder = "Email adress" required autofocus>
+                </div><br>
+                <div>
+                    <input type = 'password' id = "inputPassword" class = "form-control" placeholder="Password" required>
+                </div><br>
+                <div class = 'checkbox mb-3'>
+                    <label>
+                        <input type ="checkbox" value="remember-me">
+                        "Remember me"
+                    </label>
+                </div><br>
+                <button class = 'btn btn-lg btn-primary btn-bloick' type = 'submit'>
+                    Sign in
+                </button>
+                <br><br>
+                <a href ='signup.html'>Are you new here? Sign up</a>
+            </form>
+        </main>
+        <footer class = 'footer'>
+            © All rights reserved
+        </footer>
+    </div>
+
+    <script>
+        function openSidebar() {
+            document.querySelector(".sidebar").classList.add("open");
+        }
+        function closeSidebar() {
+            document.querySelector(".sidebar").classList.remove("open");
+        }
+    </script>
+    
+</body>
+</html>
