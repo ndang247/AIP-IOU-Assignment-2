@@ -26,13 +26,40 @@
         </aside>
 
         <main>
-            
+            <form class="form-signup">
+                <h1 class="signupTitle">Sign up</h1><br>
+                <div class="field-firstname">
+                    <input type="text" id="input-fname" class="form-control" placeholder="First Name" required>
+                </div><br>
+    
+                <div class="field-lastname">
+                    <input type="text" id="input-lname" class="form-control" placeholder="Last Name" required>
+                </div><br>
+    
+                <div class="field-email">
+                   
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email" required>
+                </div><br>
+    
+                <div class="field-password">
+                    
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                </div><br>
+    
+                <div class="field-confirm">
+                    
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required>
+                </div><br>
+    
+                <div class="btn-signup" type="submit">Sign up</div>
+            </form>
         </main>
         <footer class = 'footer'>
             © All rights reserved
         </footer>
     </div>
 
+ 
     <script>
         function openSidebar() {
             document.querySelector(".sidebar").classList.add("open");
