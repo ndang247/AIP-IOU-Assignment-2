@@ -1,7 +1,8 @@
-import Account from './Account.js'
+import accountSchema from './Account.js'
+
 const mongoose = require('mongoose');
 
-const User = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         maxlength: 20, 
@@ -22,8 +23,8 @@ const User = new mongoose.Schema({
     },
     account: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Account'
+        ref: 'accountSchema'
     },
 });
 
-modules.exports = mongoose.model('User', User);
+modules.exports = mongoose.model('User', userSchema);

@@ -1,19 +1,21 @@
-import User from './User.js'
-import ItemInstance from './ItemInstance.js'
+// why import those?
+import userSchema from './user.js'
+import itemInstanceSchema from './itemInstance.js'
+
 const mongoose = require('mongoose');
 
-const Favour = new mongoose.Schema({
+const favourSchema = new mongoose.Schema({
     offerer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'userSchema',
     },     
     receiver: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'userSchema',
     },
     items: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ItemInstances'
+        ref: 'itemInstanceSchema'
     }],
     date: {
         type: Date
@@ -27,4 +29,4 @@ const Favour = new mongoose.Schema({
     },
 });
 
-modules.exports = mongoose.model('Favour', Favour);
+modules.exports = mongoose.model('Favour', favourSchema);

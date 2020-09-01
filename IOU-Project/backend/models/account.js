@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const Account = new mongoose.Schema({
+// schema is to define the type of field and whether it is required
+const accountSchema = new mongoose.Schema({
     username: {
         type: String, 
         trim: true, 
@@ -8,7 +9,7 @@ const Account = new mongoose.Schema({
     },     
     password: {
         type: String, 
-        trim: true, 
+        trim: true, // make sure the users do not input spaces 
         required: true
     }
 });
@@ -21,4 +22,4 @@ Account.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-modules.exports = mongoose.model('Account', Account);
+modules.exports = mongoose.model('Account', accountSchema);
