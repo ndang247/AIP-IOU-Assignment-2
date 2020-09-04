@@ -8,7 +8,7 @@ const itemInstancesRouter = require('./routes/itemInstances');
 const requesttsRouter = require('./routes/requests');
 const usersRouter = require('./routes/users');
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 // store the connection's string
 const url = 'mongodb+srv://dbUser:notapassword@aipiou.d2nlx.mongodb.net/HDstudents?retryWrites=true&w=majority';
@@ -25,7 +25,8 @@ app.use(bodyParser.json());
 // connection to the cloud database
 mongoose.connect(url, {
   useNewUrlParser: true,
-  useUnifiedTopology: true 
+  useCreateIndex: true,
+  useUnifiedTopology: true
 });
 
 const connection = mongoose.connection;
@@ -34,7 +35,7 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');  
 });
 
-// when user goes to there end point the file in routes will be used
+// when user goes to end point the file in routes will be used
 app.use('/accounts', accountsRouter);
 app.use('/favours', favoursRouter);
 app.use('/itemInstances', itemInstancesRouter);

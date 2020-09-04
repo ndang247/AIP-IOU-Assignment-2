@@ -9,6 +9,8 @@ function App() {
   return (
     <Router>
       <Navbar/>
+      <Route path='/' component={HomePage}/>
+      <Route path='/signin' component={SignIn}/>
     </Router>
   );
 }
