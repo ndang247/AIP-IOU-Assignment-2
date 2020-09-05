@@ -8,7 +8,7 @@ const itemInstancesRouter = require('./routes/itemInstances');
 const requesttsRouter = require('./routes/requests');
 const usersRouter = require('./routes/users');
 
-const port = process.env.PORT || 8080;
+const port = process.env.port || 8080;
 
 // store the connection's string
 const url = 'mongodb+srv://dbUser:notapassword@aipiou.d2nlx.mongodb.net/HDstudents?retryWrites=true&w=majority';
