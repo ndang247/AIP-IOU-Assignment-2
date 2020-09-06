@@ -26,6 +26,10 @@ export default class SignUp extends React.Component {
                                 <input type='password' id='inputPassword' className='form-control' placeholder='Password' required='true'/>
                             </div>
                             <br></br>
+                            <div className='field-confirm'>
+                                <input type='password' id='confirmPassword' className='form-control' placeholder='Confirm password' required='true'/>
+                            </div>
+                            <br></br>
                             <div className='btn-signup'>
                                 <button className='btn-signup'>Sign up</button>
                             </div>
