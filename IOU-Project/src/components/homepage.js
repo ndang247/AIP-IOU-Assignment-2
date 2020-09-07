@@ -9,7 +9,7 @@ export default class HomePage extends React.Component {
                 <section className='jumbotron text-centre'>
                     <div className='container'>
                         <h1 className='jumbotron-heading'>Public Requests</h1>
-                        <table>
+                        <table className="request-table">
                             <thead>
                                 <tr>
                                     <th>Username</th>
@@ -19,6 +19,36 @@ export default class HomePage extends React.Component {
                                     <th>When</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Nam Long Nguyen</td>
+                                    <td>100,000$</td>
+                                    <td>Nam Long Nguyen</td>
+                                    <td>100,000$</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Nam Dang</td>
+                                    <td>88,000$</td>
+                                    <td>Nam Dang</td>
+                                    <td>88,000$</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Harry</td>
+                                    <td>50,000$</td>
+                                    <td>Harry</td>
+                                    <td>50,000$</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Hoang Long Nguyen</td>
+                                    <td>50$</td>
+                                    <td>Hoang Long Nguyen</td>
+                                    <td>50$</td>
+                                </tr>
+                            </tbody>
                         </table>
                         <br/>
                         <p>

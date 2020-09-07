@@ -132,6 +132,7 @@
     padding: 2rem;
     border: .1rem #c0c0c0 solid;
     border-radius: .5rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .form-control {
@@ -233,6 +234,60 @@ main {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+/*Leaderboard*/
+.leaderboard-table, .request-table {
+    border-collapse: collapse;
+    margin: 25px 40px;
+    font-size: 1.2em;
+    min-width: 400px;
+    font-family: Asap, sans-serif;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.leaderboard-table thead tr,
+.request-table thead tr {
+    background-color: #0078B5;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.leaderboard-table th,
+.leaderboard-table td, 
+.request-table th, 
+.request-table td {
+    padding: 12px 15px;
+
+}
+
+.leaderboard-table tbody tr, 
+.request-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.leaderboard-table tbody tr:nth-of-type(even),
+.request-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.leaderboard-table tbody tr:last-of-type,
+.request-table tbody tr:last-of-type {
+    border-bottom: 2px solid #0078B5;
+}
+
+.leaderboard-title {
+    font-weight: bold;
+    margin: 1rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0078B5;
+}
+
+
+
 /* cards 
 .py-5 {
     padding-bottom: 3rem!important;

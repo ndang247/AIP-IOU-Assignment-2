@@ -14,8 +14,11 @@ export default class Navbar extends React.Component {
                         <Link to='/'>IOU</Link>
                     </div>
                     <div className="header-links">
+                        <Link to='/'>Home</Link>
+                        <Link to='/leaderboard'>Leaderboard</Link>
                         <Link to='/signup'>Sign Up</Link>
                         <Link to='/signin'>Sign In</Link>
+                        
                     </div>
                 </header>
 

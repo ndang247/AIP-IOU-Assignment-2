@@ -6,6 +6,7 @@ import HomePage from './components/homepage';
 import SignIn from './components/signin';
 import SignUp from './components/signup';
 import Footer from './components/footer';
+import Leaderboard from './components/leaderboard';
 import "./Style.css";
 
 // react will render the component based on the path/route specified
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' exact component={HomePage}/>
         <Route path='/signin' component={SignIn}/>
         <Route path='/signup' component={SignUp}/>
+        <Route path='/leaderboard' component={Leaderboard}/>
         <Route path='/' component={Footer}/>
       </div>
     </Router>
