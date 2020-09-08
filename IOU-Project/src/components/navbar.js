@@ -4,11 +4,18 @@ import "../Style.css"
 
 export default class Navbar extends React.Component {
     render() {
+        const openSidebar = () => {
+            document.querySelector(".sidebar").classList.add("open");
+        }
+        
+        const closeSidebar = () => {
+            document.querySelector(".sidebar").classList.remove("open");
+        }
         return (
             <div>
                 <header className="header">
                     <div className="brand">
-                        <button>
+                        <button onClick={openSidebar}>
                             &#9776;
                         </button>
                         <Link to='/'>IOU</Link>
@@ -18,12 +25,11 @@ export default class Navbar extends React.Component {
                         <Link to='/leaderboard'>Leaderboard</Link>
                         <Link to='/signup'>Sign Up</Link>
                         <Link to='/signin'>Sign In</Link>
-                        
                     </div>
                 </header>
 
                 <aside className="sidebar">
-                    <button>x</button>
+                    <button onClick={closeSidebar}>x</button>
                 </aside>
             </div>
         );
