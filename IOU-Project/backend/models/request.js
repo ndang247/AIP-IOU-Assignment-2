@@ -1,44 +1,29 @@
-import favourSchema from './favour.js'
-import userSchema from './user.js'
-import itemInstanceSchema from './itemInstance.js'
+const { Sequelize, DataTypes, Model } = require('sequelize');
+import {sequelize} from '../database/connection.js';
 
-const mongoose = require('mongoose');
-
-const requestSchema = new mongoose.Schema({
+const Request = sequelize.define('Request', 
+{
+    // Model attributes are defined here
+    id:{
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
     task: {
-        type: String, 
-        maxlength: 20,
-        trim: true, 
-        required: true
-    },     
+      type: DataTypes.STRING(20),
+      allowNull: false
+    },
     description: {
-        type: String,
-        maxlength: 150, 
-        trim: true, 
-        required: true
+      type: DataTypes.STRING(100),
+      allowNull: false
     },
-    reward: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'itemInstanceSchema',
-    }],
-    requester: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userSchema'
-    },
-    accepter: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userSchema'
-    },
-    favour: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'favourSchema'
-    },
-    posted_date: {
-        type: Date,
-    },
-    accepted_date: {
-        type: Date
-    },
+    // fk are in relationship.js
+    
+  }, {
+    // Other model options go here
+    sequelize, // We need to pass the connection instance
+    freezeTableName: true
 });
 
-modules.exports = mongoose.model('Request', requestSchema);
+module.exports = Request

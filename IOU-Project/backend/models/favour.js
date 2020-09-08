@@ -1,32 +1,23 @@
-// why import those?
-import userSchema from './user.js'
-import itemInstanceSchema from './itemInstance.js'
+const { Sequelize, DataTypes, Model } = require('sequelize');
+import {sequelize} from '../database/connection.js';
 
-const mongoose = require('mongoose');
-
-const favourSchema = new mongoose.Schema({
-    offerer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userSchema',
-    },     
-    receiver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'userSchema',
+const Favour = sequelize.define('Favour', {
+  // Model attributes are defined here
+    id:{
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
     },
-    items: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'itemInstanceSchema'
-    }],
-    date: {
-        type: Date
-    },
-    paid_back_date: {
-        type: Date
-    },
-    isPaid: {
-        type: Boolean,
-        default: false
-    },
+    isPaid:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
+    // fk are in relationships.js
+  }, {
+  // Other model options go here
+  sequelize, // We need to pass the connection instance
+  freezeTableName: true
 });
 
-modules.exports = mongoose.model('Favour', favourSchema);
+module.exports = Favour
