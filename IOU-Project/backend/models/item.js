@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 import {sequelize} from '../database/connection.js';
 
-const User = sequelize.define('User', {
+const Item = sequelize.define('Item', 
+{
     // Model attributes are defined here
     id:{
       type: DataTypes.INTEGER(11),
@@ -9,29 +10,15 @@ const User = sequelize.define('User', {
       autoIncrement: true,
       primaryKey: true
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    email:{
-      type: DataTypes.email,
-      allowNull: false,
-      validate:{
-        isEmail: true
-      }
-    },
-    password:{
-      type: DataTypes.password,
-      allowNull: false
+    item_name:{
+        type: DataTypes.STRING
     }
+    // fk are in relationship.js
+    
   }, {
     // Other model options go here
     sequelize, // We need to pass the connection instance
     freezeTableName: true
 });
 
-module.exports = User
+module.exports = Item
