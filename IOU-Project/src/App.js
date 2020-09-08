@@ -3,26 +3,24 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/navbar';
 import HomePage from './components/homepage';
-import SignIn from './components/signin';
-import SignUp from './components/signup';
-import Footer from './components/footer';
 import Leaderboard from './components/leaderboard';
+import SignUp from './components/signup';
+import SignIn from './components/signin';
+import Footer from './components/footer';
 import "./Style.css";
 
 // react will render the component based on the path/route specified
 function App() {
-
-  
   return (
     <Router>
       <div className='container'>
         <Navbar/>
         <br/>
         <Route path='/' exact component={HomePage}/>
-        <Route path='/signin' component={SignIn}/>
         <Route path='/signup' component={SignUp}/>
+        <Route path='/signin' component={SignIn}/>
         <Route path='/leaderboard' component={Leaderboard}/>
-        <Route path='/' component={Footer}/>
+        <Footer/>
       </div>
     </Router>
   );

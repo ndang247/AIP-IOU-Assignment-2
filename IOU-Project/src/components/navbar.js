@@ -3,19 +3,18 @@ import { Link } from "react-router-dom";
 import "../Style.css"
 
 export default class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.openSidebar = this.openSidebar.bind(this);
+        this.closeSidebar = this.closeSidebar.bind(this);
+    }
+
     render() {
-        const openSidebar = () => {
-            document.querySelector(".sidebar").classList.add("open");
-        }
-        
-        const closeSidebar = () => {
-            document.querySelector(".sidebar").classList.remove("open");
-        }
         return (
             <div>
                 <header className="header">
                     <div className="brand">
-                        <button onClick={openSidebar}>
+                        <button onClick={this.openSidebar}>
                             &#9776;
                         </button>
                         <Link to='/'>IOU</Link>
@@ -29,9 +28,18 @@ export default class Navbar extends React.Component {
                 </header>
 
                 <aside className="sidebar">
-                    <button onClick={closeSidebar}>x</button>
+                    <button onClick={this.closeSidebar}>x</button>
                 </aside>
             </div>
         );
+    }
+
+    // Use react-side-bar or refs instead of acccessing DOM directly
+    openSidebar() {
+        document.querySelector(".sidebar").classList.add("open");
+    }
+    
+    closeSidebar() {
+        document.querySelector(".sidebar").classList.remove("open");
     }
 }
