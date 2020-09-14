@@ -1,29 +1,34 @@
-const {DataTypes} = require('sequelize');
-import {sequelize} from '../database/connection.js';
-
-const RequestItem = sequelize.define('RequestItem', {
-  // Model attributes are defined here
-  requestId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Request,
-      key: 'id'
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, Sequelize) => {
+  class RequestItem extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      RequestItem.belongsTo(models.Item, {
+        onDelete: 'CASCADE',
+        foreignKey: 'itemId'
+      });
+      RequestItem.belongsTo(models.Request, {
+        onDelete: 'CASCADE',
+        foreignKey: 'requestId'
+      });
     }
-  },
-  itemId: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Item, 
-      key: 'id'
-    }
-  },
-  quantity:{
-    type: DataTypes.INTEGER,
-  }
-}, {
-  // Other model options go here
-  sequelize, // We need to pass the connection instance
-  freezeTableName: true
-});
-
-module.exports = RequestItem
+  };
+  RequestItem.init({
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+  }, {
+    sequelize,
+    modelName: 'RequestItem',
+  });
+  return RequestItem;
+};

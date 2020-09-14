@@ -1,23 +1,42 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-import {sequelize} from '../database/connection.js';
-
-const Favour = sequelize.define('Favour', {
-  // Model attributes are defined here
-    id:{
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    isPaid:{
-      type: DataTypes.BOOLEAN,
-      defaultValue: true
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Favour extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      Favour.belongsTo(models.User, {
+        onDelete: 'CASCADE',
+        foreignKey: 'receiverId'
+      });
+      Favour.belongsTo(models.User, {
+        onDelete: 'CASCADE',
+        foreignKey: 'receiverId'
+      });
+      
+      // Super M:N relationship with Item
+      Favour.belongsToMany(models.Item, {
+        through: models.FavourItem, 
+        foreignKey: 'favourId'
+      });
+      Favour.hasMany(models.FavourItem, {
+        foreignKey: 'favourId'
+      });
     }
-    // fk are in relationships.js
+  };
+  Favour.init({
+    proof: DataTypes.BLOB,
+    offererId: DataTypes.INTEGER,
+    receiverId: DataTypes.INTEGER,
   }, {
-  // Other model options go here
-  sequelize, // We need to pass the connection instance
-  freezeTableName: true
-});
-
-module.exports = Favour
+    sequelize,
+    modelName: 'Favour',
+  });
+  return Favour;
+};

@@ -1,14 +1,48 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-import {sequelize} from '../database/connection.js';
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, Sequelize) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      User.belongsToMany(models.User, {
+        through: models.Favour, 
+        foreignKey: 'offererId'
+      });
+      User.belongsToMany(models.User, {
+        through: models.Favour, 
+        foreignKey: 'receiverId'
+      });
+      User.hasMany(models.Favour, {
+        foreignKey: {
+          name: 'offererId'
+        }
+      });
+      User.hasMany(models.Favour, {
+        foreignKey: {
+          name: 'receiverId'
+        }
+      });
+      User.hasMany(models.Request, {
+        foreignKey: {
+          name: 'requesterId'
+        }
+      });
+      User.hasMany(models.Request, {
+        foreignKey: {
+          name: 'accepterId'
+        }
+      });
 
-const User = sequelize.define('User', {
-    // Model attributes are defined here
-    id:{
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
+    }
+  };
+  User.init({
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -18,20 +52,19 @@ const User = sequelize.define('User', {
       allowNull: false
     },
     email:{
-      type: DataTypes.email,
+      type: DataTypes.STRING,
       allowNull: false,
       validate:{
         isEmail: true
       }
     },
     password:{
-      type: DataTypes.password,
+      type: DataTypes.STRING,
       allowNull: false
     }
   }, {
-    // Other model options go here
-    sequelize, // We need to pass the connection instance
-    freezeTableName: true
-});
-
-module.exports = User
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};

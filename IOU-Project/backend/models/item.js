@@ -1,24 +1,43 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-import {sequelize} from '../database/connection.js';
-
-const Item = sequelize.define('Item', 
-{
-    // Model attributes are defined here
-    id:{
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    item_name:{
-        type: DataTypes.STRING
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Item extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      // Super M:N relationship with Favour
+      Item.belongsToMany(models.Favour, {
+        through: models.FavourItem, 
+        foreignKey: 'itemId'
+      });
+      Item.hasMany(models.FavourItem, {
+        foreignKey: 'itemId'
+      });
+      
+      // Super M:N relationship with Request
+      Item.belongsToMany(models.Request, {
+        through: models.FavourItem, 
+        foreignKey: 'itemId'
+      });
+      Item.hasMany(models.RequestItem, {
+        foreignKey: 'itemId'
+      });
     }
-    // fk are in relationship.js
-    
+  };
+  Item.init({
+    itemName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
   }, {
-    // Other model options go here
-    sequelize, // We need to pass the connection instance
-    freezeTableName: true
-});
-
-module.exports = Item
+    sequelize,
+    modelName: 'Item',
+  });
+  return Item;
+};

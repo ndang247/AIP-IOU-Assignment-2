@@ -1,29 +1,42 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-import {sequelize} from '../database/connection.js';
-
-const Request = sequelize.define('Request', 
-{
-    // Model attributes are defined here
-    id:{
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    task: {
-      type: DataTypes.STRING(20),
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING(100),
-      allowNull: false
-    },
-    // fk are in relationship.js
-    
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Request extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      Request.belongsTo(models.User, {
+        onDelete: 'CASCADE',
+        foreignKey: 'requesterId'
+      });
+      Request.belongsTo(models.User, {
+        onDelete: 'CASCADE',
+        foreignKey: 'accepterId'
+      });
+      
+      // Super M:N relationship with Item
+      Request.belongsToMany(models.Item, {
+        through: models.RequestItem, 
+        foreignKey: 'requestId'
+      });
+      Request.hasMany(models.RequestItem, {
+        foreignKey: 'requestId'
+      });
+    }
+  };
+  Request.init({
+    proof: DataTypes.BLOB,
+    requesterId: DataTypes.INTEGER,
+    accepterId: DataTypes.INTEGER,
   }, {
-    // Other model options go here
-    sequelize, // We need to pass the connection instance
-    freezeTableName: true
-});
-
-module.exports = Request
+    sequelize,
+    modelName: 'Request',
+  });
+  return Request;
+};
