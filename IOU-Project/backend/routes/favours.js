@@ -1,0 +1,2 @@
+//get favour
+//post favour
