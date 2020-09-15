@@ -1,30 +1,70 @@
-import accountSchema from './Account.js'
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, Sequelize) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      User.belongsToMany(models.User, {
+        through: models.Favour, 
+        foreignKey: 'offererId'
+      });
+      User.belongsToMany(models.User, {
+        through: models.Favour, 
+        foreignKey: 'receiverId'
+      });
+      User.hasMany(models.Favour, {
+        foreignKey: {
+          name: 'offererId'
+        }
+      });
+      User.hasMany(models.Favour, {
+        foreignKey: {
+          name: 'receiverId'
+        }
+      });
+      User.hasMany(models.Request, {
+        foreignKey: {
+          name: 'requesterId'
+        }
+      });
+      User.hasMany(models.Request, {
+        foreignKey: {
+          name: 'accepterId'
+        }
+      });
 
-const mongoose = require('mongoose');
-
-const userSchema = new mongoose.Schema({
+    }
+  };
+  User.init({
     firstName: {
-        type: String,
-        maxlength: 20, 
-        trim: true,
-        default: ''
+      type: DataTypes.STRING,
+      allowNull: false
     },
     lastName: {
-        type: String,
-        maxlength: 20,
-        trim: true,
-        default: ''
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    autobiography: {
-        type: String,
-        maxlength: 150,
-        trim: true,
-        default: ''
+    email:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        isEmail: true
+      }
     },
-    account: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'accountSchema'
-    },
-});
-
-modules.exports = mongoose.model('User', userSchema);
+    password:{
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};
