@@ -4,13 +4,13 @@ import {sequelize} from '../database/connection.js';
 const Item = sequelize.define('Item', 
 {
     // Model attributes are defined here
-    id:{
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    item_name:{
+    item_name: {
         type: DataTypes.STRING
     }
     // fk are in relationship.js

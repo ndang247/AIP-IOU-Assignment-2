@@ -4,7 +4,7 @@ import {sequelize} from '../database/connection.js';
 const Request = sequelize.define('Request', 
 {
     // Model attributes are defined here
-    id:{
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       autoIncrement: true,

@@ -2,26 +2,26 @@ const { DataTypes } = require("Sequelize");
 const { useReducer } = require("react");
 
 //
-User.hasMany(Favour,{
+User.hasMany(Favour, {
     foreignKey: "offererId"
 })
 Favour.belongsTo(User);
 
 //
-User.hasMany(Favour,{
+User.hasMany(Favour, {
     foreignKey: "receiverId"
 })
 Favour.belongsTo(User);
 
 
 //
-User.hasMany(Request,{
+User.hasMany(Request, {
     foreignKey: "requesterId"
 })
 Request.belongsTo(User);
 
 //
-User.hasMany(Request,{
+User.hasMany(Request, {
     foreignKey: "accepterId",
     
 })

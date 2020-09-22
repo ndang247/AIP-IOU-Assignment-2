@@ -17,7 +17,7 @@ const FavourItem = sequelize.define('FavourItem', {
       key: 'id'
     }
   },
-  quantity:{
+  quantity: {
     type: DataTypes.INTEGER,
   }
 }, {

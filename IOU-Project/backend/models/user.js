@@ -3,7 +3,7 @@ import {sequelize} from '../database/connection.js';
 
 const User = sequelize.define('User', {
     // Model attributes are defined here
-    id:{
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       autoIncrement: true,
@@ -17,14 +17,14 @@ const User = sequelize.define('User', {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email:{
+    email: {
       type: DataTypes.email,
       allowNull: false,
-      validate:{
+      validate: {
         isEmail: true
       }
     },
-    password:{
+    password: {
       type: DataTypes.password,
       allowNull: false
     }

@@ -17,7 +17,7 @@ const RequestItem = sequelize.define('RequestItem', {
       key: 'id'
     }
   },
-  quantity:{
+  quantity: {
     type: DataTypes.INTEGER,
   }
 }, {

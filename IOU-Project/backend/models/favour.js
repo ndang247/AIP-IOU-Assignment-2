@@ -3,13 +3,13 @@ import {sequelize} from '../database/connection.js';
 
 const Favour = sequelize.define('Favour', {
   // Model attributes are defined here
-    id:{
+    id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    isPaid:{
+    isPaid: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
