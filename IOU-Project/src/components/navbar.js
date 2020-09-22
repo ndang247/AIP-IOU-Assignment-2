@@ -1,45 +1,61 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Sidebar from "react-sidebar";
 import "../Style.css"
 
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
-        this.openSidebar = this.openSidebar.bind(this);
-        this.closeSidebar = this.closeSidebar.bind(this);
+        this.state = {
+            sidebarOpen: false
+          };
+          this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
-
-    render() {
-        return (
-            <div>
-                <header className="header">
-                    <div className="brand">
-                        <button onClick={this.openSidebar}>
-                            &#9776;
-                        </button>
-                        <Link to='/'>IOU</Link>
-                    </div>
-                    <div className="header-links">
-                        <Link to='/'>Home</Link>
-                        <Link to='/leaderboard'>Leaderboard</Link>
-                        <Link to='/signup'>Sign Up</Link>
-                        <Link to='/signin'>Sign In</Link>
-                    </div>
-                </header>
-
-                <aside className="sidebar">
-                    <button onClick={this.closeSidebar}>x</button>
-                </aside>
-            </div>
-        );
-    }
-
-    // Use react-side-bar or refs instead of acccessing DOM directly
-    openSidebar() {
-        document.querySelector(".sidebar").classList.add("open");
+    onSetSidebarOpen(open) {
+        this.setState({ sidebarOpen: open });
     }
     
-    closeSidebar() {
-        document.querySelector(".sidebar").classList.remove("open");
+    render() {
+        return (
+        <div>
+            <header className="header">
+                <div className="brand">
+                    <Sidebar
+                    sidebar={
+                    <header className="header">
+                        <div className="brand">
+                            <div className="header-links">
+                                <div>
+                                    <Link to='/'>Home</Link>
+                                </div>
+                                <br/>
+                                <div>
+                                    <Link to='/leaderboard'>Leaderboard</Link>
+                                </div>
+                                <br/>
+                                <div>
+                                    <Link to='/signup'>Sign Up</Link>
+                                </div>
+                                <br/>
+                                <div>
+                                    <Link to='/signin'>Sign In</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    }
+                    open={this.state.sidebarOpen}
+                    onSetOpen={this.onSetSidebarOpen}
+                    styles={{ sidebar: { background: "#0078B5" } }}
+                    >
+                        <button onClick={() => this.onSetSidebarOpen(true)}>
+                            &#9776;
+                        </button>
+                    </Sidebar>
+                    <Link to='/'>IOU</Link>
+                </div>
+            </header>
+        </div>
+        );
     }
 }

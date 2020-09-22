@@ -5,7 +5,7 @@ import "../Style.css"
 export default class HomePage extends React.Component {
     render() {
         return (
-            <main>
+            <body>
                 <section className='jumbotron text-centre'>
                     <div className='container'>
                         <h1 className='jumbotron-heading'>Public Requests</h1>
@@ -51,13 +51,11 @@ export default class HomePage extends React.Component {
                             </tbody>
                         </table>
                         <br/>
-                        <p>
-                            <Link to='/leaderboard' className='btn btn-primary my-2'>Leaderboard</Link>
-                            <Link to='/signup' className='btn btn-primary my-2'>Sign in to post a request</Link>
-                        </p>
+                        <Link to='/leaderboard' className='btn btn-primary my-2'>Leaderboard</Link>
+                        <Link to='/signup' className='btn btn-primary my-2'>Sign in to post a request</Link>
                     </div>
                 </section>
-            </main>
+            </body>
         );
     }
 }

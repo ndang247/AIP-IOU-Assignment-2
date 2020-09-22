@@ -51,14 +51,14 @@ module.exports = (sequelize, Sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email:{
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
+      validate: {
         isEmail: true
       }
     },
-    password:{
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     }
