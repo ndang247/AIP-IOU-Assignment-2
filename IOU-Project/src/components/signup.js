@@ -10,23 +10,19 @@ export default class SignUp extends React.Component {
                         <form className='form-signup'>
                             <h1 className='signupTitle'>Sign up</h1>
                             <br></br>
-                            <div className='field-firstname'>
-                                <input type='text' id='input-fname' className='form-control' placeholder='First Name' required='true' autoFocus='true'/>
+                            <div>
+                                <input type='text' id='input-fname' className='form-control' placeholder='Full Name' required='true' autoFocus='true'/>
                             </div>
                             <br></br>
-                            <div className='field-lastname'>
-                                <input type='text' id='input-lname' className='form-control' placeholder='Last Name' required='true'/>
-                            </div>
-                            <br></br>
-                            <div className='field-email'>
+                            <div>
                                 <input type='email' id='inputEmail' className='form-control' placeholder='Email' required='true'/>
                             </div>
                             <br></br>
-                            <div className='field-password'>
+                            <div>
                                 <input type='password' id='inputPassword' className='form-control' placeholder='Password' required='true'/>
                             </div>
                             <br></br>
-                            <div className='field-confirm'>
+                            <div>
                                 <input type='password' id='confirmPassword' className='form-control' placeholder='Confirm password' required='true'/>
                             </div>
                             <br></br>

@@ -161,19 +161,19 @@
     cursor: pointer;
 }
 
-.btn-block,.btn-signup {
+.btn-block, .btn-signup {
     display:block;
     width:100%;
 }
 
-.btn-group-lg>.btn, .btn-lg, .btn-signup {
+.btn-group-lg > .btn, .btn-lg, .btn-signup {
     padding: .5rem 1rem;
     font-size: 1.25rem;
     line-height: 1.5;
     border-radius: .3rem;
 }
 
-.btn-primary,.btn-signup {
+.btn-primary, .btn-signup {
     color:white;
     background-color:#0078B5 ;
     border-color: #0078B5;
@@ -203,7 +203,7 @@ main {
     text-align: center;
 }
 
-.jumbotron .container{
+.jumbotron .container {
     max-width: 40rem;
 }
 
@@ -212,7 +212,7 @@ main {
     font-size: 2.5rem;
 }
 
-.container{
+.container {
     width: 100%;
     margin-right: auto;
     margin-left: auto;

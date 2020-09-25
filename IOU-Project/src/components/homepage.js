@@ -6,8 +6,8 @@ export default class HomePage extends React.Component {
     render() {
         return (
             <body>
-                <section className='jumbotron text-centre'>
-                    <div className='container'>
+                <div className="container">
+                    <section className='jumbotron text-centre'>
                         <h1 className='jumbotron-heading'>Public Requests</h1>
                         <table className="request-table">
                             <thead>
@@ -53,8 +53,8 @@ export default class HomePage extends React.Component {
                         <br/>
                         <Link to='/leaderboard' className='btn btn-primary my-2'>Leaderboard</Link>
                         <Link to='/signup' className='btn btn-primary my-2'>Sign in to post a request</Link>
-                    </div>
-                </section>
+                    </section>
+                </div>
             </body>
         );
     }
