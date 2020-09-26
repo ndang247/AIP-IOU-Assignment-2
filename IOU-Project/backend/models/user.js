@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, DataTypes
 } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
   class User extends Model {
@@ -13,11 +13,13 @@ module.exports = (sequelize, Sequelize) => {
       // define association here
       User.belongsToMany(models.User, {
         through: models.Favour, 
-        foreignKey: 'offererId'
+        foreignKey: 'offererId',
+        as: 'offerer'
       });
       User.belongsToMany(models.User, {
         through: models.Favour, 
-        foreignKey: 'receiverId'
+        foreignKey: 'receiverId',
+        as: 'receiver'
       });
       User.hasMany(models.Favour, {
         foreignKey: {
@@ -28,6 +30,16 @@ module.exports = (sequelize, Sequelize) => {
         foreignKey: {
           name: 'receiverId'
         }
+      });
+      User.belongsToMany(models.User, {
+        through: models.Request, 
+        foreignKey: 'requesterId',
+        as: 'requester'
+      });
+      User.belongsToMany(models.User, {
+        through: models.Request, 
+        foreignKey: 'accepterId',
+        as: 'accepter'
       });
       User.hasMany(models.Request, {
         foreignKey: {
@@ -43,11 +55,7 @@ module.exports = (sequelize, Sequelize) => {
     }
   };
   User.init({
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false
     },
