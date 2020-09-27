@@ -3,7 +3,7 @@ const {
   Model, DataTypes
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
+  class Reward extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,32 +12,32 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Super M:N relationship with Favour
-      Item.belongsToMany(models.Favour, {
-        through: models.FavourItem, 
-        foreignKey: 'itemId'
+      Reward.belongsToMany(models.Favour, {
+        through: models.FavourReward, 
+        foreignKey: 'rewardId'
       });
-      Item.hasMany(models.FavourItem, {
-        foreignKey: 'itemId'
+      Reward.hasMany(models.FavourReward, {
+        foreignKey: 'rewardId'
       });
       
       // Super M:N relationship with Request
-      Item.belongsToMany(models.Request, {
-        through: models.FavourItem, 
-        foreignKey: 'itemId'
+      Reward.belongsToMany(models.Request, {
+        through: models.RequestReward, 
+        foreignKey: 'rewardId'
       });
-      Item.hasMany(models.RequestItem, {
-        foreignKey: 'itemId'
+      Reward.hasMany(models.RequestReward, {
+        foreignKey: 'rewardId'
       });
     }
   };
-  Item.init({
-    itemName: {
+  Reward.init({
+    rewardName: {
       type: DataTypes.STRING,
       allowNull: false
     },
   }, {
     sequelize,
-    modelName: 'Item',
+    modelName: 'Reward',
   });
-  return Item;
+  return Reward;
 };

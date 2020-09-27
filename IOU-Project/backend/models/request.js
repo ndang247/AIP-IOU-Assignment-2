@@ -13,27 +13,25 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Request.belongsTo(models.User, {
         onDelete: 'CASCADE',
-        foreignKey: 'requesterId'
-      });
-      Request.belongsTo(models.User, {
-        onDelete: 'CASCADE',
         foreignKey: 'accepterId'
       });
       
-      // Super M:N relationship with Item
-      Request.belongsToMany(models.Item, {
-        through: models.RequestItem, 
+      // Super M:N relationship with Reward
+      Request.belongsToMany(models.Reward, {
+        through: models.RequestReward, 
         foreignKey: 'requestId'
       });
-      Request.hasMany(models.RequestItem, {
+      Request.hasMany(models.RequestReward, {
         foreignKey: 'requestId'
       });
     }
   };
   Request.init({
+    taskName: DataTypes.STRING,
+    description: DataTypes.STRING,
     proof: DataTypes.BLOB,
-    requesterId: DataTypes.INTEGER,
     accepterId: DataTypes.INTEGER,
+    
   }, {
     sequelize,
     modelName: 'Request',

@@ -2,29 +2,29 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Items', [
+    return queryInterface.bulkInsert('Rewards', [
     {
-        itemName: "Pizza",
+        rewardName: "Pizza",
         createdAt: new Date(),
         updatedAt: new Date()
     },
     {
-        itemName: "Sushi",
+        rewardName: "Sushi",
         createdAt: new Date(),
         updatedAt: new Date()
     }, 
     {
-        itemName: "Pho",
+        rewardName: "Pho",
         createdAt: new Date(),
         updatedAt: new Date()
     }, 
     {
-        itemName: "Noodle",
+        rewardName: "Noodle",
         createdAt: new Date(),
         updatedAt: new Date()
     }, 
     {
-        itemName: "Coffee",
+        rewardName: "Coffee",
         createdAt: new Date(),
         updatedAt: new Date()
     },  
@@ -39,6 +39,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Rewards', null, {});
   }
 };

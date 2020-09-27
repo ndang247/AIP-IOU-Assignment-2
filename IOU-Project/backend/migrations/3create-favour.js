@@ -8,10 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      proof: {
-        type: Sequelize.BLOB,
-        allowNull: true,
-      },
       offererId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
@@ -27,6 +23,14 @@ module.exports = {
           model: 'Users',
           key: 'id',
         }
+      },
+      proof: {
+        type: Sequelize.BLOB,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

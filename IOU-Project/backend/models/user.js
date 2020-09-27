@@ -31,24 +31,16 @@ module.exports = (sequelize, Sequelize) => {
           name: 'receiverId'
         }
       });
-      User.belongsToMany(models.User, {
-        through: models.Request, 
-        foreignKey: 'requesterId',
-        as: 'requester'
-      });
-      User.belongsToMany(models.User, {
-        through: models.Request, 
-        foreignKey: 'accepterId',
-        as: 'accepter'
-      });
-      User.hasMany(models.Request, {
-        foreignKey: {
-          name: 'requesterId'
-        }
-      });
+      //
       User.hasMany(models.Request, {
         foreignKey: {
           name: 'accepterId'
+        }
+      });
+      // 
+      User.hasMany(models.RequestReward, {
+        foreignKey: {
+          name: 'requesterId'
         }
       });
 

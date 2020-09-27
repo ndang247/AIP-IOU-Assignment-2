@@ -8,11 +8,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lastName: {
+      fullname: {
         type: Sequelize.STRING,
         allowNull: false
       },
