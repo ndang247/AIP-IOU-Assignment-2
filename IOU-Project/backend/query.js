@@ -69,3 +69,18 @@ const addRequest = (async(accepterId, description, taskName) =>{
     }
 })
 
+const addUser = (async(fullname, email, password) =>{
+    try{
+        const newUser = await models.User.create(
+            {
+                fullname: fullname,
+                email: email , 
+                password: models.User.generateHash(password),
+                
+            }
+    );
+    }catch(err){
+        console.log(err);
+    }
+})("Ben", "ben@gmail.com", "123456")
+
