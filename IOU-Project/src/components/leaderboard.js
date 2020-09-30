@@ -1,5 +1,5 @@
 import React from "react";
-import "../Style.css"
+import "../Style.css";
 
 export default class Leaderboard extends React.Component {
     render() {
@@ -40,6 +40,6 @@ export default class Leaderboard extends React.Component {
                     </table>
                 </div>
             </body>
-            ); 
+        );
     }
 }

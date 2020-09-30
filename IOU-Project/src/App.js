@@ -7,7 +7,7 @@ import Leaderboard from './components/leaderboard';
 import SignUp from './components/signup';
 import SignIn from './components/signin';
 import Footer from './components/footer';
-import AddRequest from './components/addrequest';
+import AddPublicRequest from './components/addpublicrequest';
 import "./Style.css";
 
 // react will render the component based on the path/route specified
@@ -20,7 +20,7 @@ function App() {
         <Route path='/signup' component={SignUp}/>
         <Route path='/signin' component={SignIn}/>
         <Route path='/leaderboard' component={Leaderboard}/>
-        <Route path='/addrequest' component={AddRequest}/>
+        <Route path='/addpublicrequest' component={AddPublicRequest}/>
         <Footer/>
     </Router>
   );

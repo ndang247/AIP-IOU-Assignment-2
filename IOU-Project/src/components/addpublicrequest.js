@@ -1,8 +1,8 @@
 import React  from "react";
-import "../Style.css"
+import "../Style.css";
 
 
-class AddRequest extends React.Component {
+class AddPublicRequest extends React.Component {
     // constructor(props) {
     //     super(props);
     //     this.state = {
@@ -53,4 +53,4 @@ class AddRequest extends React.Component {
     }
 }
 
-export default AddRequest;
+export default AddPublicRequest;

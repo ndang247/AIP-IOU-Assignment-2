@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+.logo {
+    margin-left: 10px;
+}
+
 .container {
     font-family: Asap, sans-serif;
     height: 100%;

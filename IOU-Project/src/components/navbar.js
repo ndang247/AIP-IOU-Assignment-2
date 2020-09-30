@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "react-sidebar";
-import "../Style.css"
+import "../Style.css";
 
 export default class Navbar extends React.Component {
     constructor(props) {
@@ -26,34 +26,34 @@ export default class Navbar extends React.Component {
                         <div className="brand">
                             <div className="header-links">
                                 <div>
-                                    <Link to='/'>Home</Link>
+                                    <Link to='/' onClick={() => this.onSetSidebarOpen(false)}>Home</Link>
                                 </div>
                                 <br/>
                                 <div>
-                                    <Link to='/leaderboard'>Leaderboard</Link>
+                                    <Link to='/leaderboard' onClick={() => this.onSetSidebarOpen(false)}>Leaderboard</Link>
+                                </div>
+                                <br/>
+                                <div>      
+                                    <div>
+                                        <Link to='/addpublicrequests' onClick={() => this.onSetSidebarOpen(false)}>Add Public Request</Link>
+                                    </div>                             
+                                </div>
+                                <br/>
+                                <div>      
+                                    <div>
+                                        <Link to='/favours' onClick={() => this.onSetSidebarOpen(false)}>View/Add Favour</Link>
+                                    </div>                             
                                 </div>
                                 <br/>
                                 <div>
                                     <div>
-                                        <Link to='/signup'>Sign Up</Link>  
+                                        <Link to='/signup' onClick={() => this.onSetSidebarOpen(false)}>Sign Up</Link>  
                                     </div>
                                 </div>
                                 <br/>
                                 <div>      
                                     <div>
-                                        <Link to='/signin'>Sign In</Link>
-                                    </div>                             
-                                </div>
-                                <br/>
-                                <div>      
-                                    <div>
-                                        <Link to='/addrequest'>View/Add Request</Link>
-                                    </div>                             
-                                </div>
-                                <br/>
-                                <div>      
-                                    <div>
-                                        <Link to='/addfavour'>Add Favour</Link>
+                                        <Link to='/signin' onClick={() => this.onSetSidebarOpen(false)}>Sign In</Link>
                                     </div>                             
                                 </div>
                             </div>
@@ -68,8 +68,10 @@ export default class Navbar extends React.Component {
                             &#9776;
                         </button>
                     </Sidebar>
-                    <div className="logo">
-                        <Link to='/'>IOU</Link>
+                    <div>
+                        <div className="logo">
+                            <Link to='/'>IOU</Link>
+                        </div>
                     </div>
                 </div>
             </header>

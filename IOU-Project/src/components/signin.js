@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Style.css"
+import "../Style.css";
 
 export default class SignIn extends React.Component {
     render() {

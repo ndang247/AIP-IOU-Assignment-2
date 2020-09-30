@@ -1,5 +1,5 @@
 import React from "react";
-import "../Style.css"
+import "../Style.css";
 
 export default class SignUp extends React.Component {
     render() {
