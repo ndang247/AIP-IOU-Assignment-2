@@ -20,7 +20,7 @@ function App() {
         <Route path='/signup' component={SignUp}/>
         <Route path='/signin' component={SignIn}/>
         <Route path='/leaderboard' component={Leaderboard}/>
-        <Route path='/addpublicrequest' component={AddPublicRequest}/>
+        <Route path='/addpublicrequests' component={AddPublicRequest}/>
         <Footer/>
     </Router>
   );
