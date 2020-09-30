@@ -34,11 +34,27 @@ export default class Navbar extends React.Component {
                                 </div>
                                 <br/>
                                 <div>
-                                    <Link to='/signup'>Sign Up</Link>
+                                    <div>
+                                        <Link to='/signup'>Sign Up</Link>  
+                                    </div>
                                 </div>
                                 <br/>
-                                <div>
-                                    <Link to='/signin'>Sign In</Link>
+                                <div>      
+                                    <div>
+                                        <Link to='/signin'>Sign In</Link>
+                                    </div>                             
+                                </div>
+                                <br/>
+                                <div>      
+                                    <div>
+                                        <Link to='/addRequest'>View/Add Request</Link>
+                                    </div>                             
+                                </div>
+                                <br/>
+                                <div>      
+                                    <div>
+                                        <Link to='/addfavour'>Add Favour</Link>
+                                    </div>                             
                                 </div>
                             </div>
                         </div>
@@ -52,7 +68,11 @@ export default class Navbar extends React.Component {
                             &#9776;
                         </button>
                     </Sidebar>
-                    <Link to='/'>IOU</Link>
+                    <div className="logo">
+                        <Link to='/'>IOU</Link>
+                    </div>
+                    
+                    
                 </div>
             </header>
         </div>

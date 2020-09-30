@@ -30,14 +30,15 @@
 
 .brand a {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
     text-decoration: none;
     color: #ffffff;
-    padding: 10px;
+    padding-left: 30px;
 }
 
 .brand button {
-    font-size: 20px;
+    padding: 10px;
+    font-size: 30px;
     background: none;
     cursor:pointer;
     border: none;
@@ -52,12 +53,11 @@
 .header-links a {
     text-decoration: none;
     color: #ffffff;
-    border: 1px solid white;
     padding: 5px 20px;
 }
 
-.header-links a:hover {
-    border: 1px solid coral;
+.header-links a:hover{
+    color: coral;
 }
 
 .sidebar {
@@ -288,6 +288,43 @@ main {
     font-size: 2.5rem;
     color: #0078B5;
 }
+
+/* View/Add request */
+#add-header {
+    font-weight: bold;
+    margin: 1rem;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #0078B5;
+}
+#add-request-form input {
+    width: 500px;
+    height:  50px;
+    padding: 0 20px;
+    margin: 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border-color: #0078B5;
+}
+
+#add-request-form:focus {
+    outline: none;
+}
+
+#add-request-form button {
+    height: 50px;
+    width: 80px;
+    border-radius: 5px;
+    border-color: #0078B5;
+    background-color: #0078B5;
+    color: #ffffff;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+
+
+
  /* Page transition */
 * {
     animation: transitionIn 0.5s;
@@ -305,12 +342,3 @@ main {
      }
  }
 
-/* cards 
-.py-5 {
-    padding-bottom: 3rem!important;
-    padding-top: 3rem!important;
-}
-
-.bg-light {
-    background-color: gray;
-}*/
