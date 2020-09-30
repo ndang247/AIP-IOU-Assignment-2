@@ -312,7 +312,7 @@ main {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-input {
+#inputRequest {
     width: 500px;
     height:  50px;
     padding: 0 20px;
