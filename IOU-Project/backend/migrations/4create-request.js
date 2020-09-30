@@ -8,18 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      proof: {
-        type: Sequelize.BLOB,
-        allowNull: true,
-      },
-      requesterId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references:{
-          model: 'Users',
-          key: 'id',
-        }
-      },
       accepterId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
@@ -35,7 +23,13 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      taskName: Sequelize.STRING,
+      description: Sequelize.STRING,
+      proof: {
+        type: Sequelize.BLOB,
+        allowNull: true,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

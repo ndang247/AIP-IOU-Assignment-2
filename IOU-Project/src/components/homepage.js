@@ -12,10 +12,10 @@ export default class HomePage extends React.Component {
                         <table className="request-table">
                             <thead>
                                 <tr>
-                                    <th>Username</th>
-                                    <th>Description</th>
-                                    <th>Favour</th>
-                                    <th>Rewards</th>
+                                    <th>Request ID</th>
+                                    <th>Proof</th>
+                                    <th>Requester ID</th>
+                                    <th>Accepter ID</th>
                                     <th>When</th>
                                 </tr>
                             </thead>

@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {Model, DataTypes} = require('sequelize');
+const bcrypt = require('bcrypt')
 module.exports = (sequelize, Sequelize) => {
   class User extends Model {
     /**
@@ -13,11 +12,13 @@ module.exports = (sequelize, Sequelize) => {
       // define association here
       User.belongsToMany(models.User, {
         through: models.Favour, 
-        foreignKey: 'offererId'
+        foreignKey: 'offererId',
+        as: 'offerer'
       });
       User.belongsToMany(models.User, {
         through: models.Favour, 
-        foreignKey: 'receiverId'
+        foreignKey: 'receiverId',
+        as: 'receiver'
       });
       User.hasMany(models.Favour, {
         foreignKey: {
@@ -29,31 +30,37 @@ module.exports = (sequelize, Sequelize) => {
           name: 'receiverId'
         }
       });
-      User.hasMany(models.Request, {
-        foreignKey: {
-          name: 'requesterId'
-        }
-      });
+      //
       User.hasMany(models.Request, {
         foreignKey: {
           name: 'accepterId'
         }
       });
+      // 
+      User.hasMany(models.RequestReward, {
+        foreignKey: {
+          name: 'requesterId'
+        }
+      });
 
+    }
+    
+    static generateHash(password){
+      return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null, null);
+    }
+    validPassword(password){
+      return bcrypt.compareSync(password, this.password);
     }
   };
   User.init({
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastName: {
+    fullname: {
       type: DataTypes.STRING,
       allowNull: false
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: true
       }
@@ -66,5 +73,6 @@ module.exports = (sequelize, Sequelize) => {
     sequelize,
     modelName: 'User',
   });
+  
   return User;
 };

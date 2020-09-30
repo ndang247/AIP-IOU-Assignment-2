@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, DataTypes
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Favour extends Model {
@@ -20,20 +20,27 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'receiverId'
       });
       
-      // Super M:N relationship with Item
-      Favour.belongsToMany(models.Item, {
-        through: models.FavourItem, 
+      // Super M:N relationship with Reward
+      Favour.belongsToMany(models.Reward, {
+        through: models.FavourReward, 
         foreignKey: 'favourId'
       });
-      Favour.hasMany(models.FavourItem, {
+      Favour.hasMany(models.FavourReward, {
         foreignKey: 'favourId'
       });
     }
   };
   Favour.init({
+    offererId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    receiverId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     proof: DataTypes.BLOB,
-    offererId: DataTypes.INTEGER,
-    receiverId: DataTypes.INTEGER,
+    description: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Favour',

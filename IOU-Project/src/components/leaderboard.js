@@ -11,8 +11,8 @@ export default class Leaderboard extends React.Component {
                         <thead>
                             <tr>
                                 <th>Rank</th>
-                                <th>Username</th>
-                                <th>Amount</th>
+                                <th>Fullname</th>
+                                <th>Amount (Rewards)</th>
                             </tr>
                         </thead>
                         <tbody>

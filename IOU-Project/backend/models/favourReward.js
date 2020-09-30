@@ -1,9 +1,9 @@
 'use strict';
 const {
-  Model
+  Model, DataTypes
 } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
-  class RequestItem extends Model {
+  class FavourReward extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,24 +11,26 @@ module.exports = (sequelize, Sequelize) => {
      */
     static associate(models) {
       // define association here
-      RequestItem.belongsTo(models.Item, {
+      FavourReward.belongsTo(models.Reward, {
         onDelete: 'CASCADE',
-        foreignKey: 'itemId'
+        foreignKey: 'rewardId'
       });
-      RequestItem.belongsTo(models.Request, {
+      FavourReward.belongsTo(models.Favour, {
         onDelete: 'CASCADE',
-        foreignKey: 'requestId'
+        foreignKey: 'favourId'
       });
     }
   };
-  RequestItem.init({
+  FavourReward.init({
+    favourId: DataTypes.INTEGER,
+    rewardId: DataTypes.INTEGER,
     quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
   }, {
     sequelize,
-    modelName: 'RequestItem',
+    modelName: 'FavourReward',
   });
-  return RequestItem;
+  return FavourReward;
 };

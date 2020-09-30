@@ -1,28 +1,38 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('FavourItems', {
-      quantity: {
-        type: Sequelize.INTEGER,
-      },
-      favourId: {
+    await queryInterface.createTable('RequestRewards', {
+      requestId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         primaryKey: true,
         references:{
-          model: 'Favours',
+          model: 'Requests',
           key: 'id',
         }
       },
-      itemId: {
+      rewardId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         primaryKey: true,
         references: {
-          model: 'Items',
+          model: 'Rewards',
           key: 'id',
         }
       },
+      requesterId:{
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        primaryKey: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+        }
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+      },
+      
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -34,6 +44,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('FavourItems');
+    await queryInterface.dropTable('RequestRewards');
   }
 };
