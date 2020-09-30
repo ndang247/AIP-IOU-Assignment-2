@@ -29,7 +29,6 @@ export default class SignUp extends React.Component {
                             <div className='btn-signup'>
                                 <button className='btn-signup'>Sign up</button>
                             </div>
-                            
                         </form>
                     </div>
                 </main>

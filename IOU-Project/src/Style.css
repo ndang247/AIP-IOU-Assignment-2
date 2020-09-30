@@ -290,14 +290,29 @@ main {
 }
 
 /* View/Add request */
-#add-header {
+.add-header {
     font-weight: bold;
     margin: 1rem;
     text-align: center;
     font-size: 2.5rem;
     color: #0078B5;
 }
-#add-request-form input {
+.add-request-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    width: 32rem;
+    padding: 2rem;
+    border: .1rem #c0c0c0 solid;
+    border-radius: .5rem;
+    top: -50px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+input {
     width: 500px;
     height:  50px;
     padding: 0 20px;
@@ -307,11 +322,11 @@ main {
     border-color: #0078B5;
 }
 
-#add-request-form:focus {
+.add-request-form:focus {
     outline: none;
 }
 
-#add-request-form button {
+.add-request-form button {
     height: 50px;
     width: 80px;
     border-radius: 5px;
@@ -341,4 +356,3 @@ main {
         transform: rotateX(0);
      }
  }
-

@@ -32,18 +32,23 @@ class AddRequest extends React.Component {
 
     render() {
         return (
-                <body>
-                    <main>
-                        <h1 id="add-header">Add Request</h1>
-                        <form id="add-request-form">
+            <body>
+                <main>
+                    <div>
+                        <form className='add-request-form'>
+                            <h1 className='add-header'>Add Request</h1>
+                            <br></br>
                             <div>
-                                <input type="text" placeholder="Enter request"/>
+                                <input type="text" id="inputRequest" placeholder="Enter request" required='true' autoFocus='true'/>
                             </div>
-                            <button type="submit">Add</button>
-
+                            <br></br>
+                            <div>
+                                <button type="submit">Add</button>
+                            </div>
                         </form>
-                    </main>
-                </body>            
+                    </div>
+                </main>
+            </body>
         );
     }
 }

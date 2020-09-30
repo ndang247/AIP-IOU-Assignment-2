@@ -14,7 +14,6 @@ import "./Style.css";
 function App() {
   return (
     <Router>
-      <div className='container'>
         <Navbar/>
         <br/>
         <Route path='/' exact component={HomePage}/>
@@ -23,7 +22,6 @@ function App() {
         <Route path='/leaderboard' component={Leaderboard}/>
         <Route path='/addrequest' component={AddRequest}/>
         <Footer/>
-      </div>
     </Router>
   );
 }

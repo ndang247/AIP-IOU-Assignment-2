@@ -47,7 +47,7 @@ export default class Navbar extends React.Component {
                                 <br/>
                                 <div>      
                                     <div>
-                                        <Link to='/addRequest'>View/Add Request</Link>
+                                        <Link to='/addrequest'>View/Add Request</Link>
                                     </div>                             
                                 </div>
                                 <br/>
@@ -71,8 +71,6 @@ export default class Navbar extends React.Component {
                     <div className="logo">
                         <Link to='/'>IOU</Link>
                     </div>
-                    
-                    
                 </div>
             </header>
         </div>
