@@ -62,7 +62,7 @@ export default class Navbar extends React.Component {
                     }
                     open={this.state.sidebarOpen}
                     onSetOpen={this.onSetSidebarOpen}
-                    styles={{ sidebar: { background: "#0078B5" } }}
+                    styles={{ sidebar: { background: "#0078b5" } }}
                     >
                         <button onClick={() => this.onSetSidebarOpen(true)}>
                             &#9776;

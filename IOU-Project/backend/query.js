@@ -3,11 +3,10 @@ const {Op, Sequelize} = require('sequelize');
 
 // Find all users
 // Raw SQL: SELECT * FROM "Users";
-/*
+
 const findAllUser = (async () => {
     try{
-        const users = await models.User.findAll({
-            attributes: ['email']
+        const users = await models.User.findAll({where:{id:1}
         });
         return JSON.stringify(users, null, 1);
     }catch(err){
@@ -19,22 +18,20 @@ var userList = (async () => {
     userList = await findAllUser()
     console.log(userList)
 })()
-*/
+/*
 const getAllRequest = (async() => {
 
     try{
         const request = await models.Request.findAll();
-        return JSON.stringify(request, null, 1);
+        const result = await JSON.stringify(request, null, 1);
+        return result;
     }catch(err){
         console.log(err)
     }
 })
-/*
-var requestList = (async () => {
-    requestList = await getAllRequest()
-    console.log(requestList)
-})()
-*/
+var a = getAllRequest().then(data => {console.log(data)}); //Promise { <pending> }
+
+
 const addFavour = (async() =>{
     try{
         const favour = await models.Favour.create(
@@ -68,7 +65,7 @@ const addRequest = (async(accepterId, description, taskName) =>{
         console.log(err);
     }
 })
-
+*/
 const addUser = (async(fullname, email, password) =>{
     try{
         const newUser = await models.User.create(
