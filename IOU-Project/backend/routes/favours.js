@@ -1,21 +1,22 @@
-const express = require('express');
-const {Op, Sequelize} = require('sequelize');
-// call the router
-const router = express.Router();
-// require the public request model
-const models = require('../models');
+const db = require('../models');
 
+module.exports = function (app, passport) {
 // if the user goes to /favours => get request
-router.route('/').get(async(request, response) => {
-    // find the favours from database
-    try {
-        const request = await models.Favour.findAll();
-        response.json(request);
-    } catch(err) {
-        res.status(400).json('Error:' + err);
-        console.log(err);
-    }
-});
+    /*
+    app.get('/api/my-owed-favour', (req, res, next) => {
+        // Get all of my requests
+        if (req.isAuthenticated()) {
+            var user = {
+                id: req.session.passport.user,
+                isloggedin: req.isAuthenticated()
+            }
+            res.json(user);
+        } else {
+            console.log("You will be direct to all-requests");
+            res.redirect("/api/requests/all-requests");
+        }
+    })
+    */
 
-// exporting the router
-module.exports = router;
+}
+

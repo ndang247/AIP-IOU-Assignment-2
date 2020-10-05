@@ -1,13 +1,11 @@
 const models = require('./models')
 const {Op, Sequelize} = require('sequelize');
 
-// Find all users
-// Raw SQL: SELECT * FROM "Users";
+// Raw
 /*
 const findAllUser = (async () => {
     try{
-        const users = await models.User.findAll({
-            attributes: ['email']
+        const users = await models.User.findAll({where:{id:1}
         });
         return JSON.stringify(users, null, 1);
     }catch(err){
@@ -20,21 +18,23 @@ var userList = (async () => {
     console.log(userList)
 })()
 */
+/*
 const getAllRequest = (async() => {
 
     try{
-        const request = await models.Request.findAll();
-        return JSON.stringify(request, null, 1);
+        const request = await models.Request.findAll({
+            attributes: ['taskName', 'description'],
+
+        });
+        const result = await JSON.stringify(request, null, 1);
+        return result;
     }catch(err){
         console.log(err)
     }
 })
-/*
-var requestList = (async () => {
-    requestList = await getAllRequest()
-    console.log(requestList)
-})()
+var a = getAllRequest().then(data => {console.log(data)}); //Promise { <pending> }
 */
+/*
 const addFavour = (async() =>{
     try{
         const favour = await models.Favour.create(
@@ -50,8 +50,9 @@ const addFavour = (async() =>{
         console.log(err);
     }
 })
+*/
 
-
+/*
 const addRequest = (async(accepterId, description, taskName) =>{
     try{
         const newRequest = await models.Request.create(
@@ -68,7 +69,9 @@ const addRequest = (async(accepterId, description, taskName) =>{
         console.log(err);
     }
 })
+*/
 
+/*
 const addUser = (async(fullname, email, password) =>{
     try{
         const newUser = await models.User.create(
@@ -84,3 +87,6 @@ const addUser = (async(fullname, email, password) =>{
     }
 })("Ben", "ben@gmail.com", "123456")
 
+*/
+
+/////////////////////////////////////////////////
