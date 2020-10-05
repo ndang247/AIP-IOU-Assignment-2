@@ -1,9 +1,8 @@
 const models = require('./models')
 const {Op, Sequelize} = require('sequelize');
 
-// Find all users
-// Raw SQL: SELECT * FROM "Users";
-
+// Raw
+/*
 const findAllUser = (async () => {
     try{
         const users = await models.User.findAll({where:{id:1}
@@ -18,11 +17,15 @@ var userList = (async () => {
     userList = await findAllUser()
     console.log(userList)
 })()
+*/
 /*
 const getAllRequest = (async() => {
 
     try{
-        const request = await models.Request.findAll();
+        const request = await models.Request.findAll({
+            attributes: ['taskName', 'description'],
+
+        });
         const result = await JSON.stringify(request, null, 1);
         return result;
     }catch(err){
@@ -30,8 +33,8 @@ const getAllRequest = (async() => {
     }
 })
 var a = getAllRequest().then(data => {console.log(data)}); //Promise { <pending> }
-
-
+*/
+/*
 const addFavour = (async() =>{
     try{
         const favour = await models.Favour.create(
@@ -47,8 +50,9 @@ const addFavour = (async() =>{
         console.log(err);
     }
 })
+*/
 
-
+/*
 const addRequest = (async(accepterId, description, taskName) =>{
     try{
         const newRequest = await models.Request.create(
@@ -66,6 +70,8 @@ const addRequest = (async(accepterId, description, taskName) =>{
     }
 })
 */
+
+/*
 const addUser = (async(fullname, email, password) =>{
     try{
         const newUser = await models.User.create(
@@ -81,3 +87,6 @@ const addUser = (async(fullname, email, password) =>{
     }
 })("Ben", "ben@gmail.com", "123456")
 
+*/
+
+/////////////////////////////////////////////////

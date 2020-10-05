@@ -13,13 +13,6 @@ module.exports = function (app, passport) {
         })
     });
 
-
-
-
-
-// process the signup form ==============================================
-//=======================================================================
-
     app.post('/signup', function(req, res, next) {
         passport.authenticate('local-signup', function(err, user, info) {
             console.log("info", info);
@@ -79,15 +72,6 @@ module.exports = function (app, passport) {
                 res.cookie('user_id', user.id);
                 res.cookie('user_name', user.fullname );
 
-                // if (!req.session.userid) {
-                //   var redirectTo = req.session.redirectTo ? req.session.redirectTo : '/';
-                //   delete req.session.redirectTo;
-                //   // is authenticated ?
-                //   res.redirect(redirectTo);
-                // } else {
-                //     next();
-                // }
-                // console.log("=====================signup: ",req.headers.referer);
                 return res.json(true);
                 // return res.redirect("/account");
 

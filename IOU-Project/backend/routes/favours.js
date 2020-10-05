@@ -2,7 +2,8 @@ const db = require('../models');
 
 module.exports = function (app, passport) {
 // if the user goes to /favours => get request
-    app.get('/my-owed-favour', (req, res, next) => {
+    /*
+    app.get('/api/my-owed-favour', (req, res, next) => {
         // Get all of my requests
         if (req.isAuthenticated()) {
             var user = {
@@ -11,9 +12,11 @@ module.exports = function (app, passport) {
             }
             res.json(user);
         } else {
-            console.log("You will be direct to all-requests")
+            console.log("You will be direct to all-requests");
             res.redirect("/api/requests/all-requests");
         }
     })
+    */
+
 }
 

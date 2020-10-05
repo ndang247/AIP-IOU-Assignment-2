@@ -1,7 +1,7 @@
 const db = require('../models');
 module.exports = function (app, passport) {
     // PUBLIC REQUESTS
-    app.get('/all-requests', (req, res, next) => {
+    app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
         db.Request.findAll({
             attributes: ['taskName', 'description'],
@@ -15,7 +15,8 @@ module.exports = function (app, passport) {
     })
 
     // PRIVATE REQUESTS
-    app.get('/my-requests', (req, res, next) => {
+    /*
+    app.get('/api/my-requests', (req, res, next) => {
         // Get all of my requests
         if (req.isAuthenticated()) {
             var user = {
@@ -29,4 +30,23 @@ module.exports = function (app, passport) {
         }
     })
 
+    app.post('/api/add-favour', async(req, res, next) =>{
+        try{
+            const favour = await db.Favour.create(
+                {
+                    offererId: req.body.offererId,
+                    receiverId: req.body.receiverId,
+                    description: req.body.description
+                }
+            )();
+            const favourReward = await db.Favour.create({
+                favourId: req.body.favourId,
+                rewardId: req.body.rewardId,
+                quantity: req.body.quantity
+            })();
+        } catch(err) {
+            console.log(err)
+        }
+    })
+*/
 }
