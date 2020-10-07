@@ -41,7 +41,7 @@ export default class Navbar extends React.Component {
                                 <br/>
                                 <div>      
                                     <div>
-                                        <Link to='/favours' onClick={() => this.onSetSidebarOpen(false)}>View/Add Favour</Link>
+                                        <Link to='/addfavour' onClick={() => this.onSetSidebarOpen(false)}>View/Add Favour</Link>
                                     </div>                             
                                 </div>
                                 <br/>
