@@ -12,7 +12,7 @@ export default class Leaderboard extends React.Component {
                             <tr>
                                 <th>Rank</th>
                                 <th>Full Name</th>
-                                <th>Number of Debts</th>
+                                <th>Number of Debt</th>
                             </tr>
                         </thead>
                         <tbody>

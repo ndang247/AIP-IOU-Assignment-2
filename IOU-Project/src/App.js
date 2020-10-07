@@ -8,6 +8,7 @@ import SignUp from './components/signup';
 import SignIn from './components/signin';
 import Footer from './components/footer';
 import AddPublicRequest from './components/addpublicrequest';
+import AddViewFavour from './components/addandviewfavour';
 import "./Style.css";
 
 // react will render the component based on the path/route specified
@@ -21,6 +22,7 @@ function App() {
         <Route path='/signin' component={SignIn}/>
         <Route path='/leaderboard' component={Leaderboard}/>
         <Route path='/addpublicrequests' component={AddPublicRequest}/>
+        <Route path='/addandviewfavour' component={AddViewFavour}/>
         <Footer/>
     </Router>
   );

@@ -41,12 +41,12 @@ export default class Navbar extends React.Component {
                                 <br/>
                                 <div>      
                                     <div>
-                                        <Link to='/favours' onClick={() => this.onSetSidebarOpen(false)}>View/Add Favour</Link>
+                                        <Link to='/addandviewfavour' onClick={() => this.onSetSidebarOpen(false)}>View/Add Favour</Link>
                                     </div>                             
                                 </div>
                                 <br/>
                                 <div>
-                                    <Link to='/viewandadddebt' onClick={() => this.onSetSidebarOpen(false)}>View/Add Debt</Link>
+                                    <Link to='/addandviewdebt' onClick={() => this.onSetSidebarOpen(false)}>View/Add Debt</Link>
                                 </div>
                                 <br/>
                                 <div>
