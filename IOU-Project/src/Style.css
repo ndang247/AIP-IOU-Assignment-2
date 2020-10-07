@@ -341,8 +341,15 @@ main {
     cursor: pointer;
 }
 
-
-
+#rewardItems {
+    width: 500px;
+    height:  50px;
+    padding: 0 20px;
+    margin: 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border-color: #0078B5;
+}
 
  /* Page transition */
 * {

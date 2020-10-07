@@ -5,7 +5,7 @@ const passport     = require('passport');
 const flash        = require('connect-flash');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
-const exphbs = require('express-handlebars')
+const exphbs = require('express-handlebars');
 const app = express();
 const port = process.env.port || 8080;
 
@@ -50,6 +50,7 @@ require('./routes/auth')(app, passport);
 require('./routes/favours')(app, passport);
 require('./routes/requests')(app, passport);
 require('./routes/rewards')(app, passport);
+require('./routes/users')(app, passport);
 
 app.listen(port, () => { 
   console.log(`Server is running on port ${port}`) 

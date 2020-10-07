@@ -1,17 +1,10 @@
 const db = require('../models');
 module.exports = function (app, passport) {
-    // PUBLIC REQUESTS
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
-        db.Request.findAll({
-            attributes: ['taskName', 'description'],
-            where: {
-                accepterId: null
-            }
-        }).then((data) => {
-            console.log('all-requests')
-            res.send(data);
-        }).catch(err => next(err));
+        db.sequelize.query('SELECT "Requests"."taskName", "Requests"."description", "RequestRewards"."quantity" FROM "Requests" INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId"')
+        .then(data => res.json(data))
+        .catch(err => res.status(400).json('Error:' + err));
     })
 
     // PRIVATE REQUESTS
