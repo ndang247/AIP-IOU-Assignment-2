@@ -32,7 +32,7 @@ export default class AddViewFavour extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward</p>
-                                <select name="rewardItems" id="rewardItems">
+                                <select name="rewardItems" className='form-control1'>
                                     <option value="pizza">Pizza</option>
                                     <option value="sushi">Sushi</option>
                                     <option value="pho">Pho</option>

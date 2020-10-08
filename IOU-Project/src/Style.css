@@ -140,7 +140,7 @@
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.addfavours-box {
+.addfavours-box, .add-debt-box, .add-request-box{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -327,7 +327,7 @@ main {
     font-size: 2.5rem;
     color: #0078B5;
 }
-.add-request-form {
+/* .add-request-form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -340,7 +340,7 @@ main {
     top: -50px;
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
+} */
 
 #inputRequest {
     width: 500px;
@@ -365,16 +365,6 @@ main {
     color: #ffffff;
     font-weight: bolder;
     cursor: pointer;
-}
-
-#rewardItems {
-    width: 500px;
-    height:  50px;
-    padding: 0 20px;
-    margin: 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    border-color: #0078B5;
 }
 
  /* Page transition */

@@ -21,7 +21,6 @@ export default class HomePage extends React.Component {
                                 <th>Requester Name</th>
                                 <th>Reward</th>
                                 <th>Reward (Quantity)</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,8 +30,7 @@ export default class HomePage extends React.Component {
                                 <td>100,000$</td>
                                 <td>Nam Long Nguyen</td>
                                 <td>100,000$</td>
-                                <td>100,000$</td>
-                                <td><button> Del </button></td>
+                                <td>100,000$</td> 
                             </tr>
                             <tr>
                                 <td>2</td>
@@ -41,7 +39,6 @@ export default class HomePage extends React.Component {
                                 <td>Nam Dang</td>
                                 <td>88,000$</td>
                                 <td>100,000$</td>
-                                <td><button> Del </button></td>
                             </tr>
                             <tr>
                                 <td>3</td>
@@ -49,8 +46,7 @@ export default class HomePage extends React.Component {
                                 <td>50,000$</td>
                                 <td>Harry</td>
                                 <td>50,000$</td>
-                                <td>100,000$</td>
-                                <td><button> Del </button></td>
+                                <td>100,000$</td> 
                             </tr>
                             <tr>
                                 <td>4</td>
@@ -59,7 +55,6 @@ export default class HomePage extends React.Component {
                                 <td>Hoang Long Nguyen</td>
                                 <td>50$</td>
                                 <td>100,000$</td>
-                                <td><button> Del </button></td>
                             </tr>
                         </tbody>
                     </table>   
