@@ -2,6 +2,20 @@ import React from "react";
 import "../Style.css";
 
 export default class HomePage extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         data: []
+    //     };
+    // }
+
+    // componentDidMount() {
+    //     axios({
+    //         method: 'GET',
+    //         url: 'http://localhost:8080/api/'
+    //     })
+    // }
+
     render() {
         return (
             <body>
@@ -23,40 +37,6 @@ export default class HomePage extends React.Component {
                                 <th>Reward (Quantity)</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nam Long Nguyen</td>
-                                <td>100,000$</td>
-                                <td>Nam Long Nguyen</td>
-                                <td>100,000$</td>
-                                <td>100,000$</td> 
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Nam Dang</td>
-                                <td>88,000$</td>
-                                <td>Nam Dang</td>
-                                <td>88,000$</td>
-                                <td>100,000$</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Harry</td>
-                                <td>50,000$</td>
-                                <td>Harry</td>
-                                <td>50,000$</td>
-                                <td>100,000$</td> 
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Hoang Long Nguyen</td>
-                                <td>50$</td>
-                                <td>Hoang Long Nguyen</td>
-                                <td>50$</td>
-                                <td>100,000$</td>
-                            </tr>
-                        </tbody>
                     </table>   
                 </div>
             </body>

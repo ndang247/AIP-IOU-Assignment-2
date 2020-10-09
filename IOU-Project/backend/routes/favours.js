@@ -7,6 +7,18 @@ module.exports = function (app, passport) {
         .then(data => res.json(data))
         .catch(err => res.status(400).json('Error:' + err));
     })
+
+    app.get('/api/most-debt', async (req, res, next) =>{
+        try{
+            db.sequelize.query('SELECT "fullname", count(*) AS "debt" ' +
+                'FROM "Users" INNER JOIN "Favours" ON "Users"."id" = "Favours"."offererId" ' +
+                'GROUP BY "Users"."id" ORDER BY "debt" DESC ' +
+                'LIMIT 10')
+                .then(data => res.json(data[0]))
+        } catch {
+            res.json({})
+        }
+    })
     /*
     app.get('/api/my-owed-favour', (req, res, next) => {
         // Get all of my requests
