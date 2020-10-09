@@ -8,7 +8,7 @@ export default class AddViewFavour extends React.Component {
                 <main>                                       
                     <div className='addfavours-box'>
                         <form>
-                            <h1 className='addFavours'>Create a Favour</h1>   
+                            <h1>Create a Favour</h1>   
                             <br></br>
                             <div>
                                 <p>Title</p>
