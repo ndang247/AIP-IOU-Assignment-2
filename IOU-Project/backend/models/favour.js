@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Favour.init({
+
     offererId: {
       type: DataTypes.INTEGER,
       allowNull: false

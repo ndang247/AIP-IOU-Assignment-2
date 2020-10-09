@@ -8,7 +8,7 @@ const session      = require('express-session');
 const exphbs = require('express-handlebars');
 const app = express();
 const port = process.env.port || 8080;
-
+const db = require('./models')
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded( {extended: false} ));
@@ -37,16 +37,9 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
-
-app.get('/signupp', function(req, res){
-  res.render('signup', {layout: false});
-})
-
-app.get('/signinn', function(req, res){
-  res.render('signup', {layout: false});
-})
 // ROUTES:
 require('./routes/auth')(app, passport);
+require('./routes/users')(app, passport);
 require('./routes/favours')(app, passport);
 require('./routes/requests')(app, passport);
 require('./routes/rewards')(app, passport);

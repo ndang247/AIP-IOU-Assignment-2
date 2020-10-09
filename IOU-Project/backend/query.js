@@ -2,7 +2,7 @@ const models = require('./models')
 const {Op, Sequelize} = require('sequelize');
 
 // Raw
-/*
+
 const findAllUser = (async () => {
     try{
         const users = await models.User.findAll({where:{id:1}
@@ -17,7 +17,7 @@ var userList = (async () => {
     userList = await findAllUser()
     console.log(userList)
 })()
-*/
+
 /*
 const getAllRequest = (async() => {
 

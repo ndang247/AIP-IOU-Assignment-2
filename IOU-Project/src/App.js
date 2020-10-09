@@ -14,7 +14,7 @@ import "./Style.css";
 // react will render the component based on the path/route specified
 function App() {
   return (
-    <Router>
+      <Router>
         <Navbar/>
         <br/>
         <Route path='/' exact component={HomePage}/>

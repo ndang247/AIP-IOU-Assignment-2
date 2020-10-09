@@ -3,9 +3,25 @@ const requestReward = require('../models/requestReward');
 module.exports = function (app, passport) {
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
+
         db.sequelize.query('SELECT "Requests"."id", "Requests"."taskName", "Requests"."description", "RequestRewards"."quantity" FROM "Requests" INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId"')
         .then(data => res.json(data))
         .catch(err => res.status(400).json('Error:' + err));
+
+        /*
+        db.Request.findAll({
+            attributes: ['taskName', 'description'],
+            where: {
+                accepterId: null
+            }, include: {
+                model: db.RequestReward
+            }
+        }).then((data) => {
+            console.log('all-requests')
+            res.send(data);
+        }).catch(err => next(err));
+        */
+
     })
 
     app.post('/api/update-requests/:id', (req, res, next) => {
@@ -37,26 +53,25 @@ module.exports = function (app, passport) {
         // Create a request
 
         // Get the taskName, description, requesterName, reward and reward quantity
-        const taskName = req.body.taskName;
-        const description = req.body.description;
-        const requesterName = req.body.requesterName;
+
+
         const rewardID = 1;
-        const rewardQuantity = Number(req.body.rewardQuantity);
+
         const requesterID = 28;
         db.Request.create({
-            taskName: taskName,
-            description: description,
-            requesterName: requesterName,
+            taskName: req.body.taskName,
+            description: req.body.description,
         }).then(requestInstance => {
-            requestInstance.save()
+            requestInstance.save().catch(err => console.log(err))
+
             db.RequestReward.create({
-                rewardId: rewardID,
-                quantity: rewardQuantity,
-                requesterId: requesterID,
+                rewardId: req.body.reward,
+                quantity: 1,
+                requesterId: 1,
                 requestId: requestInstance.id
             }).then(requestRewardInstance => {
                 requestRewardInstance.save()
-            })
+            }).catch(err => console.log(err))
         }).catch(err => res.status(400).json('Error ' + err));
     })
 
