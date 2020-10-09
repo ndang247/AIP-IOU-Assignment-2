@@ -123,7 +123,7 @@ module.exports = function(passport) {
             // we are checking to see if the user trying to login already exists
             db.User.findOne({
                 where: {
-                    email: email
+                    email: req.body.email
                 }
             }).then(function(user, err) {
                 // if no user is found, return the message

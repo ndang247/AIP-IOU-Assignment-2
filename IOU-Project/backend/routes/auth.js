@@ -23,7 +23,7 @@ module.exports = function (app, passport) {
                 }
                 res.cookie('user_id', user.id);
                 res.cookie('user_name', user.fullname );
-                return res.redirect('/');
+                return res.redirect('http://localhost:3000/leaderboard');
             });
         })(req, res, next);
     });
@@ -54,7 +54,7 @@ module.exports = function (app, passport) {
                 res.cookie('user_id', user.id);
                 res.cookie('user_name', user.fullname );
 
-                return res.render('dashboard', {layout: false});
+                return res.redirect('http://localhost:3000/leaderboard');
 
             });
         })(req, res, next);
