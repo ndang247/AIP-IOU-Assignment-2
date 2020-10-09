@@ -32,30 +32,35 @@ class AddPublicRequest extends React.Component {
 
     render() {
         return (
-            <body>
-                <main>
-                    <div className='add-request-box'>
+            <body>               
+                <main>                                       
+                    <div className='addreq-box'>
                         <form>
-                            <h1 className='addRequest'>Create a Request</h1>
+                            <h1>Create a Public Request</h1>   
                             <br></br>
                             <div>
                                 <p>Task Name</p>
-                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true'/>
+                                <input type='text' id='input-request' className='form-control1' required='true' autoFocus='true'/>
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Description</p>
+                                <input type='text' id='input-request' className='form-control1' required='true' />
+                            </div>
+                            <br></br>                    
+                            <div>
+                                <p>Requester Name</p>
+                                <input type='text' id='input-request' className='form-control1' required='true'/>
                             </div>
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'description' id='description' className = 'form-control1' required='true'/>
+                                <textarea type = 'text' id='input-request' className = 'form-control1' required='true'/>
                             </div>
                             <br></br>
                             <div>
-                                <p>Requester Name</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' />
-                            </div>
-                            <br></br>                          
-                            <div>
                                 <p>Reward</p>
-                                <select name="rewardItems" className='form-control1'>
+                                <select name="rewardItems" id='input-request' className='form-control1'>
                                     <option value="pizza">Pizza</option>
                                     <option value="sushi">Sushi</option>
                                     <option value="pho">Pho</option>
@@ -66,20 +71,16 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward (Quantity)</p>
-                                <input type='text' id='input-reward-quantity' className='form-control1' required='true' />
+                                <input type='text' id='input-fname' className='form-control1' required='true' />
                             </div>
-                            <br></br>
-                            <div>
-                                <p>Upload Picture Here (Proof)</p>
-                                <input type='file' id='input-proof' className='form-control1' required='true'/>                                
-                            </div>
+                            <br></br>                           
                             <br></br><br/>
                             <div className='btn-signup'>
-                                <button className='btn-signup'>Create a new request</button>
+                                <button className='btn-signup'>Create a new favour</button>
                             </div>                        
                         </form>
-                    </div>
-                </main>
+                    </div>                   
+                </main>                
             </body>
         );
     };
