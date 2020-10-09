@@ -54,8 +54,8 @@ module.exports = function (app, passport) {
                 res.cookie('user_id', user.id);
                 res.cookie('user_name', user.fullname );
 
-                return res.redirect('http://localhost:3000/leaderboard');
-
+                //res.redirect('http://localhost:3000/leaderboard');
+                res.json({success: true});
             });
         })(req, res, next);
     });
