@@ -1,5 +1,6 @@
 const db = require('../models');
 const requestReward = require('../models/requestReward');
+
 module.exports = function (app, passport) {
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted

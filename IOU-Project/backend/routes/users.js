@@ -1,5 +1,4 @@
-var db = require("../models");
-
+const db = require("../models");
 
 module.exports = function(app, passport){
     app.get('/api/emails', (req, res, next) => {

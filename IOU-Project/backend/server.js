@@ -51,6 +51,7 @@ require('./routes/favours')(app, passport);
 require('./routes/requests')(app, passport);
 require('./routes/rewards')(app, passport);
 require('./routes/users')(app, passport);
+require('./routes/debts')(app, passport);
 
 app.listen(port, () => { 
   console.log(`Server is running on port ${port}`) 
