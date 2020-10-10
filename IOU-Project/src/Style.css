@@ -140,7 +140,7 @@
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.addfavours-box {
+.addfavours-box, .addreq-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,7 +150,7 @@
     padding: 2rem;
     border: .1rem #c0c0c0 solid;
     border-radius: .5rem;
-    top: -90px;
+    top: -50px;
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
@@ -317,64 +317,6 @@ main {
     text-align: center;
     font-size: 2.5rem;
     color: #0078B5;
-}
-
-/* View/Add request */
-.add-header {
-    font-weight: bold;
-    margin: 1rem;
-    text-align: center;
-    font-size: 2.5rem;
-    color: #0078B5;
-}
-.add-request-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    flex-direction: column;
-    width: 32rem;
-    padding: 2rem;
-    border: .1rem #c0c0c0 solid;
-    border-radius: .5rem;
-    top: -50px;
-    position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-#inputRequest {
-    width: 500px;
-    height:  50px;
-    padding: 0 20px;
-    margin: 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    border-color: #0078B5;
-}
-
-.add-request-form:focus {
-    outline: none;
-}
-
-.add-request-form button {
-    height: 50px;
-    width: 80px;
-    border-radius: 5px;
-    border-color: #0078B5;
-    background-color: #0078B5;
-    color: #ffffff;
-    font-weight: bolder;
-    cursor: pointer;
-}
-
-#rewardItems {
-    width: 500px;
-    height:  50px;
-    padding: 0 20px;
-    margin: 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    border-color: #0078B5;
 }
 
  /* Page transition */

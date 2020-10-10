@@ -1,8 +1,37 @@
 import React from "react";
 import "../Style.css";
+import axios from 'axios';
 
 export default class Leaderboard extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            rank: 1
+        };
+    }
+
+    componentDidMount() {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/most-debt',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                data: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    handleRanking(){
+        this.setState({rank: this.state.rank + 1})
+        return this.state.rank;
+    }
     render() {
+
         return (
             <body>
                 <div className="container">
@@ -16,26 +45,13 @@ export default class Leaderboard extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nam Long Nguyen</td>
-                                <td>100,000$</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Nam Dang</td>
-                                <td>88,000$</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Harry</td>
-                                <td>50,000$</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Hoang Long Nguyen</td>
-                                <td>50$</td>
-                            </tr>
+                        {
+                            this.state.data.map((leaderboardData) => 
+                                <tr><td></td> <td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
+                                
+                            
+                            
+                            )}
                         </tbody>
                     </table>
                 </div>
