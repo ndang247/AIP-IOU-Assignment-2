@@ -36,7 +36,6 @@ module.exports = function (app, passport) {
     app.post('/api/add-requests', (req, res, next) => {
         // Create a request
 
-        // Get the taskName, description, requesterName, reward and reward quantity
         const taskName = req.body.taskName;
         const description = req.body.description;
         const requesterName = req.body.requesterName;
