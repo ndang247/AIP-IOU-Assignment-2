@@ -10,6 +10,18 @@
     margin-left: 10px;
 }
 
+.favour-container, .debt-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    width: 50rem;
+    padding: 2rem;
+    top: -50px;
+    position: relative;
+}
+
 .container {
     font-family: Asap, sans-serif;
     height: 100%;
@@ -140,7 +152,7 @@
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
-.addfavours-box, .addreq-box {
+.addfavours-box, .addreq-box, .add-debt-box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -279,6 +291,8 @@ main {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     
 }
+
+
 
 .leaderboard-table thead tr,
 .request-table thead tr {

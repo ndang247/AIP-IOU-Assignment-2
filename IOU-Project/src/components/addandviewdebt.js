@@ -1,10 +1,74 @@
 import React from "react";
 import "../Style.css";
+import axios from 'axios';
 
 export default class AddViewDebt extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            rewardData: [],
+            userData: []
+        };
+    }
+    
+    componentDidMount() {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/rewards',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                rewardData: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+        
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/emails',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                userData: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
         return(
             <body>
+                <div className="debt-container container">
+                    <section className='jumbotron text-centre'>
+                        <h1 className='leaderboard-title'>My Debts</h1>
+                    </section>
+                    <br></br>
+                    <br></br>
+                    <table className="request-table">
+                        <thead>
+                            <tr>
+                                <th>Debt ID</th>
+                                <th>Debt's Title</th>
+                                <th>Debtor</th>
+                                <th>Description</th>
+                                <th>Reward</th>
+                                <th>Reward (Quantity)</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.userData.map((userData) =>
+                                <tr><td>{userData.email}</td></tr>
+                            )}
+                        </tbody>
+                        
+                    </table>   
+                </div>          
                 <main>
                     <div className='add-debt-box'>
                         <form>
@@ -33,11 +97,11 @@ export default class AddViewDebt extends React.Component {
                             <div>
                                 <p>Reward</p>
                                 <select name="rewardItems" className='form-control1'>
-                                    <option value="pizza">Pizza</option>
-                                    <option value="sushi">Sushi</option>
-                                    <option value="pho">Pho</option>
-                                    <option value="noodle">Noodle</option>
-                                    <option value="coffee">Coffee</option>
+                                    {
+                                        this.state.rewardData.map((rewardData) =>
+                                        <option value="rewards">{rewardData.rewardName}</option>
+                                        )
+                                    }
                                 </select>
                             </div>
                             <br></br>
@@ -46,11 +110,7 @@ export default class AddViewDebt extends React.Component {
                                 <input type='text' id='input-fname' className='form-control1' required='true' />
                             </div>
                             <br></br>
-                            <div>
-                                <p>Upload Picture Here (Proof)</p>
-                                <input type='file' id='evidence-file' className='form-control1' required='true'/>                                
-                            </div>
-                            <br></br><br/>
+                           
                             <div className='btn-signup'>
                                 <button className='btn-signup'>Create a new debt</button>
                             </div>                        

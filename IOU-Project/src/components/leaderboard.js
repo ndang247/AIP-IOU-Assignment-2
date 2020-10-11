@@ -48,8 +48,6 @@ export default class Leaderboard extends React.Component {
                         {
                             this.state.data.map((leaderboardData) => 
                                 <tr><td></td> <td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
-                                
-                            
                             
                             )}
                         </tbody>

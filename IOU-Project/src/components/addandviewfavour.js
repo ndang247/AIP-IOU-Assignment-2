@@ -1,11 +1,69 @@
 import React from "react";
 import "../Style.css";
+import axios from 'axios';
+
 
 export default class AddViewFavour extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    }
+
+    componentDidMount() {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/rewards',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                data: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
         return (
-            <body>               
-                <main>                                       
+            <body>
+                <div className="favour-container container">
+                    <section className='jumbotron text-centre'>
+                        <h1 className='leaderboard-title'>My Favours</h1>
+                    </section>
+                    <br></br>
+                    <br></br>
+                    <table className="request-table">
+                        <thead>
+                            <tr>
+                                <th>Favour ID</th>
+                                <th>Favour's Title</th>
+                                <th>Owner's Name</th>
+                                <th>Description</th>
+                                <th>Reward</th>
+                                <th>Reward (Quantity)</th>
+                                <th>Proof</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>   
+                </div>          
+                <main>
                     <div className='addfavours-box'>
                         <form>
                             <h1>Create a Favour</h1>   
@@ -33,11 +91,11 @@ export default class AddViewFavour extends React.Component {
                             <div>
                                 <p>Reward</p>
                                 <select name="rewardItems" className='form-control1'>
-                                    <option value="pizza">Pizza</option>
-                                    <option value="sushi">Sushi</option>
-                                    <option value="pho">Pho</option>
-                                    <option value="noodle">Noodle</option>
-                                    <option value="coffee">Coffee</option>
+                                    {
+                                        this.state.data.map((rewardData) =>
+                                        <option value="rewards">{rewardData.rewardName}</option>
+                                        )
+                                    }
                                 </select>
                             </div>
                             <br></br>
@@ -55,8 +113,8 @@ export default class AddViewFavour extends React.Component {
                                 <button className='btn-signup'>Create a new favour</button>
                             </div>                        
                         </form>
-                    </div>                   
-                </main>                
+                    </div>
+                </main>             
             </body>
         );
     }

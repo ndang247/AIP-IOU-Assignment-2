@@ -1,5 +1,6 @@
 import React from "react";
 import "../Style.css";
+import axios from 'axios';
 
 export default class HomePage extends React.Component {
     // constructor(props) {
@@ -16,7 +17,30 @@ export default class HomePage extends React.Component {
     //     })
     // }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    }
+
+    componentDidMount() {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/all-requests',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                data: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     render() {
+
         return (
             <body>
                 <div className="container">
@@ -37,6 +61,13 @@ export default class HomePage extends React.Component {
                                 <th>Reward (Quantity)</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            {
+                                this.state.data.map((publicRequests) => 
+                                <tr><td>{publicRequests.id}</td> <td>{publicRequests.taskName}</td> <td>{publicRequests.description}</td>
+                                <td>{publicRequests.fullname}</td><td></td><td>{publicRequests.quantity}</td></tr>
+                                )}
+                        </tbody>
                     </table>   
                 </div>
             </body>
