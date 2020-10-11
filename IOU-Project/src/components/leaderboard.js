@@ -6,8 +6,7 @@ export default class Leaderboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            rank: 1
+            data: []
         };
     }
 
@@ -26,10 +25,6 @@ export default class Leaderboard extends React.Component {
         })
     }
 
-    handleRanking(){
-        this.setState({rank: this.state.rank + 1})
-        return this.state.rank;
-    }
     render() {
 
         return (
@@ -39,7 +34,6 @@ export default class Leaderboard extends React.Component {
                     <table className="leaderboard-table">
                         <thead>
                             <tr>
-                                <th>Rank</th>
                                 <th>Full Name</th>
                                 <th>Number of Debt</th>
                             </tr>
@@ -47,9 +41,8 @@ export default class Leaderboard extends React.Component {
                         <tbody>
                         {
                             this.state.data.map((leaderboardData) => 
-                                <tr><td></td> <td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
-                            
-                            )}
+                            <tr><td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
+                        )}
                         </tbody>
                     </table>
                 </div>
