@@ -1,6 +1,6 @@
 const db = require('../models');
 const requestReward = require('../models/requestReward');
-
+const qs = require('querystring');
 module.exports = function (app, passport) {
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
@@ -36,27 +36,32 @@ module.exports = function (app, passport) {
 
     app.post('/api/add-requests', (req, res, next) => {
         // Create a request
-        const taskName = req.body.taskName;
-        const description = req.body.description;
-        const requesterName = req.body.requesterName;
-        const rewardID = 1;
-        const rewardQuantity = Number(req.body.rewardQuantity);
-        const requesterID = 28;
+        const item_list = {
+            "Pho": 1,
+            "Pizza": 2,
+            "Sushi": 3
+        }
+
+
+        const requesterID = 31;
+
         db.Request.create({
-            taskName: taskName,
-            description: description,
-            requesterName: requesterName
+            taskName: req.body.taskName,
+            description: req.body.description,
         }).then(requestInstance => {    
-            requestInstance.save().catch(err => console.log(err));
+            requestInstance.save()
+                .catch(err => console.log(err));
             db.RequestReward.create({
-                rewardId: rewardID,
-                quantity: rewardQuantity,
+                rewardId: 1, //item_list[req.body.reward], // hardcode
+                quantity: Number(req.body.quantity),
                 requesterId: requesterID,
                 requestId: requestInstance.id
             }).then(requestRewardInstance => {
                 requestRewardInstance.save().catch(err => console.log(err));
             }).catch(err => console.log(err));
         }).catch(err => console.log(err));
+
+
     })
 
     app.post('/api/add-request-reward', (req, res, next) => {

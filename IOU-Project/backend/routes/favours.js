@@ -4,10 +4,12 @@ module.exports = function (app, passport) {
 
     app.get('/api/my-favours', (req, res, next) => {
         // Get all my favours
+
         db.sequelize.query('SELECT "Favours"."id", "Favours"."description", "FavourRewards"."quantity", "FavourRewards"."rewardId" FROM "Favours" INNER JOIN "FavourRewards" ON "Favours"."id" = "FavourRewards"."favourId"')
         .then(data => {
             res.json(data[0])
         })
+
         .catch(err => res.status(400).json('Error:' + err));
     })
 
@@ -35,22 +37,6 @@ module.exports = function (app, passport) {
         .catch(err => res.status(400).json('Error:' + err));
     })
 
-    // Create a favour
 
-    /*
-    app.get('/api/my-owed-favour', (req, res, next) => {
-        // Get all of my requests
-        if (req.isAuthenticated()) {
-            var user = {
-                id: req.session.passport.user,
-                isloggedin: req.isAuthenticated()
-            }
-            res.json(user);
-        } else {
-            console.log("You will be direct to all-requests");
-            res.redirect("/api/requests/all-requests");
-        }
-    })
-    */
 }
 

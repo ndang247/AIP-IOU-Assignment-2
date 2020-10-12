@@ -13,7 +13,7 @@ module.exports = function (app, passport) {
         })
     });
 
-    app.post('/signup', function(req, res, next) {
+    app.post('/auth/signup', function(req, res, next) {
         passport.authenticate('local-signup', function(err, user, info) {
             console.log("info", info);
             if (err) {
@@ -49,7 +49,8 @@ module.exports = function (app, passport) {
         })(req, res, next);
     });
 
-    app.post('/login', function(req, res, next) {
+    app.post('/auth/signin', function(req, res, next) {
+        console.log("Authenticating logging in")
         passport.authenticate('local-login', function(err, user, info) {
             console.log("\n\n\n########userrrr", user)
             if (err) {
@@ -72,8 +73,7 @@ module.exports = function (app, passport) {
                 res.cookie('user_id', user.id);
                 res.cookie('user_name', user.fullname );
 
-                return res.json(true);
-                // return res.redirect("/account");
+                return res.send({success: true});
 
             });
         })(req, res, next);

@@ -1,7 +1,7 @@
 import React  from "react";
 import "../Style.css";
 import axios from 'axios';
-
+const qs = require('querystring')
 
 class AddPublicRequest extends React.Component {
     // constructor(props) {
@@ -37,15 +37,15 @@ class AddPublicRequest extends React.Component {
             // the property of the state that correspond to the field of the database
             taskName: '',
             description: '',
-            requesterName: '',
+            reward: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
-            rewardQuantity: ''
+            quantity: ''
         };
 
-        this.onChangeTaskName = this.onChangeTaskName.bind(this);
-        this.onChangeDescription = this.onChangeDescription.bind(this);
-        this.onChangeFullName = this.onChangeFullName.bind(this);
-        this.onChangeRewardQuantity = this.onChangeRewardQuantity.bind(this);
+        // this.onChangeTaskName = this.onChangeTaskName.bind(this);
+        // this.onChangeDescription = this.onChangeDescription.bind(this);
+        // this.onChangeFullName = this.onChangeFullName.bind(this);
+        // this.onChangeRewardQuantity = this.onChangeRewardQuantity.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -64,30 +64,9 @@ class AddPublicRequest extends React.Component {
         })
     }
 
-    onChangeTaskName(e) {
-        this.setState({
-            taskName: e.target.value
-        });
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
     }
-
-    onChangeDescription(e) {
-        this.setState({
-            description: e.target.value
-        });
-    }
-
-    onChangeFullName(e) {
-        this.setState({
-            requesterName: e.target.value
-        });
-    }
-
-    onChangeRewardQuantity(e) {
-        this.setState({
-            rewardQuantity: e.target.value
-        });
-    }
-
     // this function is use when user submit a form
     onSubmit(e) {
         // this will prevent the default HTML form submit behaviour from taking place
@@ -96,15 +75,15 @@ class AddPublicRequest extends React.Component {
         const publicRequest = {
             taskName: this.state.taskName,
             description: this.state.description,
-            requesterName: this.state.fullname,
-            rewardQuantity: this.state.rewardQuantity
+            quantity: this.state.quantity,
+            reward: this.state.reward
         }
-
-        console.log(publicRequest);
-
-        // send pubic request object to our back-end to add to database
-        // make sure the back-end is running
-        axios.post('http://localhost:8080/api/add-requests', publicRequest)
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        axios.post('http://localhost:8080/api/add-requests',  qs.stringify(publicRequest), config)
         .then(res => console.log(res.data));
     }
 
@@ -119,22 +98,17 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Task Name</p>
-                                <input type='text' id='input-request' className='form-control1' required='true' autoFocus='true'/>
-                            </div>
-                            <br></br>                    
-                            <div>
-                                <p>Requester Name</p>
-                                <input type='text' id='input-request' className='form-control1' required='true'/>
+                                <input type='text' id='input-request' className='form-control1' required='true' autoFocus='true' name = 'taskName' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'text' id='input-request' className = 'form-control1' required='true'/>
+                                <textarea type = 'text' id='input-request' className = 'form-control1' required='true' name='description' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
                                 <p>Reward</p>
-                                <select name="rewardItems" id='input-request' className='form-control1'>
+                                <select name="reward" id='input-request' className='form-control1' onChange={this.handlechange}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
                                         <option value="rewards">{rewardData.rewardName}</option>
@@ -145,7 +119,7 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward (Quantity)</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' />
+                                <input type='text' id='input-fname' className='form-control1' required='true' name='quantity' onChange={this.handleChange}/>
                             </div>
                             <br></br>                           
                             <br></br><br/>

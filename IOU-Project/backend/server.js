@@ -43,7 +43,7 @@ app.get('/signupp', function(req, res){
 })
 
 app.get('/signinn', function(req, res){
-  res.render('signup', {layout: false});
+  res.render('signin', {layout: false});
 })
 // ROUTES:
 require('./routes/auth')(app, passport);
@@ -53,6 +53,6 @@ require('./routes/rewards')(app, passport);
 require('./routes/users')(app, passport);
 require('./routes/debts')(app, passport);
 
-app.listen(port, () => { 
-  console.log(`Server is running on port ${port}`) 
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`)
 });
