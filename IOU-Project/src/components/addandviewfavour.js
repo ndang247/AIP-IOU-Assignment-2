@@ -7,7 +7,7 @@ export default class AddViewFavour extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            rewardData: []
         };
     }
 
@@ -19,7 +19,7 @@ export default class AddViewFavour extends React.Component {
         }).then (res => {
             console.log(res);
             this.setState({
-                data: res.data
+                rewardData: res.data
             });
         }).catch(err => {
             console.log(err);
@@ -82,7 +82,7 @@ export default class AddViewFavour extends React.Component {
                                 <p>Reward</p>
                                 <select name="rewardItems" className='form-control1'>
                                     {
-                                        this.state.data.map((rewardData) =>
+                                        this.state.rewardData.map((rewardData) =>
                                         <option value="rewards">{rewardData.rewardName}</option>
                                         )
                                     }

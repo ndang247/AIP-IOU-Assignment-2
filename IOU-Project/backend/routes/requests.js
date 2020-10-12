@@ -39,15 +39,15 @@ module.exports = function (app, passport) {
 
         const taskName = req.body.taskName;
         const description = req.body.description;
-        const requesterName = req.body.requesterName;
+        const fullname = req.body.fullname;
         const rewardID = 1;
         const rewardQuantity = Number(req.body.rewardQuantity);
         const requesterID = 28;
         db.Request.create({
             taskName: taskName,
             description: description,
-            requesterName: requesterName,
-        }).then(requestInstance => {
+            fullname: fullname,
+        }).then(requestInstance => {    
             requestInstance.save()
             db.RequestReward.create({
                 rewardId: rewardID,

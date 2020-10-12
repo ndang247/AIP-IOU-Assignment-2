@@ -34,7 +34,7 @@ class AddPublicRequest extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            rewardData: []
         };
     }
 
@@ -46,7 +46,7 @@ class AddPublicRequest extends React.Component {
         }).then (res => {
             console.log(res);
             this.setState({
-                data: res.data
+                rewardData: res.data
             });
         }).catch(err => {
             console.log(err);
@@ -86,7 +86,7 @@ class AddPublicRequest extends React.Component {
                                 <p>Reward</p>
                                 <select name="rewardItems" id='input-request' className='form-control1'>
                                     {
-                                        this.state.data.map((rewardData) =>
+                                        this.state.rewardData.map((rewardData) =>
                                         <option value="rewards">{rewardData.rewardName}</option>
                                         )
                                     }

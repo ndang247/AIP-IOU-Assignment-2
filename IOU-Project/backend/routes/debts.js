@@ -18,9 +18,9 @@ module.exports = function (app, passport) {
         .catch(err => res.status(400).json('Error ' + err))
     })
 
-    app.delete('/api/delete-debts', (req, res, next) => {
+    app.delete('/api/delete-debts/:id', (req, res, next) => {
         // Delete a debt
-        db.Favour.findByPk(req.body.id)
+        db.Favour.findByPk(req.params.id)
         .then(debt => {
             debt.destroy()
             .then(() => res.json('Favour deleted!'))
