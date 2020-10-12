@@ -42,12 +42,10 @@ export default class AddViewDebt extends React.Component {
     render() {
         return(
             <body>
-                <div className="debt-container container">
+                <div className="debt-container">
                     <section className='jumbotron text-centre'>
                         <h1 className='leaderboard-title'>My Debts</h1>
                     </section>
-                    <br></br>
-                    <br></br>
                     <table className="request-table">
                         <thead>
                             <tr>

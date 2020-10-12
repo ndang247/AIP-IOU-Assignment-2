@@ -36,28 +36,27 @@ module.exports = function (app, passport) {
 
     app.post('/api/add-requests', (req, res, next) => {
         // Create a request
-
         const taskName = req.body.taskName;
         const description = req.body.description;
-        const fullname = req.body.fullname;
+        const requesterName = req.body.requesterName;
         const rewardID = 1;
         const rewardQuantity = Number(req.body.rewardQuantity);
         const requesterID = 28;
         db.Request.create({
             taskName: taskName,
             description: description,
-            fullname: fullname,
+            requesterName: requesterName
         }).then(requestInstance => {    
-            requestInstance.save()
+            requestInstance.save().catch(err => console.log(err));
             db.RequestReward.create({
                 rewardId: rewardID,
                 quantity: rewardQuantity,
                 requesterId: requesterID,
                 requestId: requestInstance.id
             }).then(requestRewardInstance => {
-                requestRewardInstance.save()
-            })
-        }).catch(err => res.status(400).json('Error ' + err));
+                requestRewardInstance.save().catch(err => console.log(err));
+            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     })
 
     app.post('/api/add-request-reward', (req, res, next) => {
@@ -74,7 +73,6 @@ module.exports = function (app, passport) {
             requestRewardInstance.save();
         }).catch(err => res.status(400).json('Error ' + err));
     })
-
 
     // PRIVATE REQUESTS
     /*

@@ -7,7 +7,8 @@ export default class AddViewFavour extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rewardData: []
+            rewardData: [],
+            favourData: []
         };
     }
 
@@ -24,6 +25,19 @@ export default class AddViewFavour extends React.Component {
         }).catch(err => {
             console.log(err);
         })
+
+        axios({
+            method: 'GET',
+            url: 'http://localhost:8080/api/get-my-favours',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                favourData: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render() {
@@ -33,6 +47,8 @@ export default class AddViewFavour extends React.Component {
                     <section className='jumbotron text-centre'>
                         <h1 className='leaderboard-title'>My Favours</h1>
                     </section>
+                    <br></br>
+                    <br></br>
                     <br></br>
                     <br></br>
                     <table className="request-table">

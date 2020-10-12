@@ -35,6 +35,8 @@ module.exports = function (app, passport) {
         .catch(err => res.status(400).json('Error:' + err));
     })
 
+    // Create a favour
+
     /*
     app.get('/api/my-owed-favour', (req, res, next) => {
         // Get all of my requests
