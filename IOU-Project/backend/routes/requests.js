@@ -34,34 +34,30 @@ module.exports = function (app, passport) {
         .catch(err => res.status(400).json('Error:' + err));
     })
 
-    app.post('/api/add-requests', (req, res, next) => {
+    app.post('/api/add-my-requests', (req, res, next) => {
         // Create a request
         const item_list = {
             "Pho": 1,
             "Pizza": 2,
             "Sushi": 3
         }
-
-
         const requesterID = 31;
 
         db.Request.create({
             taskName: req.body.taskName,
             description: req.body.description,
         }).then(requestInstance => {    
-            requestInstance.save()
-                .catch(err => console.log(err));
+            requestInstance.save().catch(err => console.log(err));
+            console.log(requestInstance.id);
             db.RequestReward.create({
-                rewardId: 1, //item_list[req.body.reward], // hardcode
+                rewardId: item_list[req.body.reward], // hardcode
                 quantity: Number(req.body.quantity),
                 requesterId: requesterID,
                 requestId: requestInstance.id
             }).then(requestRewardInstance => {
-                requestRewardInstance.save().catch(err => console.log(err));
+                requestRewardInstance.save().then(() => res.json("Request Added")).catch(err => console.log(err));
             }).catch(err => console.log(err));
-        }).catch(err => console.log(err));
-
-
+        }).catch(err => res.status(400).json('Error ' + err));
     })
 
     app.post('/api/add-request-reward', (req, res, next) => {

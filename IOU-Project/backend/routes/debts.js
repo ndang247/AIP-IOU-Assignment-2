@@ -3,7 +3,10 @@ const db = require('../models');
 module.exports = function (app, passport) {
     app.get('/api/get-my-debts', async (req, res, next) => {
         // Get all debt
-        db.sequelize.query('SELECT * FROM "Favours" INNER JOIN "FavourRewards" ON "Favours"."id" = "FavourRewards"."favourId"')
+        db.sequelize.query('SELECT * ' +
+            'FROM "Favours" INNER JOIN "FavourRewards" ' +
+            'ON "Favours"."id" = "FavourRewards"."favourId"' +
+            'WHERE "Favours"."receiverId" = 31')
         .then(data => res.json(data[0]))
         .catch(err => res.status(400).json('Error:' + err));
     })
@@ -31,23 +34,27 @@ module.exports = function (app, passport) {
 
     app.post('/api/add-my-debts', (req, res, next) => {
         // Create a debt
-        const debtTitle = req.body.debtTitle;
-        const owner = req.body.owner;
-        const ownerEmail = req.body.ownerEmail;
-        db.Request.create({
-            taskName: taskName,
-            description: description,
-            requesterName: requesterName,
-        }).then(requestInstance => {
-            requestInstance.save()
-            db.RequestReward.create({
-                rewardId: rewardID,
-                quantity: rewardQuantity,
-                requesterId: requesterID,
-                requestId: requestInstance.id
+        const item_list = {
+            "Pho": 1,
+            "Pizza": 2,
+            "Sushi": 3
+        }
+        const fake_offerer_id = 31;
+        const fake_receiver_id = 32; // my id req.user.id
+        db.Favour.create({
+            description: req.body.description,
+            offererId: fake_offerer_id,
+            receiverId: fake_receiver_id
+        }).then(debtInstance => {
+            debtInstance.save().catch(err => console.log(err))
+            console.log(debtInstance.id);
+            db.FavourReward.create({
+                rewardId: item_list[req.body.reward],
+                quantity: Number(req.body.quantity),
+                favourId: debtInstance.id
             }).then(requestRewardInstance => {
-                requestRewardInstance.save()
-            })
+                requestRewardInstance.save().then(() => res.json("Debt Added")).catch(err => console.log(err))
+            }).catch(err => console.log(err));
         }).catch(err => res.status(400).json('Error ' + err));
     })
 

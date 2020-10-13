@@ -50,7 +50,6 @@ export default class AddViewDebt extends React.Component {
                         <thead>
                             <tr>
                                 <th>Debt ID</th>
-                                <th>Debt's Title</th>
                                 <th>Debtor</th>
                                 <th>Description</th>
                                 <th>Reward</th>
