@@ -1,7 +1,7 @@
 import React  from "react";
 import "../Style.css";
 import axios from 'axios';
-const qs = require('querystring')
+const qs = require('querystring');
 
 class AddPublicRequest extends React.Component {
     // constructor(props) {
@@ -108,7 +108,7 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward</p>
-                                <select name="reward" id='input-request' className='form-control1' onChange={this.handlechange}>
+                                <select name="reward" id='input-request' className='form-control1' onChange={this.handleChange}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
                                         <option value="rewards">{rewardData.rewardName}</option>

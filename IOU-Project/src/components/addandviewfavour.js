@@ -1,15 +1,22 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
+const qs = require('querystring');
 
 
 export default class AddViewFavour extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rewardData: [],
+            // the property of the state that correspond to the field of the database
+            title: '',
+            description: '',
+            quantity: '',
+            rewardData: [], // this will be shown in a dropdown all the rewards in the database
             favourData: []
-        };
+        }
+
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -38,6 +45,27 @@ export default class AddViewFavour extends React.Component {
         }).catch(err => {
             console.log(err);
         })
+    }
+
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+    // this function is use when user submit a form
+    onSubmit(e) {
+        // this will prevent the default HTML form submit behaviour from taking place
+        e.preventDefault();
+
+        const favour = {
+            description: this.state.description,
+            quantity: this.state.quantity
+        }
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        axios.post('http://localhost:8080/api/add-my-favours',  qs.stringify(favour), config)
+        .then(res => console.log(res.data));
     }
 
     render() {
@@ -71,22 +99,12 @@ export default class AddViewFavour extends React.Component {
                 </div>          
                 <main>
                     <div className='addfavours-box'>
-                        <form>
+                        <form onSubmit={this.onSubmit}>
                             <h1>Create a Favour</h1>   
                             <br></br>
                             <div>
                                 <p>Title</p>
                                 <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true'/>
-                            </div>
-                            <br></br>
-                            <div>
-                                <p>Full Name</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' />
-                            </div>
-                            <br></br>                    
-                            <div>
-                                <p>Email Address</p>
-                                <input type='email' id='input-email' className='form-control1' required='true'/>
                             </div>
                             <br></br>
                             <div>

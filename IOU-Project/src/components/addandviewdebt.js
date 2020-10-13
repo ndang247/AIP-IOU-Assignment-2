@@ -1,14 +1,20 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
+const qs = require('querystring');
 
 export default class AddViewDebt extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rewardData: [],
-            userData: []
-        };
+            // the property of the state that correspond to the field of the database
+            description: '',
+            quantity: '',
+            rewardData: [], // this will be shown in a dropdown all the rewards in the database
+            debtData: []
+        }
+
+        this.onSubmit = this.onSubmit.bind(this);
     }
     
     componentDidMount() {
@@ -27,16 +33,35 @@ export default class AddViewDebt extends React.Component {
         
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/emails',
+            url: 'http://localhost:8080/api/get-my-debts',
             data: null
         }).then (res => {
             console.log(res);
             this.setState({
-                userData: res.data
+                debtData: res.data
             });
         }).catch(err => {
             console.log(err);
         })
+    }
+
+    handleChange = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    // this function is use when user submit a form
+    onSubmit(e) {
+        const debt = {
+            description: this.state.description,
+            quantity: this.state.quantity
+        }
+        const config = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        axios.post('http://localhost:8080/api/add-my-debts',  qs.stringify(debt), config)
+        .then(res => console.log(res.data));
     }
 
     render() {
@@ -59,8 +84,8 @@ export default class AddViewDebt extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.userData.map((userData) =>
-                                <tr><td>{userData.email}</td></tr>
+                                this.state.debtData.map((debtData) =>
+                                <tr><td>{debtData.UserId}</td> <td>{debtData.fullname}</td> <td>{debtData.description}</td> </tr>
                             )}
                         </tbody>
                         
@@ -68,27 +93,17 @@ export default class AddViewDebt extends React.Component {
                 </div>          
                 <main>
                     <div className='add-debt-box'>
-                        <form>
+                        <form onSubmit={this.onSubmit}>
                             <h1 className='addDebt'>Create a Debt</h1>
-                            <br></br>
+                            {/* <br></br>
                             <div>
                                 <p>Title</p>
-                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true'/>
-                            </div>
-                            <br></br>
-                            <div>
-                                <p>Full Name</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' />
-                            </div>
-                            <br></br>                    
-                            <div>
-                                <p>Email Address</p>
-                                <input type='email' id='input-email' className='form-control1' required='true'/>
-                            </div>
+                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true' onChange={this.handleChange}/>
+                            </div> */}
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'description' id='description' className = 'form-control1' required='true'/>
+                                <textarea type = 'description' id='description' name='description' className = 'form-control1' required='true' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
@@ -104,7 +119,7 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward (Quantity)</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' />
+                                <input type='text' id='input-fname' name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                            

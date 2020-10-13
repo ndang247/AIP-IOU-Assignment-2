@@ -5,11 +5,10 @@ module.exports = function (app, passport) {
     app.get('/api/my-favours', (req, res, next) => {
         // Get all my favours
 
-        db.sequelize.query('SELECT "Favours"."id", "Favours"."description", "FavourRewards"."quantity", "FavourRewards"."rewardId" FROM "Favours" INNER JOIN "FavourRewards" ON "Favours"."id" = "FavourRewards"."favourId"')
+        db.sequelize.query('SELECT "Users"."id" AS "UserId", "Users"."fullname", "Favours"."id" AS "FavourId", "Favours"."description" FROM "Favours" INNER JOIN "Users" ON "Users"."id" = "Favours"."receiverId"')
         .then(data => {
             res.json(data[0])
         })
-
         .catch(err => res.status(400).json('Error:' + err));
     })
 
@@ -35,6 +34,32 @@ module.exports = function (app, passport) {
             .catch(err => res.status(400).json('Error ' + err));
         })
         .catch(err => res.status(400).json('Error:' + err));
+    })
+
+    app.post('/api/add-my-favours', (req, res, next) => {
+        // Create a debt
+        const item_list = {
+            "Pho": 1,
+            "Pizza": 2,
+            "Sushi": 3
+        }
+        const fake_offerer_id = 31;
+        const fake_receiver_id = 32; // my id req.user.id
+        db.Favour.create({
+            description: req.body.description,
+            offererId: fake_offerer_id,
+            receiverId: fake_receiver_id
+        }).then(favourInstance => {
+            favourInstance.save().catch(err => console.log(err))
+            console.log(favourInstance.id);
+            db.FavourReward.create({
+                rewardId: item_list[req.body.reward],
+                quantity: Number(req.body.quantity),
+                favourId: favourInstance.id
+            }).then(favourRewardInstance => {
+                favourRewardInstance.save().then(() => res.json("Favour Added")).catch(err => console.log(err))
+            }).catch(err => console.log(err));
+        }).catch(err => res.status(400).json('Error ' + err));
     })
 
 

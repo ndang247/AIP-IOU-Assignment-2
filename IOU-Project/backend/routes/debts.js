@@ -3,10 +3,7 @@ const db = require('../models');
 module.exports = function (app, passport) {
     app.get('/api/get-my-debts', async (req, res, next) => {
         // Get all debt
-        db.sequelize.query('SELECT * ' +
-            'FROM "Favours" INNER JOIN "FavourRewards" ' +
-            'ON "Favours"."id" = "FavourRewards"."favourId"' +
-            'WHERE "Favours"."receiverId" = 31')
+        db.sequelize.query('SELECT "Users"."id" AS "UserId", "Users"."fullname", "Favours"."id" AS "FavourId", "Favours"."description" FROM "Favours" INNER JOIN "Users" ON "Users"."id" = "Favours"."receiverId"')
         .then(data => res.json(data[0]))
         .catch(err => res.status(400).json('Error:' + err));
     })
@@ -52,8 +49,8 @@ module.exports = function (app, passport) {
                 rewardId: item_list[req.body.reward],
                 quantity: Number(req.body.quantity),
                 favourId: debtInstance.id
-            }).then(requestRewardInstance => {
-                requestRewardInstance.save().then(() => res.json("Debt Added")).catch(err => console.log(err))
+            }).then(debtRewardInstance => {
+                debtRewardInstance.save().then(() => res.json("Debt Added")).catch(err => console.log(err))
             }).catch(err => console.log(err));
         }).catch(err => res.status(400).json('Error ' + err));
     })
