@@ -35,7 +35,7 @@ export default class AddViewFavour extends React.Component {
 
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/get-my-favours',
+            url: 'http://localhost:8080/api/my-favours',
             data: null
         }).then (res => {
             console.log(res);
@@ -71,7 +71,7 @@ export default class AddViewFavour extends React.Component {
     render() {
         return (
             <body>
-                <div className="favour-container container">
+                <div className="favour-container">
                     <section className='jumbotron text-centre'>
                         <h1 className='leaderboard-title'>My Favours</h1>
                     </section>
@@ -83,7 +83,6 @@ export default class AddViewFavour extends React.Component {
                         <thead>
                             <tr>
                                 <th>Favour ID</th>
-                                <th>Favour's Title</th>
                                 <th>Owner's Name</th>
                                 <th>Description</th>
                                 <th>Reward</th>
@@ -93,6 +92,10 @@ export default class AddViewFavour extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
+                            {
+                                this.state.favourData.map((favourData) =>
+                                <tr><td>{favourData.FavourId}</td> <td>{favourData.fullname}</td> <td>{favourData.description}</td> </tr>
+                            )}
                         </tbody>
                         
                     </table>   
@@ -103,13 +106,8 @@ export default class AddViewFavour extends React.Component {
                             <h1>Create a Favour</h1>   
                             <br></br>
                             <div>
-                                <p>Title</p>
-                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true'/>
-                            </div>
-                            <br></br>
-                            <div>
                                 <p>Description</p>  
-                                <textarea type = 'description' id='description' className = 'form-control1' required='true'/>
+                                <textarea type = 'description' id='description' name='description' className = 'form-control1' required='true'/>
                             </div>
                             <br></br>
                             <div>
