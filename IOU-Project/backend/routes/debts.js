@@ -36,12 +36,12 @@ module.exports = function (app, passport) {
             "Pizza": 2,
             "Sushi": 3
         }
-        const fake_offerer_id = 31;
-        const fake_receiver_id = 32; // my id req.user.id
+        const fake_offerer_id = 2;
+        
         db.Favour.create({
             description: req.body.description,
             offererId: fake_offerer_id,
-            receiverId: fake_receiver_id
+            receiverId: req.cookies.user_id
         }).then(debtInstance => {
             debtInstance.save().catch(err => console.log(err))
             console.log(debtInstance.id);

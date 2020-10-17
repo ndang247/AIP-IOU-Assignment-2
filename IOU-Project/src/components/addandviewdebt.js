@@ -11,7 +11,8 @@ export default class AddViewDebt extends React.Component {
             description: '',
             quantity: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
-            debtData: []
+            debtData: [],
+            userIdData: []
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -26,6 +27,19 @@ export default class AddViewDebt extends React.Component {
             console.log(res);
             this.setState({
                 rewardData: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+
+        axios({
+            method: 'GET',
+            url: '/api/user-id',
+            data: null
+        }).then (res => {
+            console.log(res);
+            this.setState({
+                userIdData: res.data
             });
         }).catch(err => {
             console.log(err);
@@ -100,6 +114,17 @@ export default class AddViewDebt extends React.Component {
                                 <p>Title</p>
                                 <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true' onChange={this.handleChange}/>
                             </div> */}
+                            <br></br>
+                            <div>
+                                <p>User's ID</p>  
+                                <select name="userId" className='form-control1'>
+                                    {
+                                        this.state.userIdData.map((userIdData) =>
+                                        <option value="userId">{userIdData.id}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
                             <br></br>
                             <div>
                                 <p>Description</p>  

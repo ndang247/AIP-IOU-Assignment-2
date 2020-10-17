@@ -22,6 +22,7 @@ export default class HomePage extends React.Component {
         this.state = {
             data: []
         };
+        this.deletePublicRequest = this.deletePublicRequest.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,16 @@ export default class HomePage extends React.Component {
             });
         }).catch(err => {
             console.log(err);
+        })
+    }
+
+    deletePublicRequest(id) {
+        axios.delete('/api/delete-requests/' + id)
+        .then(response => console.log(response.data));
+
+        this.setState({
+            // whenever the id in the exercises array does not equal to the id that is being deleted will be pass back to the array
+            data: this.state.data.filter(request => request._id !== id)
         })
     }
 
@@ -56,16 +67,17 @@ export default class HomePage extends React.Component {
                                 <th>Request ID</th>
                                 <th>Task Name</th>
                                 <th>Description</th>
-                                <th>Requester Name</th>
+                                <th>Requester's ID</th>
                                 <th>Reward</th>
                                 <th>Reward (Quantity)</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 this.state.data.map((publicRequests) => 
                                 <tr><td>{publicRequests.id}</td> <td>{publicRequests.taskName}</td> <td>{publicRequests.description}</td>
-                                <td>{publicRequests.fullname}</td><td></td><td>{publicRequests.quantity}</td></tr>
+                                <td>{publicRequests.UserId}</td> <td></td> <td>{publicRequests.quantity}</td> <td><button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button></td></tr>
                                 )}
                         </tbody>
                     </table>   

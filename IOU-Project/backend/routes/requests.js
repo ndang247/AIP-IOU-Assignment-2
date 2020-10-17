@@ -4,7 +4,7 @@ const qs = require('querystring');
 module.exports = function (app, passport) {
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
-        db.sequelize.query('SELECT "Requests"."id", "Requests"."taskName", "Requests"."description", "Users"."fullname", "RequestRewards"."quantity" FROM "Requests" INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId" INNER JOIN "Users" ON "Users"."id" = "RequestRewards"."requesterId"')
+        db.sequelize.query('SELECT "Requests"."id", "Requests"."taskName", "Requests"."description", "Users"."id" AS "UserId", "RequestRewards"."quantity" FROM "Requests" INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId" INNER JOIN "Users" ON "Users"."id" = "RequestRewards"."requesterId"')
         .then(data => res.json(data[0]))
         .catch(err => res.status(400).json('Error:' + err));
     })
