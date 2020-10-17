@@ -52,7 +52,7 @@ class AddPublicRequest extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/rewards',
+            url: '/api/rewards',
             data: null
         }).then (res => {
             console.log(res);
@@ -83,7 +83,7 @@ class AddPublicRequest extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('http://localhost:8080/api/add-requests',  qs.stringify(publicRequest), config)
+        axios.post('/api/add-requests',  qs.stringify(publicRequest), config)
         .then(res => console.log(res.data));
     }
 

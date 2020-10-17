@@ -13,19 +13,20 @@ export default class SignIn extends React.Component {
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
+    handleLogout = (event) => {
+        axios.get('/logout');
+        this.props.setLoggedOut();
+    }
     handleSubmit = (event) => {
-        axios.post('http://localhost:8080/auth/signin', {
+        axios.post('/auth/signin', {
             email: this.state.email,
             password: this.state.password
         })
-            .then(function (response) {
-                console.log(response);
-
-                if (response.success) {
-
-                    this.props.history.push('/leaderboard')
+            .then( (response) => {
+                if (response.status === 200) {
+                    this.props.setLoggedIn();
+                    this.props.history.push('/');
                 }
-
             })
             .catch(function (error) {
                 console.log(error);
@@ -34,40 +35,61 @@ export default class SignIn extends React.Component {
         event.preventDefault();
     }
     render() {
-
-        return (
-            <body>
-            <main>
-                <div className='signin-box'>
-                    <form className='form-signin'>
+        if(this.props.isLoggedn === true) {
+            return (
+                <body>
+                <main>
+                    <form>
                         <div>
-                            <h1 className='signinTitle'>Sign in</h1>
+                            <button className='btn btn-lg btn-primary btn-block' type='submit'
+                                    onClick={this.handleLogout}>
+                                Logout
+                            </button>
                         </div>
-                        <div>
-                            <input type='email' id='inputEmail' className='form-control' placeholder='Email adress' required='true' autoFocus='true' name='email' onChange={this.handleChange}/>
-                        </div>
-                        <br/>
-                        <div>
-                            <input type='password' id='inputPassword' className='form-control' placeholder='Password' required='true' name='password' onChange={this.handleChange}/>
-                        </div>
-                        <br/>
-                        <div className='checkbox mb-3'>
-                            <label>
-                                <input type='checkbox' value='remember-me'/>
-                                <label> Remember me </label>
-                            </label>
-                        </div>
-                        <br/>
-                        <button className='btn btn-lg btn-primary btn-block' type='submit' onClick={this.handleSubmit}>
-                            Sign in
-                        </button>
-                        <br/>
-                        <br/>
-                        <Link to='/signup'>Are you new here? Sign up</Link>
                     </form>
-                </div>
-            </main>
-            </body>
-        );
+                </main>
+                </body>
+            )
+        }
+        else {
+            return (
+                <body>
+                <main>
+                    <div className='signin-box'>
+                        <form className='form-signin'>
+                            <div>
+                                <h1 className='signinTitle'>Sign in</h1>
+                            </div>
+                            <div>
+                                <input type='email' id='inputEmail' className='form-control' placeholder='Email adress'
+                                       required='true' autoFocus='true' name='email' onChange={this.handleChange}/>
+                            </div>
+                            <br/>
+                            <div>
+                                <input type='password' id='inputPassword' className='form-control'
+                                       placeholder='Password' required='true' name='password'
+                                       onChange={this.handleChange}/>
+                            </div>
+                            <br/>
+                            <div className='checkbox mb-3'>
+                                <label>
+                                    <input type='checkbox' value='remember-me'/>
+                                    <label> Remember me </label>
+                                </label>
+                            </div>
+                            <br/>
+                            <button className='btn btn-lg btn-primary btn-block' type='submit'
+                                    onClick={this.handleSubmit}>
+                                Sign in
+                            </button>
+                            <br/>
+                            <br/>
+                            <Link to='/signup'>Are you new here? Sign up</Link>
+                        </form>
+                    </div>
+                </main>
+                </body>
+            );
+            }              
     }
 }

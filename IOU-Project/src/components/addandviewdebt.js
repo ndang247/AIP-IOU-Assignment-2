@@ -20,7 +20,7 @@ export default class AddViewDebt extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/rewards',
+            url: '/api/rewards',
             data: null
         }).then (res => {
             console.log(res);

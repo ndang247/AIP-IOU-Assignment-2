@@ -27,7 +27,7 @@ export default class HomePage extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/all-requests',
+            url: '/api/all-requests',
             data: null
         }).then (res => {
             console.log(res);

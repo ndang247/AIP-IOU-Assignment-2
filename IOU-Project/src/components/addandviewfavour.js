@@ -22,7 +22,7 @@ export default class AddViewFavour extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/rewards',
+            url: '/api/rewards',
             data: null
         }).then (res => {
             console.log(res);
@@ -35,7 +35,7 @@ export default class AddViewFavour extends React.Component {
 
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/my-favours',
+            url: '/api/my-favours',
             data: null
         }).then (res => {
             console.log(res);
@@ -64,7 +64,7 @@ export default class AddViewFavour extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('http://localhost:8080/api/add-my-favours',  qs.stringify(favour), config)
+        axios.post('/api/add-my-favours',  qs.stringify(favour), config)
         .then(res => console.log(res.data));
     }
 

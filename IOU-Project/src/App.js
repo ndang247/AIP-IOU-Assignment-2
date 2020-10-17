@@ -29,11 +29,11 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Navbar isLoggedIn={this.state.isLoggedIn} />
+        <Navbar {...this.props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>
         <br />
         <Route path='/' exact component={HomePage} />
         <Route path='/signup' component={(props) =>
-          <SignUp {...props} abc={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
+          <SignUp {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
         } />
         <Route path='/signin' component={(props) =>
           <SignIn {...props} isLoggedn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />

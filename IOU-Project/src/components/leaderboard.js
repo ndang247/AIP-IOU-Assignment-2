@@ -13,7 +13,7 @@ export default class Leaderboard extends React.Component {
     componentDidMount() {
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/most-debt',
+            url: '/api/most-debt',
             data: null
         }).then (res => {
             console.log(res);
