@@ -1,7 +1,7 @@
 
 import React from 'react';
 // react router allows matching a specific route to a specific component for that page
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Navbar from './components/navbar';
 import HomePage from './components/homepage';
 import Leaderboard from './components/leaderboard';
@@ -19,6 +19,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: false };
+    this.PrivateRoute = this.PrivateRoute.bind(this);
   }
   setLoggedIn() {
     this.setState({ isLoggedIn: true });
@@ -26,6 +27,18 @@ class App extends React.Component {
   setLoggedOut() {
     this.setState({ isLoggedIn: false });
   }
+
+  PrivateRoute({ component: Component, ...rest }) { return (
+    <Route {...rest} render={(props) => (
+      this.state.isLoggedIn === true
+        ? <Component {...props} />
+        : <Redirect to={{
+            pathname: '/signin',
+            state: { from: props.location }
+          }} />
+    )} />
+  )} 
+    
   render() {
     return (
       <Router>
@@ -39,9 +52,9 @@ class App extends React.Component {
           <SignIn {...props} isLoggedn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
         } />
         <Route path='/leaderboard' component={Leaderboard} />
-        <Route path='/addpublicrequests' component={AddPublicRequest} />
-        <Route path='/addandviewfavour' component={AddViewFavour} />
-        <Route path='/addandviewdebt' component={AddViewDebt} />
+        <this.PrivateRoute path='/addpublicrequests' component={AddPublicRequest} />
+        <this.PrivateRoute  path='/addandviewfavour' component={AddViewFavour} />
+        <this.PrivateRoute path='/addandviewdebt' component={AddViewDebt} />
         <Footer />
       </Router>
     );
