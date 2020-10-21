@@ -16,7 +16,7 @@ I Owe You(IOU) tracking system is a web application that helps you keep track of
 The web app allows groups or teams to log in and record the favors that they owe to each other. The main purpose of the system is to keep track of small favors among friends or groups.
 
 ## Setup
-# Window
+#### Window
 We assume you have Ubuntu 20.04
 
 1. Install Visual Studio Code in Windows, using the installer provided on the Visual Studio Code website
