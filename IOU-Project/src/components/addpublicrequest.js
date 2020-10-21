@@ -124,7 +124,7 @@ class AddPublicRequest extends React.Component {
                             <br></br>                           
                             <br></br><br/>
                             <div className='btn-signup'>
-                                <button className='btn-signup'>Create a new favour</button>
+                                <button className='btn-signup'>Create a new request</button>
                             </div>                        
                         </form>
                     </div>                   

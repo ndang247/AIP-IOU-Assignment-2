@@ -96,7 +96,6 @@ module.exports = function (app, passport) {
             'INNER JOIN "Rewards" ON "Rewards"."id" = "RequestRewards"."rewardId"' +
             'WHERE "Rewards"."rewardName" = :reward', {
                 replacements: {reward: req.body.reward},
-                type: QueryTypes.SELECT
             })
             .then(data => res.json(data[0]))
             .catch(err => res.status(400).json('Error:' + err));
