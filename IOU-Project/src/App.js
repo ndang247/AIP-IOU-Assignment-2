@@ -10,8 +10,11 @@ import SignIn from './components/signin';
 import AddPublicRequest from './components/addpublicrequest';
 import AddViewFavour from './components/addandviewfavour';
 import AddViewDebt from './components/addandviewdebt';
+import GainReward from './components/gainreward';
+import PayFavour from './components/payfavour';
 import "./Style.css";
 import axios from "axios"
+
 axios.defaults.withCredentials = true;
 // react will render the component based on the path/route specified
 class App extends React.Component {
@@ -54,6 +57,8 @@ class App extends React.Component {
         <this.PrivateRoute path='/addpublicrequests' component={AddPublicRequest} />
         <this.PrivateRoute  path='/addandviewfavour' component={AddViewFavour} />
         <this.PrivateRoute path='/addandviewdebt' component={AddViewDebt} />
+        <this.PrivateRoute path='/gainreward' component={GainReward} />
+        <this.PrivateRoute path='/payfavour' component={PayFavour}/>
       </Router>
     );
   }

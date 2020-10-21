@@ -179,6 +179,23 @@ body {
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+
+.gain-reward-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    width: 40rem;
+    padding: 2rem;
+    border: .1rem #c0c0c0 solid;
+    border-radius: .5rem;
+    
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
 .form-control {
     display: block;
     width: 100%;
@@ -312,6 +329,10 @@ main {
 
 .btn-filter:hover {
     background-color: orange;
+}
+
+.btn-filter .active {
+    background-color: coral;
 }
 
 /* Leaderboard */
