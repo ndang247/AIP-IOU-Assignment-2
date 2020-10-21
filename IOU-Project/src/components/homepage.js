@@ -1,8 +1,7 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
-
-
+// 9
 export default class HomePage extends React.Component {
 
     constructor(props) {
@@ -88,21 +87,22 @@ export default class HomePage extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                this.state.data.map((publicRequests) =>
-                                    <tr>
-                                        <td>{publicRequests.id}</td>
-                                        <td>{publicRequests.taskName}</td>
-                                        <td>{publicRequests.description}</td>
-                                        <td>{publicRequests.UserId}</td>
-                                        <td>{publicRequests.rewardName}</td>
-                                        <td>{publicRequests.quantity}</td>
-                                        <td>
-                                            <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
-                                            {/*<button onClick={() => this.onFilter("Pizza")}>Pho</button>*/}
-                                        </td>
-                                    </tr>
+                            {                                                             
+                                this.state.data.map((publicRequests) => 
+                                <tr>
+                                    <td>{publicRequests.id}</td>
+                                    <td>{publicRequests.taskName}</td>
+                                    <td>{publicRequests.description}</td>
+                                    <td>{publicRequests.UserId}</td>
+                                    <td>{publicRequests.rewardName}</td>
+                                    <td>{publicRequests.quantity}</td>
+                                    <td>
+                                        <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
+                                        {/*<button onClick={() => this.onFilter("Pizza")}>Pho</button>*/}
+                                    </td>
+                                </tr>
                                 )}
+                                
                         </tbody>
                     </table>
                     

@@ -39,12 +39,12 @@ module.exports = function (app, passport) {
                     return next(loginErr);
                 }
                 //var userId = user.dataValues.id;
-                console.log('redirecting....');
-
+                console.log('redirecting....')
                 res.cookie('user_id', user.id);
-                res.cookie('user_name', user.fullname );
-                //return res.json("/accounts/view");
-                console.log("Registered")
+
+
+                return res.send({success: true});
+
             });
         })(req, res, next);
     });
@@ -71,7 +71,7 @@ module.exports = function (app, passport) {
                 //var userId = user.dataValues.id;
                 console.log('redirecting....')
                 res.cookie('user_id', user.id);
-                res.cookie('user_name', user.fullname );
+
 
                 return res.send({success: true});
 
