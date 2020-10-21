@@ -23,9 +23,11 @@ export default class SignIn extends React.Component {
             password: this.state.password
         })
             .then( (response) => {
-                if (response.status === 200) {
+                if (response.data.success === true) {
                     this.props.setLoggedIn();
                     this.props.history.push('/');
+                }else{
+                    alert("Wrong password or username");
                 }
             })
             .catch(function (error) {
