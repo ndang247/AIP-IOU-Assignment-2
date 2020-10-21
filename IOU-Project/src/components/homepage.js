@@ -1,7 +1,8 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
-// 9
+
+const Cookie = require('js-cookie');
 export default class HomePage extends React.Component {
 
     constructor(props) {
@@ -50,7 +51,6 @@ export default class HomePage extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
-        //alert(this.state.email)
 
     }
     render() {
@@ -86,9 +86,16 @@ export default class HomePage extends React.Component {
                                         <td>{publicRequests.UserId}</td>
                                         <td>{publicRequests.rewardName}</td>
                                         <td>{publicRequests.quantity}</td>
-                                        <td>
+                                        {
+                                            publicRequests.UserId === Number(Cookie.get('user_id')) ?
+                                            <td>
+                                                <a href = '/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
+                                            </td>
+                                            : <td></td> 
+                                        }
+                                        {/* <td>
                                             <a href = '/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
-                                        </td>
+                                        </td> */}
                                     </tr>
                                     )}
                                     

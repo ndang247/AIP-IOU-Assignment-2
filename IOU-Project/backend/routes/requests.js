@@ -57,7 +57,7 @@ module.exports = function (app, passport) {
             db.RequestReward.create({
                 rewardId: item_list[req.body.reward], // hardcode
                 quantity: Number(req.body.quantity),
-                requesterId: 1 ,//req.cookies.user_id,
+                requesterId: Number(req.body.user_id),
                 requestId: requestInstance.id
             }).then(requestRewardInstance => {
                 console.log(requestRewardInstance);
