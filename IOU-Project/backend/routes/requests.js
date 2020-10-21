@@ -13,34 +13,34 @@ module.exports = function (app, passport) {
             'INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId" ' +
             'INNER JOIN "Users" ON "Users"."id" = "RequestRewards"."requesterId" ' +
             'INNER JOIN "Rewards" ON "Rewards"."id" = "RequestRewards"."rewardId"')
-        .then(data => res.json(data[0]))
-        .catch(err => res.status(400).json('Error:' + err));
+            .then(data => res.json(data[0]))
+            .catch(err => res.status(400).json('Error:' + err));
     })
     app.post('/api/update-requests/:id', (req, res, next) => {
         // Update a request when user wants to edit
         db.Request.findByPk(req.params.id)
-        .then(request => {
-            request.taskName = req.body.taskName;
-            request.description = req.body.description;
-        
-            request.save()
-            .then(() => res.json('Request updated!'))
-            .catch(err => res.status(400).json('Error ' + err));
-        })
-        .catch(err => res.status(400).json('Error:' + err));
+            .then(request => {
+                request.taskName = req.body.taskName;
+                request.description = req.body.description;
+
+                request.save()
+                    .then(() => res.json('Request updated!'))
+                    .catch(err => res.status(400).json('Error ' + err));
+            })
+            .catch(err => res.status(400).json('Error:' + err));
     })
 
     app.delete('/api/delete-requests/:id', (req, res, next) => {
         // Delete a request
         db.Request.findByPk(req.params.id)
-        .then(request => {
-            request.destroy()
-            .then(() => res.json('Request deleted!'))
-            .catch(err => res.status(400).json('Error ' + err));
-        })
-        .catch(err => res.status(400).json('Error:' + err));
+            .then(request => {
+                request.destroy()
+                    .then(() => res.json('Request deleted!'))
+                    .catch(err => res.status(400).json('Error ' + err));
+            })
+            .catch(err => res.status(400).json('Error:' + err));
     })
-    
+
     app.post('/api/add-my-request', (req, res, next) => {
         // Create a request
         const item_list = {
@@ -52,7 +52,7 @@ module.exports = function (app, passport) {
         db.Request.create({
             taskName: req.body.taskName,
             description: req.body.description,
-        }).then(requestInstance => {    
+        }).then(requestInstance => {
             requestInstance.save().catch(err => console.log(err));
             db.RequestReward.create({
                 rewardId: item_list[req.body.reward], // hardcode
@@ -79,7 +79,7 @@ module.exports = function (app, passport) {
             requestRewardInstance.save();
         }).catch(err => res.status(400).json('Error ' + err));
     })
-    app.post('/api/filter-request', (req, res,next) => {
+    app.post('/api/filter-request', (req, res, next) => {
         db.sequelize.query('SELECT "Requests"."id", ' +
             '"Requests"."taskName", ' +
             '"Requests"."description", ' +
@@ -91,9 +91,36 @@ module.exports = function (app, passport) {
             'INNER JOIN "Users" ON "Users"."id" = "RequestRewards"."requesterId" ' +
             'INNER JOIN "Rewards" ON "Rewards"."id" = "RequestRewards"."rewardId"' +
             'where "Rewards"."rewardName" = :reward', {
-                replacements: {reward: req.body.reward}
-            })
-            .then(data => {res.json(data[0])})
+            replacements: { reward: req.body.reward }
+        })
+            .then(data => { res.json(data[0]) })
             .catch(err => res.status(400).json('Error:' + err));
+    })
+
+    app.post('/api/gain-reward', (req, res, next) => {
+        db.sequelize.query('SELECT "RequestRewards"."requesterId", "rewardId", "quantity" FROM "RequestRewards" WHERE "requestId" = :requestId',
+            {
+                replacements: { requestId: Number(req.body.requestId) }
+            }
+        ).then( data => {
+            console.log(data[0][0]['requesterId']);
+            db.Favour.create({
+                offererId: Number(req.body.user_id),
+                receiverId: data[0][0]['requesterId'],
+
+            }).then(favourData => {
+                console.log(favourData);
+                favourData.save().catch(err => console.log(err));
+                console.log()
+                db.FavourReward.create({
+                    favourId: favourData.id,
+                    rewardId: 1,
+                    quantity: 1
+                }).then(favourReward => {
+                    console.log(favourReward)
+                    favourReward.save().then(() => res.json("Request Added")).catch(err => console.log(err));
+                }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
     })
 }

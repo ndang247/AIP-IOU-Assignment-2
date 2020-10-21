@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Favour.init({
+    id: {
+      type: DataTypes.INTEGER, 
+      autoIncrement: true,
+      primaryKey: true
+    },
     offererId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -39,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    proof: DataTypes.BLOB,
+    upload_proof: DataTypes.BLOB,
+    paid_proof: DataTypes.BLOB,
     description: DataTypes.STRING,
   }, {
     sequelize,

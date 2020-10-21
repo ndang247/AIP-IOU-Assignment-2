@@ -3,19 +3,15 @@ import "../Style.css";
 import axios from "axios";
 
 export default class PayFavour extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         // the property of the state that correspond to the field of the database
-    //         title: '',
-    //         description: '',
-    //         quantity: '',
-    //         rewardData: [], // this will be shown in a dropdown all the rewards in the database
-    //         favourData: []
-    //     }
+    constructor(props) {
+        super(props);
+        this.state = {
+            // the property of the state that correspond to the field of the database
+            requestID: ''
+        }
 
-    //     this.onSubmit = this.onSubmit.bind(this);
-    // }
+        this.onSubmit = this.onSubmit.bind(this);
+    }
 
     // componentDidMount() {
     //     axios({
