@@ -1,17 +1,20 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
-// 9
+import GainReward from "./gainreward";
+
 export default class HomePage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
         };
         this.deletePublicRequest = this.deletePublicRequest.bind(this);
         this.onFilter = this.onFilter.bind(this);
+        
     }
+
 
     componentDidMount() {
         axios({
@@ -57,6 +60,23 @@ export default class HomePage extends React.Component {
         //alert(this.state.email)
 
     }
+
+    clearFilter() {
+        axios({
+            method: 'GET',
+            url: '/api/all-requests',
+            data: null
+        }).then(res => {
+            //alert(res.data);
+            this.setState({
+                data: res.data
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+
     render() {
 
         return (
@@ -67,6 +87,7 @@ export default class HomePage extends React.Component {
                         <h1 className='leaderboard-title'>Public Requests</h1>
                     </section>
                     <div className="filter-div">
+                        <button className="btn-filter active" onClick={() => this.clearFilter()}>All</button>
                         <button className="btn-filter" onClick={() => this.onFilter("Pho")}>Pho</button>
                         <button className="btn-filter" onClick={() => this.onFilter("Pizza")}>Pizza</button>
                         <button className="btn-filter" onClick={() => this.onFilter("Sushi")}>Sushi</button>
@@ -96,16 +117,17 @@ export default class HomePage extends React.Component {
                                     <td>{publicRequests.UserId}</td>
                                     <td>{publicRequests.rewardName}</td>
                                     <td>{publicRequests.quantity}</td>
+                                    
                                     <td>
-                                        <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
-                                        {/*<button onClick={() => this.onFilter("Pizza")}>Pho</button>*/}
+                                        <a href='/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
+                                        
                                     </td>
+                                    
                                 </tr>
                                 )}
                                 
                         </tbody>
                     </table>
-                    
                     
                 </div>
               
