@@ -73,13 +73,6 @@ export default class SignIn extends React.Component {
                                        onChange={this.handleChange}/>
                             </div>
                             <br/>
-                            <div className='checkbox mb-3'>
-                                <label>
-                                    <input type='checkbox' value='remember-me'/>
-                                    <label> Remember me </label>
-                                </label>
-                            </div>
-                            <br/>
                             <button className='btn btn-lg btn-primary btn-block' type='submit'
                                     onClick={this.handleSubmit}>
                                 Sign in
