@@ -1,6 +1,5 @@
 const { QueryTypes } = require('sequelize');
 const db = require('../models');
-
 module.exports = function (app, passport) {
     app.get('/api/all-requests', (req, res, next) => {
         // Get all requests that have not been accepted
@@ -17,7 +16,6 @@ module.exports = function (app, passport) {
         .then(data => res.json(data[0]))
         .catch(err => res.status(400).json('Error:' + err));
     })
-
     app.post('/api/update-requests/:id', (req, res, next) => {
         // Update a request when user wants to edit
         db.Request.findByPk(req.params.id)
@@ -94,11 +92,10 @@ module.exports = function (app, passport) {
             'INNER JOIN "RequestRewards" ON "Requests"."id" = "RequestRewards"."requestId" ' +
             'INNER JOIN "Users" ON "Users"."id" = "RequestRewards"."requesterId" ' +
             'INNER JOIN "Rewards" ON "Rewards"."id" = "RequestRewards"."rewardId"' +
-            'WHERE "Rewards"."rewardName" = :reward', {
-                replacements: {reward: req.body.reward},
-                type: QueryTypes.SELECT
+            'where "Rewards"."rewardName" = :reward', {
+                replacements: {reward: req.body.reward}
             })
-            .then(data => res.json(data[0]))
+            .then(data => {res.json(data[0])})
             .catch(err => res.status(400).json('Error:' + err));
     })
 }

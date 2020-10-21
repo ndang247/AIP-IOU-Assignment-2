@@ -1,8 +1,8 @@
 import React  from "react";
 import "../Style.css";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 const qs = require('querystring');
-
 class AddPublicRequest extends React.Component {
     // constructor(props) {
     //     super(props);
@@ -16,7 +16,6 @@ class AddPublicRequest extends React.Component {
     //     this.handleRequest = this.handleRequest.bind(this);
     //     this.addItem = this.addItem.bind(this);
     // }
-
     // handleRequest(e) {
     //     this.setState({
     //         currentItem:{
@@ -25,12 +24,10 @@ class AddPublicRequest extends React.Component {
     //         }
     //     })
     // }
-
     // addItem(e) {
     //     e.preventDefault();
     //     const newItem = this.state.currentItem;
     // }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -41,14 +38,14 @@ class AddPublicRequest extends React.Component {
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             quantity: ''
         };
-
         // this.onChangeTaskName = this.onChangeTaskName.bind(this);
         // this.onChangeDescription = this.onChangeDescription.bind(this);
         // this.onChangeFullName = this.onChangeFullName.bind(this);
         // this.onChangeRewardQuantity = this.onChangeRewardQuantity.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeSelect = this.handleChangeSelect.bind(this);
     }
-
     componentDidMount() {
         axios({
             method: 'GET',
@@ -57,13 +54,13 @@ class AddPublicRequest extends React.Component {
         }).then (res => {
             console.log(res);
             this.setState({
-                rewardData: res.data
+                rewardData: res.data,
+                reward: res.data[0].rewardName
             });
         }).catch(err => {
             console.log(err);
         })
     }
-
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
     }
@@ -71,24 +68,29 @@ class AddPublicRequest extends React.Component {
     onSubmit(e) {
         // this will prevent the default HTML form submit behaviour from taking place
         e.preventDefault();
-
-        const publicRequest = {
-            taskName: this.state.taskName,
-            description: this.state.description,
-            quantity: this.state.quantity,
-            reward: this.state.reward
-        }
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+            const publicRequest = {
+                taskName: this.state.taskName,
+                description: this.state.description,
+                quantity: this.state.quantity,
+                reward: this.state.reward,
+                user_id: Cookies.get('user_id')
             }
-        }
-        axios.post('/api/add-requests',  qs.stringify(publicRequest), config)
-        .then(res => console.log(res.data));
+            const config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+            axios.post('/api/add-my-request', qs.stringify(publicRequest), config).then(res => {
+                alert(res.data);
+                console.log(res.data);
+            }
+        );
+
     }
-
+    handleChangeSelect(e){
+        this.setState({reward: e.target.value});
+    }
     render() {
-
         return (
             <body>               
                 <main>                                       
@@ -108,23 +110,23 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward</p>
-                                <select name="reward" id='input-request' className='form-control1' onChange={this.handleChange}>
+                                <select value={this.state.reward} id='input-request' className='form-control1' onChange={this.handleChangeSelect}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
-                                        <option value="rewards">{rewardData.rewardName}</option>
+                                        <option >{rewardData.rewardName}</option>
                                         )
                                     }
                                 </select>
                             </div>
                             <br></br>
                             <div>
-                                <p>Reward (Quantity)</p>
+                                <p>Quantity</p>
                                 <input type='text' id='input-fname' className='form-control1' required='true' name='quantity' onChange={this.handleChange}/>
                             </div>
                             <br></br>                           
                             <br></br><br/>
                             <div className='btn-signup'>
-                                <button className='btn-signup'>Create a new favour</button>
+                                <button className='btn-signup' onClick={this.onSubmit}>Create a new request</button>
                             </div>                        
                         </form>
                     </div>                   
@@ -133,5 +135,4 @@ class AddPublicRequest extends React.Component {
         );
     };
 }
-
 export default AddPublicRequest;

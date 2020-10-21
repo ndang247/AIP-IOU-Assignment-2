@@ -1,7 +1,7 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
-
+// 9
 export default class HomePage extends React.Component {
 
     constructor(props) {
@@ -77,7 +77,7 @@ export default class HomePage extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {
+                            {                                                             
                                 this.state.data.map((publicRequests) => 
                                 <tr>
                                     <td>{publicRequests.id}</td>
@@ -92,6 +92,7 @@ export default class HomePage extends React.Component {
                                     </td>
                                 </tr>
                                 )}
+                                
                         </tbody>
                     </table>
                     {/*<div className='btn-signup'>*/}
