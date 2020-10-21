@@ -18,8 +18,8 @@ export default class HomePage extends React.Component {
             method: 'GET',
             url: '/api/all-requests',
             data: null
-        }).then(res => {
-            //alert(res.data);
+        }).then (res => {
+            console.log(res);
             this.setState({
                 data: res.data
             });
@@ -30,7 +30,7 @@ export default class HomePage extends React.Component {
 
     deletePublicRequest(id) {
         axios.delete('/api/delete-requests/' + id)
-            .then(response => console.log(response.data));
+        .then(response => console.log(response.data));
 
         this.setState({
             // whenever the id in the exercises array does not equal to the id that is being deleted will be pass back to the array
@@ -38,15 +38,11 @@ export default class HomePage extends React.Component {
         })
     }
 
-    onFilter(rewardName) {
+    onFilter(reward){
         axios.post('/api/filter-request', {
-            reward: rewardName
+            reward: reward
         })
-            .then(res => {
-                this.setState({
-                    data: []
-                });
-                console.log(res.data)
+            .then( (res) => {
                 this.setState({
                     data: res.data
                 });
@@ -58,59 +54,91 @@ export default class HomePage extends React.Component {
 
     }
     render() {
-
-        return (
-            <body>
-             
-                <div className="container">
-                    <section className='jumbotron text-centre'>
-                        <h1 className='leaderboard-title'>Public Requests</h1>
-                    </section>
-                    <div className="filter-div">
-                        <button className="btn-filter" onClick={() => this.onFilter("Pho")}>Pho</button>
-                        <button className="btn-filter" onClick={() => this.onFilter("Pizza")}>Pizza</button>
-                        <button className="btn-filter" onClick={() => this.onFilter("Sushi")}>Sushi</button>
-                    </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <table className="request-table">
-                        <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Task Name</th>
-                                <th>Description</th>
-                                <th>Requester's ID</th>
-                                <th>Reward</th>
-                                <th>Reward (Quantity)</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {                                                             
-                                this.state.data.map((publicRequests) => 
+        if(this.props.isLoggedIn === true) {
+            return (
+                <body>
+                    <div className="container">
+                        <section className='jumbotron text-centre'>
+                            <h1 className='leaderboard-title'>Public Requests</h1>
+                        </section>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <table className="request-table">
+                            <thead>
                                 <tr>
-                                    <td>{publicRequests.id}</td>
-                                    <td>{publicRequests.taskName}</td>
-                                    <td>{publicRequests.description}</td>
-                                    <td>{publicRequests.UserId}</td>
-                                    <td>{publicRequests.rewardName}</td>
-                                    <td>{publicRequests.quantity}</td>
-                                    <td>
-                                        <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
-                                        {/*<button onClick={() => this.onFilter("Pizza")}>Pho</button>*/}
-                                    </td>
+                                    <th>Request ID</th>
+                                    <th>Task Name</th>
+                                    <th>Description</th>
+                                    <th>Requester's ID</th>
+                                    <th>Reward</th>
+                                    <th>Reward (Quantity)</th>
+                                    <th>Delete</th>
                                 </tr>
-                                )}
-                                
-                        </tbody>
-                    </table>
-                    
-                    
-                </div>
-              
-            </body>
-            
-        );
+                            </thead>
+                            <tbody>
+                                {                                                             
+                                    this.state.data.map((publicRequests) => 
+                                    <tr>
+                                        <td>{publicRequests.id}</td>
+                                        <td>{publicRequests.taskName}</td>
+                                        <td>{publicRequests.description}</td>
+                                        <td>{publicRequests.UserId}</td>
+                                        <td>{publicRequests.rewardName}</td>
+                                        <td>{publicRequests.quantity}</td>
+                                        <td>
+                                            <a href = '/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
+                                        </td>
+                                    </tr>
+                                    )}
+                                    
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </body>
+            );
+        }
+        else {
+            return(
+                <body>
+                    <div className="container">
+                        <section className='jumbotron text-centre'>
+                            <h1 className='leaderboard-title'>Public Requests</h1>
+                        </section>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <table className="request-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Task Name</th>
+                                    <th>Description</th>
+                                    <th>Requester's ID</th>
+                                    <th>Reward</th>
+                                    <th>Reward (Quantity)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {                                                             
+                                    this.state.data.map((publicRequests) => 
+                                    <tr>
+                                        <td>{publicRequests.id}</td>
+                                        <td>{publicRequests.taskName}</td>
+                                        <td>{publicRequests.description}</td>
+                                        <td>{publicRequests.UserId}</td>
+                                        <td>{publicRequests.rewardName}</td>
+                                        <td>{publicRequests.quantity}</td>
+                                    </tr>
+                                    )}                                    
+                            </tbody>
+                        </table>
+                    </div>
+
+                </body>
+            );            
+        }
     }
 }

@@ -83,9 +83,16 @@ class AddPublicRequest extends React.Component {
             axios.post('/api/add-my-request', qs.stringify(publicRequest), config).then(res => {
                 alert(res.data);
                 console.log(res.data);
+                this.setState = (
+                    {
+                        taskName: '',
+                        description: '',
+                        reward: '', 
+                        quantity: ''
+                    }
+                );
             }
         );
-
     }
     handleChangeSelect(e){
         this.setState({reward: e.target.value});
@@ -100,12 +107,12 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Task Name</p>
-                                <input type='text' id='input-request' className='form-control1' required='true' autoFocus='true' name = 'taskName' onChange={this.handleChange}/>
+                                <input type='text' value = {this.state.taskName} id='input-request' className='form-control1' required='true' autoFocus='true' name = 'taskName' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'text' id='input-request' className = 'form-control1' required='true' name='description' onChange={this.handleChange}/>
+                                <textarea type = 'text'  value = {this.state.description} id='input-request' className = 'form-control1' required='true' name='description' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
@@ -121,12 +128,12 @@ class AddPublicRequest extends React.Component {
                             <br></br>
                             <div>
                                 <p>Quantity</p>
-                                <input type='text' id='input-fname' className='form-control1' required='true' name='quantity' onChange={this.handleChange}/>
+                                <input type='text'  value = {this.state.quantity} id='input-fname' className='form-control1' required='true' name='quantity' onChange={this.handleChange}/>
                             </div>
                             <br></br>                           
                             <br></br><br/>
                             <div className='btn-signup'>
-                                <button className='btn-signup' onClick={this.onSubmit}>Create a new request</button>
+                                <button type = 'reset' className='btn-signup' onClick={this.onSubmit}>Create a new request</button>
                             </div>                        
                         </form>
                     </div>                   

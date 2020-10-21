@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
         })
         .catch(err => res.status(400).json('Error:' + err));
     })
-    /*
+
     app.delete('/api/delete-requests/:id', (req, res, next) => {
         // Delete a request
         db.Request.findByPk(req.params.id)
@@ -40,7 +40,7 @@ module.exports = function (app, passport) {
         })
         .catch(err => res.status(400).json('Error:' + err));
     })
-    */
+    
     app.post('/api/add-my-request', (req, res, next) => {
         // Create a request
         const item_list = {
@@ -65,7 +65,6 @@ module.exports = function (app, passport) {
             }).catch(err => console.log(err));
         }).catch(err => res.status(400).json('Error ' + err));
     })
-    /*
     app.post('/api/add-request-reward', (req, res, next) => {
         // Add request reward
         const rewardID = 1;
@@ -80,7 +79,6 @@ module.exports = function (app, passport) {
             requestRewardInstance.save();
         }).catch(err => res.status(400).json('Error ' + err));
     })
-    */
     app.post('/api/filter-request', (req, res,next) => {
         db.sequelize.query('SELECT "Requests"."id", ' +
             '"Requests"."taskName", ' +

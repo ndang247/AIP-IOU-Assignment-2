@@ -72,13 +72,7 @@ export default class SignIn extends React.Component {
                                        placeholder='Password' required='true' name='password'
                                        onChange={this.handleChange}/>
                             </div>
-                            <br/>
-                            <div className='checkbox mb-3'>
-                                <label>
-                                    <input type='checkbox' value='remember-me'/>
-                                    <label> Remember me </label>
-                                </label>
-                            </div>
+                            <br/>                            
                             <br/>
                             <button className='btn btn-lg btn-primary btn-block' type='submit'
                                     onClick={this.handleSubmit}>
@@ -92,6 +86,6 @@ export default class SignIn extends React.Component {
                 </main>
                 </body>
             );
-            }              
+        }              
     }
 }

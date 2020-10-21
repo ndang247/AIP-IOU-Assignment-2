@@ -43,7 +43,9 @@ class App extends React.Component {
       <Router>
         <Navbar {...this.props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>
         <br />
-        <Route path='/' exact component={HomePage} />
+        <Route path='/' exact component={(props) =>
+        <HomePage {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
+      } />
         <Route path='/signup' component={(props) =>
           <SignUp {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
         } />
