@@ -3,19 +3,6 @@ import "../Style.css";
 import axios from 'axios';
 
 export default class HomePage extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         data: []
-    //     };
-    // }
-
-    // componentDidMount() {
-    //     axios({
-    //         method: 'GET',
-    //         url: 'http://localhost:8080/api/'
-    //     })
-    // }
 
     constructor(props) {
         super(props);
@@ -23,6 +10,7 @@ export default class HomePage extends React.Component {
             data: []
         };
         this.deletePublicRequest = this.deletePublicRequest.bind(this);
+        this.onFilter = this.onFilter.bind(this);
     }
 
     componentDidMount() {
@@ -50,6 +38,21 @@ export default class HomePage extends React.Component {
         })
     }
 
+    onFilter(reward){
+        axios.post('/api/filter-request', {
+            reward: reward
+        })
+            .then( (res) => {
+                this.setState({
+                    data: res.data
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        //alert(this.state.email)
+
+    }
     render() {
 
         return (
@@ -76,12 +79,28 @@ export default class HomePage extends React.Component {
                         <tbody>
                             {
                                 this.state.data.map((publicRequests) => 
-                                <tr><td>{publicRequests.id}</td> <td>{publicRequests.taskName}</td> <td>{publicRequests.description}</td>
-                                <td>{publicRequests.UserId}</td> <td></td> <td>{publicRequests.quantity}</td> <td><button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button></td></tr>
+                                <tr>
+                                    <td>{publicRequests.id}</td>
+                                    <td>{publicRequests.taskName}</td>
+                                    <td>{publicRequests.description}</td>
+                                    <td>{publicRequests.UserId}</td>
+                                    <td>{publicRequests.rewardName}</td>
+                                    <td>{publicRequests.quantity}</td>
+                                    <td>
+                                        <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
+                                        {/*<button onClick={() => this.onFilter("Pizza")}>Pho</button>*/}
+                                    </td>
+                                </tr>
                                 )}
                         </tbody>
-                    </table>   
+                    </table>
+                    {/*<div className='btn-signup'>*/}
+                    {/*    <button className='btn-signup' onClick={() => this.onFilter("Pho")}>Pho</button>*/}
+                    {/*    <button className='btn-signup' onClick={() => this.onFilter("Pizza")}>Pizza</button>*/}
+                    {/*    <button className='btn-signup' onClick={() => this.onFilter("Sushi")}>Sushi</button>*/}
+                    {/*</div>*/}
                 </div>
+
             </body>
         );
     }
