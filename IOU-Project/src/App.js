@@ -7,7 +7,6 @@ import HomePage from './components/homepage';
 import Leaderboard from './components/leaderboard';
 import SignUp from './components/signup';
 import SignIn from './components/signin';
-import Footer from './components/footer';
 import AddPublicRequest from './components/addpublicrequest';
 import AddViewFavour from './components/addandviewfavour';
 import AddViewDebt from './components/addandviewdebt';
@@ -55,7 +54,6 @@ class App extends React.Component {
         <this.PrivateRoute path='/addpublicrequests' component={AddPublicRequest} />
         <this.PrivateRoute  path='/addandviewfavour' component={AddViewFavour} />
         <this.PrivateRoute path='/addandviewdebt' component={AddViewDebt} />
-        <Footer />
       </Router>
     );
   }
