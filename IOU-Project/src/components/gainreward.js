@@ -50,11 +50,6 @@ export default class GainReward extends React.Component {
                             </div>
                            
                             <br></br>
-                            {/* <div>
-                                <p>Upload Picture Here (Proof)</p>
-                                <input type='file' id='evidence-file' className='form-control1' required='true'/>                                
-                            </div> */}
-                            <br></br><br/>
                             <div className='btn-signup'>
                                 <button className='btn-signup' type = 'submit' onClick = {this.onSubmit}>Gain reward</button>
                             </div>                        

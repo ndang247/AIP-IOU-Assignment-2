@@ -26,7 +26,7 @@ export default class SignUp extends React.Component {
                     this.props.setLoggedIn();
                     this.props.history.push('/');
                 }else{
-                    alert("Wrong password or username");
+                    alert("Email is already taken");
                 }
             })
             .catch(function (error) {

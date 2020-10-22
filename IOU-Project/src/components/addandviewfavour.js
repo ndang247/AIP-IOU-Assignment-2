@@ -87,7 +87,6 @@ export default class AddViewFavour extends React.Component {
                                 <th>Description</th>
                                 <th>Reward</th>
                                 <th>Reward (Quantity)</th>
-                                <th>Proof</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -126,11 +125,6 @@ export default class AddViewFavour extends React.Component {
                                 <input type='text' id='input-fname' className='form-control1' required='true' />
                             </div>
                             <br></br>
-                            <div>
-                                <p>Upload Picture Here (Proof)</p>
-                                <input type='file' id='evidence-file' className='form-control1' required='true'/>                                
-                            </div>
-                            <br></br><br/>
                             <div className='btn-signup'>
                                 <button className='btn-signup'>Create a new favour</button>
                             </div>                        
