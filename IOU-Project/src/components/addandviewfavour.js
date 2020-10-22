@@ -155,7 +155,7 @@ export default class AddViewFavour extends React.Component {
             <body>
             <div className="debt-container">
                 <section className='jumbotron text-centre'>
-                    <h1 className='leaderboard-title'>My Debts</h1>
+                    <h1 className='leaderboard-title'>My Favours</h1>
                 </section>
                 <table className="request-table">
                     <thead>
@@ -178,7 +178,7 @@ export default class AddViewFavour extends React.Component {
                                 <td>{debtData.rewardName}</td>
                                 <td>{debtData.quantity}</td>
                                 <td>
-                                    <a href='#' onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
+                                    <button onClick={() => this.deleteFavour(debtData.id)}>Delete</button>
                                 </td>
                             </tr>
                         )}

@@ -33,7 +33,10 @@ export default class GainReward extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('/api/gain-reward',  qs.stringify(favour), config).then(res => console.log(res.data));
+        axios.post('/api/gain-reward',  qs.stringify(favour), config)
+            .then(() => {
+            axios.delete('/api/delete-requests/'+82, null, config).catch(err => console.log(err));
+        });
     }
 
     render() {

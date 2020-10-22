@@ -114,8 +114,8 @@ module.exports = function (app, passport) {
                 console.log()
                 db.FavourReward.create({
                     favourId: favourData.id,
-                    rewardId: 1,
-                    quantity: 1
+                    rewardId: data[0][0]['rewardId'],
+                    quantity: data[0][0]['quantity']
                 }).then(favourReward => {
                     console.log(favourReward)
                     favourReward.save().then(() => res.json("Request Added")).catch(err => console.log(err));

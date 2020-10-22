@@ -178,7 +178,7 @@ export default class AddViewDebt extends React.Component {
                                 <td>{debtData.rewardName}</td>
                                 <td>{debtData.quantity}</td>
                                 <td>
-                                    <a href='#' onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
+                                    <a onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
                                 </td>
                             </tr>
                         )}

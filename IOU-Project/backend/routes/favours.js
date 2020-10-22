@@ -55,8 +55,8 @@ module.exports = function (app, passport) {
 
         db.Favour.create({
             description: req.body.description,
-            offererId: req.body.receiverId,
-            receiverId: req.body.user_id
+            offererId: Number(req.body.user_id),
+            receiverId: Number(req.body.receiverId)
         }).then(favourInstance => {
             favourInstance.save().catch(err => console.log(err))
             console.log(favourInstance.id);
