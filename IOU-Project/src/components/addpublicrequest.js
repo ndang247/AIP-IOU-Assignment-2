@@ -4,30 +4,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 const qs = require('querystring');
 class AddPublicRequest extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         items:[],
-    //         currentItem: {
-    //             text: '',
-    //             key: ''
-    //         }
-    //     }
-    //     this.handleRequest = this.handleRequest.bind(this);
-    //     this.addItem = this.addItem.bind(this);
-    // }
-    // handleRequest(e) {
-    //     this.setState({
-    //         currentItem:{
-    //             text: e.target.value,
-    //             key: Date.now()
-    //         }
-    //     })
-    // }
-    // addItem(e) {
-    //     e.preventDefault();
-    //     const newItem = this.state.currentItem;
-    // }
     constructor(props) {
         super(props);
         this.state = {
@@ -38,10 +14,7 @@ class AddPublicRequest extends React.Component {
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             quantity: ''
         };
-        // this.onChangeTaskName = this.onChangeTaskName.bind(this);
-        // this.onChangeDescription = this.onChangeDescription.bind(this);
-        // this.onChangeFullName = this.onChangeFullName.bind(this);
-        // this.onChangeRewardQuantity = this.onChangeRewardQuantity.bind(this);
+        
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeSelect = this.handleChangeSelect.bind(this);
@@ -81,7 +54,7 @@ class AddPublicRequest extends React.Component {
                 }
             }
             axios.post('/api/add-my-request', qs.stringify(publicRequest), config).then(res => {
-                alert(res.data);
+                //alert(res.data);
                 console.log(res.data);
                 this.setState = (
                     {
@@ -91,6 +64,7 @@ class AddPublicRequest extends React.Component {
                         quantity: ''
                     }
                 );
+                this.props.history.push('/');
             }
         );
     }

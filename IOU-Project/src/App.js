@@ -55,12 +55,20 @@ class App extends React.Component {
         <Route path='/signin' component={(props) =>
           <SignIn {...props} isLoggedn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()} />
         } />
-        <Route path='/leaderboard' component={Leaderboard} />
-        <this.PrivateRoute path='/addpublicrequests' component={AddPublicRequest} />
-        <this.PrivateRoute  path='/addandviewfavour' component={AddViewFavour} />
-        <this.PrivateRoute path='/addandviewdebt' component={AddViewDebt} />
-        <this.PrivateRoute path='/gainreward' component={GainReward} />
-        <this.PrivateRoute path='/payfavour' component={PayFavour}/>
+        <Route  path='/leaderboard' component={Leaderboard} />
+        <this.PrivateRoute  path='/addpublicrequests' component={(props) => 
+        <AddPublicRequest {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>} />
+
+        <this.PrivateRoute  path='/addandviewfavour' component={(props) => 
+        <AddViewFavour {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>} />
+
+        <this.PrivateRoute  path='/addandviewdebt' component={(props) => 
+        <AddViewDebt {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>} />
+
+        <this.PrivateRoute  path='/gainreward' component={(props) => 
+        <GainReward {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>} />
+
+        <this.PrivateRoute  path='/payfavour' component={PayFavour}/>
       </Router>
     );
   }
