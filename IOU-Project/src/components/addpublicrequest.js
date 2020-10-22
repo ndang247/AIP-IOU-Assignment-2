@@ -120,7 +120,7 @@ class AddPublicRequest extends React.Component {
                                 <select value={this.state.reward} id='input-request' className='form-control1' onChange={this.handleChangeSelect}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
-                                        <option >{rewardData.rewardName}</option>
+                                        <option>{rewardData.rewardName}</option>
                                         )
                                     }
                                 </select>
