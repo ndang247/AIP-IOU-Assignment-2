@@ -68,7 +68,7 @@ class App extends React.Component {
         <this.PrivateRoute  path='/gainreward' component={(props) => 
         <GainReward {...props} isLoggedIn={this.state.isLoggedIn} setLoggedIn={() => this.setLoggedIn()} setLoggedOut={() => this.setLoggedOut()}/>} />
 
-        <this.PrivateRoute  path='/payfavour' component={PayFavour}/>
+
       </Router>
     );
   }

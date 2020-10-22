@@ -93,10 +93,7 @@ export default class AddViewDebt extends React.Component {
             });
         });
 
-        this.setState({
-            // whenever the id in the exercises array does not equal to the id that is being deleted will be pass back to the array
-            debtData: this.state.debtData.filter(debt => debt._id !== id)
-        })
+
     }
 
     handleChange = (event) => {
@@ -181,7 +178,7 @@ export default class AddViewDebt extends React.Component {
                                 <td>{debtData.rewardName}</td>
                                 <td>{debtData.quantity}</td>
                                 <td>
-                                    <a href='#' onClick={() => this.deleteDebt(debtData.id)}>Delete</a>
+                                    <a href='#' onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
                                 </td>
                             </tr>
                         )}

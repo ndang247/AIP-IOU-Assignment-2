@@ -1,15 +1,24 @@
 const db = require('../models');
-
+const { QueryTypes } = require('sequelize');
 module.exports = function (app, passport) {
 
-    app.get('/api/my-favours', (req, res, next) => {
+    app.post('/api/my-favours', (req, res, next) => {
         // Get all my favours
 
-        db.sequelize.query('SELECT "Users"."id" AS "UserId", "Users"."fullname", "Favours"."id" AS "FavourId", "Favours"."description" FROM "Favours" INNER JOIN "Users" ON "Users"."id" = "Favours"."receiverId"')
-        .then(data => {
-            res.json(data[0])
+        db.sequelize.query('SELECT "Favours"."id", "Users"."fullname", "Favours"."receiverId", ' +
+            '"Favours"."description", "Rewards"."rewardName", "FavourRewards"."quantity" ' +
+            'FROM "Favours" ' +
+            'INNER JOIN "FavourRewards" ON "Favours"."id" = "FavourRewards"."favourId" ' +
+            'INNER JOIN "Users" ON "Users"."id" = "Favours"."receiverId" ' +
+            'INNER JOIN "Rewards" ON "Rewards"."id" = "FavourRewards"."rewardId" ' +
+            'WHERE "Favours"."offererId" = ?',{
+            replacements: [Number(req.body.user_id)],
+            type: QueryTypes.SELECT
         })
-        .catch(err => res.status(400).json('Error:' + err));
+            .then(data => {
+                res.json(data)
+            })
+            .catch(err => res.status(400).json('Error:' + err));
     })
 
     app.post('/api/update-favours/:id', (req, res, next) => {
@@ -43,12 +52,11 @@ module.exports = function (app, passport) {
             "Pizza": 2,
             "Sushi": 3
         }
-        const fake_offerer_id = 31;
-        const fake_receiver_id = 32; // my id req.user.id
+
         db.Favour.create({
             description: req.body.description,
-            offererId: fake_offerer_id,
-            receiverId: fake_receiver_id
+            offererId: req.body.receiverId,
+            receiverId: req.body.user_id
         }).then(favourInstance => {
             favourInstance.save().catch(err => console.log(err))
             console.log(favourInstance.id);
