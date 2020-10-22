@@ -313,6 +313,7 @@ main {
     position: absolute;
     bottom: 100;
     left: 100;
+    padding-left: 2.5rem;
 }
 
 .btn-filter {

@@ -17,7 +17,6 @@ export default class AddViewDebt extends React.Component {
             debtData: [],
             userIdData: []
         }
-
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChangeSelectReward = this.handleChangeSelectReward.bind(this);
         this.handleChangeSelectOffererId = this.handleChangeSelectOffererId.bind(this);
@@ -138,7 +137,7 @@ export default class AddViewDebt extends React.Component {
                                         {
                                             debtData.UserId === Number(Cookie.get('user_id')) ?
                                                 <td>
-                                                    <a href='/addandviewdebt' onClick={() => this.deleteDebt(debtData.FavourId)}>Delete</a>
+                                                    <a href='#' onClick={() => this.deleteDebt(debtData.FavourId)}>Delete</a>
                                                 </td>
                                                 : <td></td>
                                         }
@@ -164,7 +163,7 @@ export default class AddViewDebt extends React.Component {
                                 <select value={this.state.offererId} className='form-control1' onChange={this.handleChangeSelectOffererId}>
                                     {
                                         this.state.userIdData.map((userIdData) =>
-                                        <option value="userId">{userIdData.id}</option>
+                                        <option>{userIdData.id}</option>
                                         )
                                     }
                                 </select>
@@ -180,7 +179,7 @@ export default class AddViewDebt extends React.Component {
                                 <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
-                                        <option value="rewards">{rewardData.rewardName}</option>
+                                        <option>{rewardData.rewardName}</option>
                                         )
                                     }
                                 </select>
@@ -188,7 +187,7 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward (Quantity)</p>
-                                <input type='text' value={this.state.quantity} id='input-fname' name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
+                                <input type='text' value={this.state.quantity} name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                            

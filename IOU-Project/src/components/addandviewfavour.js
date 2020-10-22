@@ -107,7 +107,7 @@ export default class AddViewFavour extends React.Component {
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'description' id='description' name='description' className = 'form-control1' required='true'/>
+                                <textarea type = 'description' name='description' className = 'form-control1' required='true'/>
                             </div>
                             <br></br>
                             <div>

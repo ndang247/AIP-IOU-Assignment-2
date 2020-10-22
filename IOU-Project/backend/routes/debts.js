@@ -41,7 +41,7 @@ module.exports = function (app, passport) {
         db.Favour.create({
             description: req.body.description,
             offererId: Number(req.body.offererId),
-            receiverId: Number(req.cookies.user_id)
+            receiverId: Number(req.body.user_id)
         }).then(debtInstance => {
             debtInstance.save().catch(err => console.log(err))
             console.log(debtInstance.id);
