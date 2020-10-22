@@ -2,13 +2,16 @@ import React from "react";
 import "../Style.css";
 import axios from 'axios';
 const qs = require('querystring');
+const Cookie = require('js-cookie');
 
 export default class AddViewDebt extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             // the property of the state that correspond to the field of the database
+            offererId: '',
             description: '',
+            reward: '',
             quantity: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             debtData: [],
@@ -16,6 +19,9 @@ export default class AddViewDebt extends React.Component {
         }
 
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleChangeSelectReward = this.handleChangeSelectReward.bind(this);
+        this.handleChangeSelectOffererId = this.handleChangeSelectOffererId.bind(this);
+        this.deleteDebt = this.deleteDebt.bind(this);
     }
     
     componentDidMount() {
@@ -47,7 +53,7 @@ export default class AddViewDebt extends React.Component {
         
         axios({
             method: 'GET',
-            url: 'http://localhost:8080/api/get-my-debts',
+            url: '/api/get-my-debts',
             data: null
         }).then (res => {
             console.log(res);
@@ -59,23 +65,46 @@ export default class AddViewDebt extends React.Component {
         })
     }
 
+    deleteDebt(id) {
+        axios.delete('/api/delete-debts/' + id)
+            .then(response => console.log(response.data));
+
+        this.setState({
+            // whenever the id in the exercises array does not equal to the id that is being deleted will be pass back to the array
+            debtData: this.state.debtData.filter(debt => debt._id !== id)
+        })
+    }
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    // for selecting rewards
+    handleChangeSelectReward(e){
+        this.setState({reward: e.target.value});
+    }
+
+    // for selecting offererId
+    handleChangeSelectOffererId(e){
+        this.setState({offererId: e.target.value});
     }
 
     // this function is use when user submit a form
     onSubmit(e) {
         const debt = {
             description: this.state.description,
-            quantity: this.state.quantity
+            reward: this.state.reward,
+            quantity: this.state.quantity,
+            offererId: this.state.offererId,
+            user_id: Cookie.get('user_id')
         }
         const config = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('http://localhost:8080/api/add-my-debts',  qs.stringify(debt), config)
-        .then(res => console.log(res.data));
+        axios.post('/api/add-my-debts',  qs.stringify(debt), config)
+        .then(res => console.log(res.data));    
     }
 
     render() {
@@ -99,7 +128,22 @@ export default class AddViewDebt extends React.Component {
                         <tbody>
                             {
                                 this.state.debtData.map((debtData) =>
-                                <tr><td>{debtData.UserId}</td> <td>{debtData.fullname}</td> <td>{debtData.description}</td> </tr>
+                                <tr>
+                                    <td>{debtData.UserId}</td> 
+                                    <td>{debtData.fullname}</td> 
+                                    <td>{debtData.description}</td> 
+                                    <td></td> 
+                                    <td></td>
+                                    <td>
+                                        {
+                                            debtData.UserId === Number(Cookie.get('user_id')) ?
+                                                <td>
+                                                    <a href='/addandviewdebt' onClick={() => this.deleteDebt(debtData.FavourId)}>Delete</a>
+                                                </td>
+                                                : <td></td>
+                                        }
+                                    </td>
+                                </tr>
                             )}
                         </tbody>
                         
@@ -117,7 +161,7 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>User's ID</p>  
-                                <select name="userId" className='form-control1'>
+                                <select value={this.state.offererId} className='form-control1' onChange={this.handleChangeSelectOffererId}>
                                     {
                                         this.state.userIdData.map((userIdData) =>
                                         <option value="userId">{userIdData.id}</option>
@@ -128,12 +172,12 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>Description</p>  
-                                <textarea type = 'description' id='description' name='description' className = 'form-control1' required='true' onChange={this.handleChange}/>
+                                <textarea type = 'description' value={this.state.description} id='description' name='description' className = 'form-control1' required='true' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                             <div>
                                 <p>Reward</p>
-                                <select name="rewardItems" className='form-control1'>
+                                <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
                                     {
                                         this.state.rewardData.map((rewardData) =>
                                         <option value="rewards">{rewardData.rewardName}</option>
@@ -144,7 +188,7 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>Reward (Quantity)</p>
-                                <input type='text' id='input-fname' name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
+                                <input type='text' value={this.state.quantity} id='input-fname' name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
                             </div>
                             <br></br>
                            
