@@ -12,7 +12,7 @@ export default class AddViewDebt extends React.Component {
             description: '',
             quantity: '',
             offererId: '',
-            reward:'',
+            reward: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             debtData: [],
             userIdData: []
@@ -28,7 +28,7 @@ export default class AddViewDebt extends React.Component {
             method: 'GET',
             url: '/api/rewards',
             data: null
-        }).then (res => {
+        }).then(res => {
             console.log(res);
             this.setState({
                 rewardData: res.data,
@@ -42,7 +42,7 @@ export default class AddViewDebt extends React.Component {
             method: 'GET',
             url: '/api/user-id',
             data: null
-        }).then (res => {
+        }).then(res => {
             console.log(res);
             this.setState({
                 userIdData: res.data,
@@ -61,37 +61,37 @@ export default class AddViewDebt extends React.Component {
             }
         };
         axios.post('/api/my-debts', qs.stringify(cookie), config)
-            .then (res => {
+            .then(res => {
                 console.log(res);
                 this.setState({
                     debtData: res.data
                 });
             }).catch(err => {
-            console.log(err);
-        });
+                console.log(err);
+            });
     }
 
     deleteDebt(id) {
         axios.delete('/api/delete-debts/' + id)
-            .then(response => console.log(response.data)).then(() =>  {
-            const cookie = {
-                user_id: Cookie.get('user_id')
-            };
-            const config = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            };
-            axios.post('/api/my-debts', qs.stringify(cookie), config)
-                .then (res => {
-                    console.log(res);
-                    this.setState({
-                        debtData: res.data
+            .then(response => console.log(response.data)).then(() => {
+                const cookie = {
+                    user_id: Cookie.get('user_id')
+                };
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                };
+                axios.post('/api/my-debts', qs.stringify(cookie), config)
+                    .then(res => {
+                        console.log(res);
+                        this.setState({
+                            debtData: res.data
+                        });
+                    }).catch(err => {
+                        console.log(err);
                     });
-                }).catch(err => {
-                console.log(err);
             });
-        });
 
 
     }
@@ -103,13 +103,13 @@ export default class AddViewDebt extends React.Component {
     }
 
     // for selecting rewards
-    handleChangeSelectReward(e){
-        this.setState({reward: e.target.value});
+    handleChangeSelectReward(e) {
+        this.setState({ reward: e.target.value });
     }
 
     // for selecting offererId
-    handleChangeSelectOffererId(e){
-        this.setState({offererId: e.target.value});
+    handleChangeSelectOffererId(e) {
+        this.setState({ offererId: e.target.value });
     }
 
     // this function is use when user submit a form
@@ -127,114 +127,109 @@ export default class AddViewDebt extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('/api/add-my-debts',  qs.stringify(debt), config)
-            .then(res => console.log(res.data)).then(() =>  {
-            const cookie = {
-                user_id: Cookie.get('user_id')
-            };
-            const config = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            };
-            axios.post('/api/my-debts', qs.stringify(cookie), config)
-                .then (res => {
-                    console.log(res);
-                    this.setState({
-                        debtData: res.data
+        axios.post('/api/add-my-debts', qs.stringify(debt), config)
+            .then(res => console.log(res.data)).then(() => {
+                const cookie = {
+                    user_id: Cookie.get('user_id')
+                };
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                };
+                axios.post('/api/my-debts', qs.stringify(cookie), config)
+                    .then(res => {
+                        console.log(res);
+                        this.setState({
+                            debtData: res.data
+                        });
+                    }).catch(err => {
+                        console.log(err);
                     });
-                }).catch(err => {
-                console.log(err);
             });
-        });
 
     }
 
     render() {
-        return(
+        return (
             <body>
-            <div className="debt-container">
-                <section className='jumbotron text-centre'>
-                    <h1 className='leaderboard-title'>My Debts</h1>
-                </section>
-                <table className="request-table">
-                    <thead>
-                    <tr>
-                        <th>Debt ID</th>
-                        <th>Debtor</th>
-                        <th>Description</th>
-                        <th>Reward</th>
-                        <th>Quantity</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.debtData.map((debtData) =>
+                <div className="debt-container">
+                    <section className='jumbotron text-centre'>
+                        <h1 className='leaderboard-title'>My Debts</h1>
+                    </section>
+                    <table className="request-table">
+                        <thead>
                             <tr>
-                                <td>{debtData.id}</td>
-                                <td>{debtData.fullname}</td>
-                                <td>{debtData.description}</td>
-                                <td>{debtData.rewardName}</td>
-                                <td>{debtData.quantity}</td>
-                                <td>
-                                    <a onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
-                                </td>
+                                <th>Debt ID</th>
+                                <th>Debtor</th>
+                                <th>Description</th>
+                                <th>Reward</th>
+                                <th>Quantity</th>
+                                <th>Delete</th>
                             </tr>
-                        )}
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.debtData.map((debtData) =>
+                                    <tr>
+                                        <td>{debtData.id}</td>
+                                        <td>{debtData.fullname}</td>
+                                        <td>{debtData.description}</td>
+                                        <td>{debtData.rewardName}</td>
+                                        <td>{debtData.quantity}</td>
+                                        <td>
+                                            <a onClick={() => this.deleteDebt(debtData.id)}>Pay</a>
+                                        </td>
+                                    </tr>
+                                )}
+                        </tbody>
 
-                </table>
-            </div>
-            <main>
-                <div className='add-debt-box'>
-                    <form onSubmit={this.onSubmit}>
-                        <h1 className='addDebt'>Create a Debt</h1>
-                        {/* <br></br>
-                            <div>
-                                <p>Title</p>
-                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true' onChange={this.handleChange}/>
-                            </div> */}
-                        <br></br>
-                        <div>
-                            <p>User's ID</p>
-                            <select value={this.state.offererId} className='form-control1' onChange={this.handleChangeSelectOffererId}>
-                                {
-                                    this.state.userIdData.map((userIdData) =>
-                                        <option>{userIdData.id}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Description</p>
-                            <textarea type = 'description' value={this.state.description} id='description' name='description' className = 'form-control1' required='true' onChange={this.handleChange}/>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Reward</p>
-                            <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
-                                {
-                                    this.state.rewardData.map((rewardData) =>
-                                        <option>{rewardData.rewardName}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Reward (Quantity)</p>
-                            <input type='text' value={this.state.quantity} name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
-                        </div>
-                        <br></br>
-
-                        <div className='btn-signup'>
-                            <button className='btn-signup'>Create a new debt</button>
-                        </div>
-                    </form>
+                    </table>
                 </div>
-            </main>
+                <main>
+                    <div className='add-debt-box'>
+                        <form onSubmit={this.onSubmit}>
+                            <h1 className='addDebt'>Create a Debt</h1>
+                            <br></br>
+                            <div>
+                                <p>User's ID</p>
+                                <select value={this.state.offererId} className='form-control1' onChange={this.handleChangeSelectOffererId}>
+                                    {
+                                        this.state.userIdData.map((userIdData) =>
+                                            <option>{userIdData.id}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Description</p>
+                                <textarea type='description' value={this.state.description} id='description' name='description' className='form-control1' required='true' onChange={this.handleChange} />
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Reward</p>
+                                <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
+                                    {
+                                        this.state.rewardData.map((rewardData) =>
+                                            <option>{rewardData.rewardName}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Reward (Quantity)</p>
+                                <input type='text' value={this.state.quantity} name='quantity' className='form-control1' required='true' onChange={this.handleChange} />
+                            </div>
+                            <br></br>
+
+                            <div className='btn-signup'>
+                                <button className='btn-signup'>Create a new debt</button>
+                            </div>
+                        </form>
+                    </div>
+                </main>
             </body>
         );
     };

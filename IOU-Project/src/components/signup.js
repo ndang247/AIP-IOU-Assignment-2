@@ -6,7 +6,7 @@ export default class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullname:'',
+            fullname: '',
             email: '',
             password: ''
         };
@@ -21,18 +21,17 @@ export default class SignUp extends React.Component {
             email: this.state.email,
             password: this.state.password
         })
-            .then( (response) => {
+            .then((response) => {
                 if (response.data.success === true) {
                     this.props.setLoggedIn();
                     this.props.history.push('/');
-                }else{
+                } else {
                     alert("Email is already taken");
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
-        //alert(this.state.email)
         event.preventDefault();
     }
     render() {
@@ -44,15 +43,15 @@ export default class SignUp extends React.Component {
                             <h1 className='signupTitle'>Sign up</h1>
                             <br></br>
                             <div>
-                                <input type='text' id='input-fname' className='form-control' placeholder='Full Name' required='true' autoFocus='true' name = {'fullname'} onChange={this.handleChange}/>
+                                <input type='text' id='input-fname' className='form-control' placeholder='Full Name' required='true' autoFocus='true' name={'fullname'} onChange={this.handleChange} />
                             </div>
                             <br></br>
                             <div>
-                                <input type='email' id='inputEmail' className='form-control' placeholder='Email' required='true' name={'email'} onChange={this.handleChange}/>
+                                <input type='email' id='inputEmail' className='form-control' placeholder='Email' required='true' name={'email'} onChange={this.handleChange} />
                             </div>
                             <br></br>
                             <div>
-                                <input type='password' id='inputPassword' className='form-control' placeholder='Password' required='true' name = {'password'} onChange={this.handleChange}/>
+                                <input type='password' id='inputPassword' className='form-control' placeholder='Password' required='true' name={'password'} onChange={this.handleChange} />
                             </div>
                             <br></br>
 

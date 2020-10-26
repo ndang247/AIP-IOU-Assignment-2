@@ -14,7 +14,7 @@ export default class GainReward extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    
+
 
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
@@ -33,32 +33,32 @@ export default class GainReward extends React.Component {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.post('/api/gain-reward',  qs.stringify(favour), config)
+        axios.post('/api/gain-reward', qs.stringify(favour), config)
             .then(() => {
-            axios.delete('/api/delete-requests/'+82, null, config).catch(err => console.log(err));
-        });
+                axios.delete('/api/delete-requests/' + 82, null, config).catch(err => console.log(err));
+            });
     }
 
     render() {
         return (
-            <body>   
+            <body>
                 <main>
                     <div className='addfavours-box'>
                         <form>
-                            <h1>Gain Reward</h1>   
+                            <h1>Gain Reward</h1>
                             <br></br>
                             <div>
-                                <p>Request ID</p>  
-                                <input type = 'id' id='requestID' name='requestID' className = 'form-control1' required='true' onChange={this.handleChange}/>
+                                <p>Request ID</p>
+                                <input type='id' id='requestID' name='requestID' className='form-control1' required='true' onChange={this.handleChange} />
                             </div>
-                           
+
                             <br></br>
                             <div className='btn-signup'>
-                                <button className='btn-signup' type = 'submit' onClick = {this.onSubmit}>Gain reward</button>
-                            </div>                        
+                                <button className='btn-signup' type='submit' onClick={this.onSubmit}>Gain reward</button>
+                            </div>
                         </form>
                     </div>
-                </main>             
+                </main>
             </body>
         );
     }

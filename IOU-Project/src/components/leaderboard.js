@@ -15,7 +15,7 @@ export default class Leaderboard extends React.Component {
             method: 'GET',
             url: '/api/most-debt',
             data: null
-        }).then (res => {
+        }).then(res => {
             console.log(res);
             this.setState({
                 data: res.data
@@ -39,10 +39,10 @@ export default class Leaderboard extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {
-                            this.state.data.map((leaderboardData) => 
-                            <tr><td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
-                        )}
+                            {
+                                this.state.data.map((leaderboardData) =>
+                                    <tr><td>{leaderboardData.fullname}</td> <td>{leaderboardData.debt}</td></tr>
+                                )}
                         </tbody>
                     </table>
                 </div>
