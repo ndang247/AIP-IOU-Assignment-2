@@ -1,7 +1,7 @@
 import React from "react";
 import "../Style.css";
 import axios from 'axios';
-import GainReward from "./gainreward";
+
 
 
 const Cookie = require('js-cookie');

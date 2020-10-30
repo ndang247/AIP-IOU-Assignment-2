@@ -12,7 +12,7 @@ export default class AddViewFavour extends React.Component {
             description: '',
             quantity: '',
             receiverId: '',
-            reward:'',
+            reward: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             debtData: [],
             userIdData: []
@@ -28,7 +28,7 @@ export default class AddViewFavour extends React.Component {
             method: 'GET',
             url: '/api/rewards',
             data: null
-        }).then (res => {
+        }).then(res => {
             console.log(res);
             this.setState({
                 rewardData: res.data,
@@ -42,7 +42,7 @@ export default class AddViewFavour extends React.Component {
             method: 'GET',
             url: '/api/user-id',
             data: null
-        }).then (res => {
+        }).then(res => {
             console.log(res);
             this.setState({
                 userIdData: res.data,
@@ -61,37 +61,37 @@ export default class AddViewFavour extends React.Component {
             }
         };
         axios.post('/api/my-favours', qs.stringify(cookie), config)
-            .then (res => {
+            .then(res => {
                 console.log(res);
                 this.setState({
                     debtData: res.data
                 });
             }).catch(err => {
-            console.log(err);
-        });
+                console.log(err);
+            });
     }
 
     deleteFavour(id) {
         axios.delete('/api/delete-favours/' + id)
-            .then(response => console.log(response.data)).then(() =>  {
-            const cookie = {
-                user_id: Cookie.get('user_id')
-            };
-            const config = {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            };
-            axios.post('/api/my-favours', qs.stringify(cookie), config)
-                .then (res => {
-                    console.log(res);
-                    this.setState({
-                        debtData: res.data
+            .then(response => console.log(response.data)).then(() => {
+                const cookie = {
+                    user_id: Cookie.get('user_id')
+                };
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                };
+                axios.post('/api/my-favours', qs.stringify(cookie), config)
+                    .then(res => {
+                        console.log(res);
+                        this.setState({
+                            debtData: res.data
+                        });
+                    }).catch(err => {
+                        console.log(err);
                     });
-                }).catch(err => {
-                console.log(err);
             });
-        });
 
 
     }
@@ -103,138 +103,140 @@ export default class AddViewFavour extends React.Component {
     }
 
     // for selecting rewards
-    handleChangeSelectReward(e){
-        this.setState({reward: e.target.value});
+    handleChangeSelectReward(e) {
+        this.setState({ reward: e.target.value });
     }
 
     // for selecting receiverId
-    handleChangeSelectReceiverId(e){
-        this.setState({receiverId: e.target.value});
+    handleChangeSelectReceiverId(e) {
+        this.setState({ receiverId: e.target.value });
     }
 
     // this function is use when user submit a form
     onSubmit(e) {
         e.preventDefault();
-        const favour = {
-            description: this.state.description,
-            reward: this.state.reward,
-            quantity: this.state.quantity,
-            receiverId: this.state.receiverId,
-            user_id: Cookie.get('user_id')
-        }
-        const config = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        axios.post('/api/add-my-favours',  qs.stringify(favour), config)
-            .then(res => console.log(res.data)).then(() =>  {
-            const cookie = {
+        if(this.state.description.length !== 0 && Number(this.state.quantity) > 0) {
+            const favour = {
+                description: this.state.description,
+                reward: this.state.reward,
+                quantity: this.state.quantity,
+                receiverId: this.state.receiverId,
                 user_id: Cookie.get('user_id')
-            };
+            }
             const config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            };
-            axios.post('/api/my-favours', qs.stringify(cookie), config)
-                .then (res => {
-                    console.log(res);
-                    this.setState({
-                        debtData: res.data
-                    });
-                }).catch(err => {
-                console.log(err);
-            });
-        });
+            }
+            axios.post('/api/add-my-favours', qs.stringify(favour), config)
+                .then(res => console.log(res.data)).then(() => {
+                    const cookie = {
+                        user_id: Cookie.get('user_id')
+                    };
+                    const config = {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    };
+                    axios.post('/api/my-favours', qs.stringify(cookie), config)
+                        .then(res => {
+                            console.log(res);
+                            this.setState({
+                                debtData: res.data
+                            });
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                });
+        } else if (Number(this.state.quantity) <= 0 || Number(this.state.quantity) == null) {
+            alert("The reward quantity should be larger than 0.")
+        } else {
+            alert("Please fill all the fields");
+        }
 
     }
 
     render() {
-        return(
+        return (
             <body>
-            <div className="debt-container">
-                <section className='jumbotron text-centre'>
-                    <h1 className='leaderboard-title'>My Favours</h1>
-                </section>
-                <table className="request-table">
-                    <thead>
-                    <tr>
-                        <th>Favour ID</th>
-                        <th>Debtee</th>
-                        <th>Description</th>
-                        <th>Reward</th>
-                        <th>Quantity</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.state.debtData.map((debtData) =>
+                <div className="debt-container">
+                    <section className='jumbotron text-centre'>
+                        <h1 className='leaderboard-title'>My Favours</h1>
+                    </section>
+                    <table className="request-table">
+                        <thead>
                             <tr>
-                                <td>{debtData.id}</td>
-                                <td>{debtData.fullname}</td>
-                                <td>{debtData.description}</td>
-                                <td>{debtData.rewardName}</td>
-                                <td>{debtData.quantity}</td>
-                                <td>
-                                    <button onClick={() => this.deleteFavour(debtData.id)}>Delete</button>
-                                </td>
+                                <th>Favour ID</th>
+                                <th>Debtee</th>
+                                <th>Description</th>
+                                <th>Reward</th>
+                                <th>Quantity</th>
+                                <th>Delete</th>
                             </tr>
-                        )}
-                    </tbody>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.debtData.map((debtData) =>
+                                    <tr>
+                                        <td>{debtData.id}</td>
+                                        <td>{debtData.fullname}</td>
+                                        <td>{debtData.description}</td>
+                                        <td>{debtData.rewardName}</td>
+                                        <td>{debtData.quantity}</td>
+                                        <td>
+                                            <button onClick={() => this.deleteFavour(debtData.id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                )}
+                        </tbody>
 
-                </table>
-            </div>
-            <main>
-                <div className='add-debt-box'>
-                    <form onSubmit={this.onSubmit}>
-                        <h1 className='addDebt'>Create a Favour</h1>
-                        {/* <br></br>
-                            <div>
-                                <p>Title</p>
-                                <input type='text' id='input-title' className='form-control1' required='true' autoFocus='true' onChange={this.handleChange}/>
-                            </div> */}
-                        <br></br>
-                        <div>
-                            <p>User's ID</p>
-                            <select value={this.state.receiverId} className='form-control1' onChange={this.handleChangeSelectReceiverId}>
-                                {
-                                    this.state.userIdData.map((userIdData) =>
-                                        <option>{userIdData.id}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Description</p>
-                            <textarea type = 'description' value={this.state.description} id='description' name='description' className = 'form-control1' required='true' onChange={this.handleChange}/>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Reward</p>
-                            <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
-                                {
-                                    this.state.rewardData.map((rewardData) =>
-                                        <option>{rewardData.rewardName}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-                        <br></br>
-                        <div>
-                            <p>Reward (Quantity)</p>
-                            <input type='text' value={this.state.quantity} name='quantity' className='form-control1' required='true' onChange={this.handleChange}/>
-                        </div>
-                        <br></br>
-
-                        <div className='btn-signup'>
-                            <button className='btn-signup'>Create a new Favour</button>
-                        </div>
-                    </form>
+                    </table>
                 </div>
-            </main>
+                <main>
+                    <div className='add-debt-box'>
+                        <form onSubmit={this.onSubmit}>
+                            <h1 className='addDebt'>Create a Favour</h1>
+                            
+                            <br></br>
+                            <div>
+                                <p>User's ID</p>
+                                <select value={this.state.receiverId} className='form-control1' onChange={this.handleChangeSelectReceiverId}>
+                                    {
+                                        this.state.userIdData.map((userIdData) =>
+                                            <option>{userIdData.id}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Description</p>
+                                <textarea type='description' value={this.state.description} id='description' name='description' className='form-control1' required='true' onChange={this.handleChange} />
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Reward</p>
+                                <select value={this.state.reward} className='form-control1' onChange={this.handleChangeSelectReward}>
+                                    {
+                                        this.state.rewardData.map((rewardData) =>
+                                            <option>{rewardData.rewardName}</option>
+                                        )
+                                    }
+                                </select>
+                            </div>
+                            <br></br>
+                            <div>
+                                <p>Reward (Quantity)</p>
+                                <input type='text' value={this.state.quantity} name='quantity' className='form-control1' required='true' onChange={this.handleChange} />
+                            </div>
+                            <br></br>
+
+                            <div className='btn-signup'>
+                                <button className='btn-signup'>Create a new Favour</button>
+                            </div>
+                        </form>
+                    </div>
+                </main>
             </body>
         );
     };

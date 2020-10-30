@@ -18,23 +18,28 @@ export default class SignIn extends React.Component {
         this.props.setLoggedOut();
     }
     handleSubmit = (event) => {
-        axios.post('/auth/signin', {
-            email: this.state.email,
-            password: this.state.password
-        })
-            .then( (response) => {
-                if (response.data.success === true) {
-                    this.props.setLoggedIn();
-                    this.props.history.push('/');
-                }else{
-                    alert("Wrong password or username");
-                }
+        if(this.state.email.length !== 0 && this.state.password.length !== 0) {
+            axios.post('/auth/signin', {
+                email: this.state.email,
+                password: this.state.password
             })
-            .catch(function (error) {
-                console.log(error);
-            });
-        //alert(this.state.email)
-        event.preventDefault();
+                .then( (response) => {
+                    if (response.data.success === true) {
+                        this.props.setLoggedIn();
+                        this.props.history.push('/');
+                    }else{
+                        alert("Wrong password or username");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            
+            event.preventDefault();
+        } else {
+            alert("Please fill all the fields");
+        }
+        
     }
     render() {
         if(this.props.isLoggedn === true) {

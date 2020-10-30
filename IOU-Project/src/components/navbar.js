@@ -127,10 +127,6 @@ export default class Navbar extends React.Component {
                                         </div>
                                         <br/>
                                         <div>
-                                            <Link to='/payfavour' onClick={() => this.onSetSidebarOpen(false)}>Pay Favour</Link>
-                                        </div>
-                                        <br/>
-                                        <div>
                                             <div>
                                                 <Link to='/signup' onClick={() => this.onSetSidebarOpen(false)}>Sign Up</Link>  
                                             </div>

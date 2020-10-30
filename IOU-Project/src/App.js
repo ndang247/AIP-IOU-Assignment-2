@@ -11,7 +11,6 @@ import AddPublicRequest from './components/addpublicrequest';
 import AddViewFavour from './components/addandviewfavour';
 import AddViewDebt from './components/addandviewdebt';
 import GainReward from './components/gainreward';
-import PayFavour from './components/payfavour';
 import "./Style.css";
 import axios from "axios"
 

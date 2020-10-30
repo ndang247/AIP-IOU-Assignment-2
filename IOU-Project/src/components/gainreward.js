@@ -23,7 +23,7 @@ export default class GainReward extends React.Component {
     onSubmit(e) {
         // this will prevent the default HTML form submit behaviour from taking place
         e.preventDefault();
-
+        
         const favour = {
             requestId: this.state.requestID,
             user_id: Cookie.get('user_id')
