@@ -64,7 +64,6 @@ export default class HomePage extends React.Component {
             url: '/api/all-requests',
             data: null
         }).then(res => {
-            //alert(res.data);
             this.setState({
                 data: res.data
             });
@@ -83,53 +82,50 @@ export default class HomePage extends React.Component {
                             <h1 className='leaderboard-title'>Public Requests</h1>
                         </section>
 
-                    <div className="filter-div">
-                        <button className="btn-filter active" onClick={() => this.clearFilter()}>All</button>
-                        <button className="btn-filter" onClick={() => this.onFilter("Pho")}>Pho</button>
-                        <button className="btn-filter" onClick={() => this.onFilter("Pizza")}>Pizza</button>
-                        <button className="btn-filter" onClick={() => this.onFilter("Sushi")}>Sushi</button>
-                    </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <table className="request-table">
-                        <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>Task Name</th>
-                                <th>Description</th>
-                                <th>Requester's ID</th>
-                                <th>Reward</th>
-                                <th>Reward (Quantity)</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.data.map((publicRequests) =>
-                                    <tr>
-                                        <td>{publicRequests.id}</td>
-                                        <td>{publicRequests.taskName}</td>
-                                        <td>{publicRequests.description}</td>
-                                        <td>{publicRequests.UserId}</td>
-                                        <td>{publicRequests.rewardName}</td>
-                                        <td>{publicRequests.quantity}</td>
-                                        {
-                                            publicRequests.UserId === Number(Cookie.get('user_id')) ?
-                                                <td>
-                                                    <a href='/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
-                                                </td>
-                                                : <td></td>
-                                        }
-                                        {/* <td>
-                                            <a href = '/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
-                                        </td> */}
-                                    </tr>
-                                )}
+                        <div className="filter-div">
+                            <button className="btn-filter active" onClick={() => this.clearFilter()}>All</button>
+                            <button className="btn-filter" onClick={() => this.onFilter("Pho")}>Pho</button>
+                            <button className="btn-filter" onClick={() => this.onFilter("Pizza")}>Pizza</button>
+                            <button className="btn-filter" onClick={() => this.onFilter("Sushi")}>Sushi</button>
+                        </div>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <table className="request-table">
+                            <thead>
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Task Name</th>
+                                    <th>Description</th>
+                                    <th>Requester's ID</th>
+                                    <th>Reward</th>
+                                    <th>Reward (Quantity)</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.data.map((publicRequests) =>
+                                        <tr>
+                                            <td>{publicRequests.id}</td>
+                                            <td>{publicRequests.taskName}</td>
+                                            <td>{publicRequests.description}</td>
+                                            <td>{publicRequests.UserId}</td>
+                                            <td>{publicRequests.rewardName}</td>
+                                            <td>{publicRequests.quantity}</td>
+                                            {
+                                                publicRequests.UserId === Number(Cookie.get('user_id')) ?
+                                                    <td>
+                                                        <a href='/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
+                                                    </td>
+                                                    : <td></td>
+                                            }
+                                        </tr>
+                                    )}
 
-                        </tbody>
-                    </table>
-                </div>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </body >
             );

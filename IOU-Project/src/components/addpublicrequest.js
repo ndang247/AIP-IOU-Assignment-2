@@ -54,8 +54,21 @@ class AddPublicRequest extends React.Component {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }
-            axios.post('/api/add-my-request', qs.stringify(publicRequest), config).then(res => {
-                //alert(res.data);
+            axios.post('/api/add-my-request', qs.stringify(publicRequest), config)
+            .then(res => {
+                console.log(res.data);
+                this.setState = (
+                    {
+                        taskName: '',
+                        description: '',
+                        reward: '',
+                        quantity: ''
+                    }
+                )
+            })
+
+            axios.post('/api/add-my-request', qs.stringify(publicRequest), config)
+            .then(res => {
                 console.log(res.data);
                 this.setState = (
                     {
@@ -66,8 +79,7 @@ class AddPublicRequest extends React.Component {
                     }
                 );
                 this.props.history.push('/');
-            }
-            );
+            });
         } else if (Number(this.state.quantity) <= 0 || isNaN(this.state.quantity)) {
             alert("The reward quantity should be a number and larger than 0.");
         } else {
