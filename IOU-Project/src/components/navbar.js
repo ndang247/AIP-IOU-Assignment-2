@@ -14,14 +14,14 @@ export default class Navbar extends React.Component {
     }
     onSetSidebarOpen(open) {
         this.setState({ sidebarOpen: open });
-    }
+    };
     logout() {
         axios.get('/logout').then(res => {
             this.onSetSidebarOpen(false);
             this.props.setLoggedOut();
         });
 
-    }
+    };
     render() {
         if (this.props.isLoggedIn === true) {
             return (
@@ -155,7 +155,7 @@ export default class Navbar extends React.Component {
                     </header>
                 </div>
             );
-        }
+        };
 
-    }
-}
+    };
+};

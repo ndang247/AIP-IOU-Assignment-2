@@ -3,7 +3,7 @@ import "../Style.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 const qs = require('querystring');
-class AddPublicRequest extends React.Component {
+export default class AddPublicRequest extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -18,7 +18,8 @@ class AddPublicRequest extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeSelect = this.handleChangeSelect.bind(this);
-    }
+    };
+
     componentDidMount() {
         axios({
             method: 'GET',
@@ -33,10 +34,12 @@ class AddPublicRequest extends React.Component {
         }).catch(err => {
             console.log(err);
         })
-    }
+    };
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-    }
+    };
+
     // this function is use when user submit a form
     onSubmit(e) {
         // this will prevent the default HTML form submit behaviour from taking place
@@ -48,12 +51,12 @@ class AddPublicRequest extends React.Component {
                 quantity: this.state.quantity,
                 reward: this.state.reward,
                 user_id: Cookies.get('user_id')
-            }
+            };
             const config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }
+            };
             axios.post('/api/add-my-request', qs.stringify(publicRequest), config)
             .then(res => {
                 console.log(res.data);
@@ -65,31 +68,22 @@ class AddPublicRequest extends React.Component {
                         quantity: ''
                     }
                 )
-            })
-
-            axios.post('/api/add-my-request', qs.stringify(publicRequest), config)
-            .then(res => {
-                console.log(res.data);
-                this.setState = (
-                    {
-                        taskName: '',
-                        description: '',
-                        reward: '',
-                        quantity: ''
-                    }
-                );
-                this.props.history.push('/');
             });
+            alert('Request added!');
+
+
         } else if (Number(this.state.quantity) <= 0 || isNaN(this.state.quantity)) {
             alert("The reward quantity should be a number and larger than 0.");
         } else {
             alert("Please fill all the fields");
         }
         
-    }
+    };
+
     handleChangeSelect(e) {
         this.setState({ reward: e.target.value });
-    }
+    };
+
     render() {
         return (
             <body>
@@ -134,5 +128,4 @@ class AddPublicRequest extends React.Component {
             </body>
         );
     };
-}
-export default AddPublicRequest;
+};

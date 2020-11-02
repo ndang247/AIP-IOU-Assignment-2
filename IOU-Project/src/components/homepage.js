@@ -15,7 +15,7 @@ export default class HomePage extends React.Component {
         this.deletePublicRequest = this.deletePublicRequest.bind(this);
         this.onFilter = this.onFilter.bind(this);
 
-    }
+    };
 
 
     componentDidMount() {
@@ -31,17 +31,21 @@ export default class HomePage extends React.Component {
         }).catch(err => {
             console.log(err);
         })
-    }
+    };
 
     deletePublicRequest(id) {
         axios.delete('/api/delete-requests/' + id)
-            .then(response => console.log(response.data));
-
-        this.setState({
-            // whenever the id in the exercises array does not equal to the id that is being deleted will be pass back to the array
-            data: this.state.data.filter(request => request._id !== id)
-        })
-    }
+            .then(response => {
+                axios.get('/api/all-requests')
+                    .then(res => {
+                        this.setState({data: res.data})
+                    }).catch(err => {
+                    console.log(err);
+                })
+            }).catch(err => {
+            console.log(err);
+        });
+    };
 
     onFilter(reward) {
         axios.post('/api/filter-request', {
@@ -56,7 +60,7 @@ export default class HomePage extends React.Component {
                 console.log(error);
             });
 
-    }
+    };
 
     clearFilter() {
         axios({
@@ -70,7 +74,7 @@ export default class HomePage extends React.Component {
         }).catch(err => {
             console.log(err);
         })
-    }
+    };
 
 
     render() {
@@ -116,7 +120,8 @@ export default class HomePage extends React.Component {
                                             {
                                                 publicRequests.UserId === Number(Cookie.get('user_id')) ?
                                                     <td>
-                                                        <a href='/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>
+                                                        {/*<a href='/' onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</a>*/}
+                                                        <button onClick={() => this.deletePublicRequest(publicRequests.id)}>Delete</button>
                                                     </td>
                                                     : <td></td>
                                             }
@@ -174,6 +179,6 @@ export default class HomePage extends React.Component {
 
                 </body>
             );
-        }
-    }
-}
+        };
+    };
+};

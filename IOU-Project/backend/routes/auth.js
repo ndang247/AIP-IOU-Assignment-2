@@ -2,7 +2,6 @@ var db = require("../models");
 
 module.exports = function (app, passport) {
 
-
     // logout of user account
     app.get('/logout', function(req, res) {
         req.session.destroy(function(err){
@@ -79,4 +78,4 @@ module.exports = function (app, passport) {
         })(req, res, next);
     });
 
-}
+};

@@ -11,17 +11,18 @@ export default class AddViewFavour extends React.Component {
             // the property of the state that correspond to the field of the database
             description: '',
             quantity: '',
-            receiverId: '',
+            receiverEmail: '',
             reward: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             debtData: [],
-            userIdData: []
+            userEmailData: []
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChangeSelectReward = this.handleChangeSelectReward.bind(this);
-        this.handleChangeSelectReceiverId = this.handleChangeSelectReceiverId.bind(this);
+        this.handleChangeSelectReceiverEmail = this.handleChangeSelectReceiverEmail.bind(this);
         this.deleteFavour = this.deleteFavour.bind(this);
-    }
+        this.handleChange = this.handleChange.bind(this);
+    };
 
     componentDidMount() {
         axios({
@@ -36,21 +37,21 @@ export default class AddViewFavour extends React.Component {
             });
         }).catch(err => {
             console.log(err);
-        })
+        });
 
         axios({
             method: 'GET',
-            url: '/api/user-id',
+            url: '/api/user-email',
             data: null
         }).then(res => {
             console.log(res);
             this.setState({
-                userIdData: res.data,
-                receiverId: res.data[0].id
+                userEmailData: res.data,
+                receiverEmail: res.data[0].email
             });
         }).catch(err => {
             console.log(err);
-        })
+        });
 
         const cookie = {
             user_id: Cookie.get('user_id')
@@ -69,7 +70,7 @@ export default class AddViewFavour extends React.Component {
             }).catch(err => {
                 console.log(err);
             });
-    }
+    };
 
     deleteFavour(id) {
         axios.delete('/api/delete-favours/' + id)
@@ -94,23 +95,22 @@ export default class AddViewFavour extends React.Component {
             });
 
 
-    }
+    };
 
-    handleChange = (event) => {
-        console.log(this.state.reward);
-        console.log(this.state.receiverId);
-        this.setState({ [event.target.name]: event.target.value });
-    }
+    handleChange(e){
+        this.setState({ [e.target.name]: e.target.value });
+    };
 
     // for selecting rewards
     handleChangeSelectReward(e) {
         this.setState({ reward: e.target.value });
-    }
+    };
 
-    // for selecting receiverId
-    handleChangeSelectReceiverId(e) {
-        this.setState({ receiverId: e.target.value });
-    }
+    // for selecting receiverEmail
+    handleChangeSelectReceiverEmail(e) {
+        this.setState({ receiverEmail: e.target.value });
+        console.log(this.state.receiverEmail);
+    };
 
     // this function is use when user submit a form
     onSubmit(e) {
@@ -120,14 +120,14 @@ export default class AddViewFavour extends React.Component {
                 description: this.state.description,
                 reward: this.state.reward,
                 quantity: this.state.quantity,
-                receiverId: this.state.receiverId,
+                receiverEmail: this.state.receiverEmail,
                 user_id: Cookie.get('user_id')
-            }
+            };
             const config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }
+            };
             axios.post('/api/add-my-favours', qs.stringify(favour), config)
                 .then(res => console.log(res.data)).then(() => {
                     const cookie = {
@@ -154,7 +154,7 @@ export default class AddViewFavour extends React.Component {
             alert("Please fill all the fields");
         }
 
-    }
+    };
 
     render() {
         return (
@@ -199,11 +199,11 @@ export default class AddViewFavour extends React.Component {
                             
                             <br></br>
                             <div>
-                                <p>User's ID</p>
-                                <select value={this.state.receiverId} className='form-control1' onChange={this.handleChangeSelectReceiverId}>
+                                <p>Receiver Email</p>
+                                <select value={this.state.receiverEmail} className='form-control1' onChange={this.handleChangeSelectReceiverEmail}>
                                     {
-                                        this.state.userIdData.map((userIdData) =>
-                                            <option>{userIdData.id}</option>
+                                        this.state.userEmailData.map((userEmailData) =>
+                                            <option>{userEmailData.email}</option>
                                         )
                                     }
                                 </select>
@@ -240,5 +240,5 @@ export default class AddViewFavour extends React.Component {
             </body>
         );
     };
-}
+};
 

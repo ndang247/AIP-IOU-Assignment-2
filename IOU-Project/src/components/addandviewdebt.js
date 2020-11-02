@@ -11,7 +11,7 @@ export default class AddViewDebt extends React.Component {
             // the property of the state that correspond to the field of the database
             description: '',
             quantity: '',
-            offererId: '',
+            offererEmail: '',
             reward: '',
             rewardData: [], // this will be shown in a dropdown all the rewards in the database
             debtData: [],
@@ -19,9 +19,10 @@ export default class AddViewDebt extends React.Component {
         }
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChangeSelectReward = this.handleChangeSelectReward.bind(this);
-        this.handleChangeSelectOffererId = this.handleChangeSelectOffererId.bind(this);
+        this.handleChangeSelectOffererEmail = this.handleChangeSelectOffererEmail.bind(this);
         this.deleteDebt = this.deleteDebt.bind(this);
-    }
+        this.handleChange = this.handleChange.bind(this);
+    };
 
     componentDidMount() {
         axios({
@@ -40,13 +41,13 @@ export default class AddViewDebt extends React.Component {
 
         axios({
             method: 'GET',
-            url: '/api/user-id',
+            url: '/api/user-email',
             data: null
         }).then(res => {
             console.log(res);
             this.setState({
                 userIdData: res.data,
-                offererId: res.data[0].id
+                offererEmail: res.data[0].email
             });
         }).catch(err => {
             console.log(err);
@@ -69,7 +70,7 @@ export default class AddViewDebt extends React.Component {
             }).catch(err => {
                 console.log(err);
             });
-    }
+    };
 
     deleteDebt(id) {
         axios.delete('/api/delete-debts/' + id)
@@ -92,14 +93,10 @@ export default class AddViewDebt extends React.Component {
                         console.log(err);
                     });
             });
+    };
 
-
-    }
-
-    handleChange = (event) => {
-        console.log(this.state.reward);
-        console.log(this.state.offererId);
-        this.setState({ [event.target.name]: event.target.value });
+    handleChange (e) {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     // for selecting rewards
@@ -107,9 +104,9 @@ export default class AddViewDebt extends React.Component {
         this.setState({ reward: e.target.value });
     }
 
-    // for selecting offererId
-    handleChangeSelectOffererId(e) {
-        this.setState({ offererId: e.target.value });
+    // for selecting offererEmail
+    handleChangeSelectOffererEmail(e) {
+        this.setState({ offererEmail: e.target.value });
     }
 
     // this function is use when user submit a form
@@ -120,14 +117,14 @@ export default class AddViewDebt extends React.Component {
                 description: this.state.description,
                 reward: this.state.reward,
                 quantity: this.state.quantity,
-                offererId: this.state.offererId,
+                offererEmail: this.state.offererEmail,
                 user_id: Cookie.get('user_id')
-            }
+            };
             const config = {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
-            }
+            };
             axios.post('/api/add-my-debts', qs.stringify(debt), config)
                 .then(res => console.log(res.data)).then(() => {
                     const cookie = {
@@ -200,10 +197,10 @@ export default class AddViewDebt extends React.Component {
                             <br></br>
                             <div>
                                 <p>User's ID</p>
-                                <select value={this.state.offererId} className='form-control1' onChange={this.handleChangeSelectOffererId}>
+                                <select value={this.state.offererEmail} className='form-control1' onChange={this.handleChangeSelectOffererEmail}>
                                     {
                                         this.state.userIdData.map((userIdData) =>
-                                            <option>{userIdData.id}</option>
+                                            <option>{userIdData.email}</option>
                                         )
                                     }
                                 </select>
@@ -240,5 +237,5 @@ export default class AddViewDebt extends React.Component {
             </body>
         );
     };
-}
+};
 

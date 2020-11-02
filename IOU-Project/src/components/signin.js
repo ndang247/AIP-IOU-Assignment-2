@@ -10,13 +10,16 @@ export default class SignIn extends React.Component {
             password: ''
         };
     }
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-    }
+    };
+
     handleLogout = (event) => {
         axios.get('/logout');
         this.props.setLoggedOut();
-    }
+    };
+
     handleSubmit = (event) => {
         if(this.state.email.length !== 0 && this.state.password.length !== 0) {
             axios.post('/auth/signin', {
@@ -39,8 +42,8 @@ export default class SignIn extends React.Component {
         } else {
             alert("Please fill all the fields");
         }
-        
-    }
+    };
+
     render() {
         if (this.props.isLoggedn === true) {
             return (
@@ -91,6 +94,6 @@ export default class SignIn extends React.Component {
                     </main>
                 </body>
             );
-        }
-    }
-}
+        };
+    };
+};

@@ -29,15 +29,11 @@ module.exports = function(passport) {
                 email: email
             }
         }).then(function(user) {
-
             if (user) {
-
                 done(null, user.get());
-
             } else {
                 // console.log("user.errors", user.errors)
                 done(user.errors, null);
-
             }
         });
     });

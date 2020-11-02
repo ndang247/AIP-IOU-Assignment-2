@@ -3,7 +3,6 @@ const { QueryTypes } = require('sequelize');
 module.exports = function (app, passport) {
     app.post('/api/my-debts', (req, res, next) => {
         // Get all my favours
-
         db.sequelize.query('SELECT "Favours"."id", "Users"."fullname", "Favours"."offererId", ' +
             '"Favours"."description", "Rewards"."rewardName", "FavourRewards"."quantity" ' +
             'FROM "Favours" ' +
@@ -15,10 +14,10 @@ module.exports = function (app, passport) {
             type: QueryTypes.SELECT
         })
             .then(data => {
-                res.json(data)
+                res.json(data);
             })
             .catch(err => res.status(400).json('Error:' + err));
-    })
+    });
 
     // Leaderboard
     app.get('/api/most-debt', async (req, res, next) =>{
@@ -27,19 +26,19 @@ module.exports = function (app, passport) {
             'GROUP BY "Users"."id" ORDER BY "debt" DESC ' +
             'LIMIT 10')
             .then(data => res.json(data[0]))
-            .catch(err => res.status(400).json('Error ' + err))
-    })
+            .catch(err => res.status(400).json('Error ' + err));
+    });
 
     app.delete('/api/delete-debts/:id', (req, res, next) => {
         // Delete a debt
         db.Favour.findByPk(req.params.id)
             .then(debt => {
                 debt.destroy()
-                    .then(() => res.json('Favour deleted!'))
+                    .then(() => res.json('Debt deleted!'))
                     .catch(err => res.status(400).json('Error ' + err));
             })
             .catch(err => res.status(400).json('Error:' + err));
-    })
+    });
 
     app.post('/api/add-my-debts', (req, res, next) => {
         // Create a debt
@@ -47,40 +46,30 @@ module.exports = function (app, passport) {
             "Pho": 1,
             "Pizza": 2,
             "Sushi": 3
-        }
-
-        db.Favour.create({
-            description: req.body.description,
-            offererId: Number(req.body.offererId),
-            receiverId: Number(req.body.user_id),
-        }).then(debtInstance => {
-            debtInstance.save().catch(err => console.log(err))
-            console.log(debtInstance.id);
-            db.FavourReward.create({
-                rewardId: item_list[req.body.reward],
-                quantity: Number(req.body.quantity),
-                favourId: debtInstance.id
-            }).then(debtRewardInstance => {
-                debtRewardInstance.save().then(() => res.json("Debt Added")).catch(err => console.log(err))
-            }).catch(err => console.log(err));
-        }).catch(err => res.status(400).json('Error ' + err));
-    })
-
-    /*
-    app.get('/api/my-owed-favour', (req, res, next) => {
-        // Get all of my requests
-        if (req.isAuthenticated()) {
-            var user = {
-                id: req.session.passport.user,
-                isloggedin: req.isAuthenticated()
+        };
+        db.User.findOne({
+            where: {
+                email: req.body.offererEmail
             }
-            res.json(user);
-        } else {
-            console.log("You will be direct to all-requests");
-            res.redirect("/api/requests/all-requests");
-        }
-    })
-    */
-}
+        }).then(offerer => {
+            console.log(offerer.id)
+            db.Favour.create({
+                description: req.body.description,
+                offererId: offerer.id,
+                receiverId: Number(req.body.user_id),
+            }).then(debtInstance => {
+                debtInstance.save().catch(err => console.log(err))
+                db.FavourReward.create({
+                    rewardId: item_list[req.body.reward],
+                    quantity: Number(req.body.quantity),
+                    favourId: debtInstance.id
+                }).then(debtRewardInstance => {
+                    debtRewardInstance.save().then(() => res.json("Debt Added")).catch(err => console.log(err));
+                }).catch(err => console.log(err));
+            }).catch(err => res.status(400).json('Error ' + err));
+        }).catch(err => res.status(400).json('Error ' + err));
+    });
+
+};
 
 

@@ -8,7 +8,7 @@ export default class Leaderboard extends React.Component {
         this.state = {
             data: []
         };
-    }
+    };
 
     componentDidMount() {
         axios({
@@ -23,7 +23,7 @@ export default class Leaderboard extends React.Component {
         }).catch(err => {
             console.log(err);
         })
-    }
+    };
 
     render() {
 
@@ -48,5 +48,5 @@ export default class Leaderboard extends React.Component {
                 </div>
             </body>
         );
-    }
-}
+    };
+};

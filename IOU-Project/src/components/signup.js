@@ -11,10 +11,11 @@ export default class SignUp extends React.Component {
             password: ''
         };
         this.validateEmail = this.validateEmail.bind(this);
-    }
+    };
+
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-    }
+    };
     
     handleSubmit = (event) => {
         if(this.state.fullname.length !== 0 && this.state.email.length !== 0 && this.state.password.length !== 0) {
@@ -46,7 +47,7 @@ export default class SignUp extends React.Component {
         }
         
         
-    }
+    };
 
     validateEmail = (text) => {
         const validation = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -56,7 +57,7 @@ export default class SignUp extends React.Component {
         }
         console.log(false)
         return false;
-    }
+    };
 
 
     render() {
@@ -89,5 +90,5 @@ export default class SignUp extends React.Component {
                 </main>
             </body>
         );
-    }
-}
+    };
+};

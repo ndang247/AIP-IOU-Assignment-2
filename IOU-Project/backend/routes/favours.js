@@ -16,10 +16,10 @@ module.exports = function (app, passport) {
             type: QueryTypes.SELECT
         })
             .then(data => {
-                res.json(data)
+                res.json(data);
             })
             .catch(err => res.status(400).json('Error:' + err));
-    })
+    });
 
     app.post('/api/update-favours/:id', (req, res, next) => {
         // Update a favour when user wants to edit
@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
             .catch(err => res.status(400).json('Error ' + err));
         })
         .catch(err => res.status(400).json('Error:' + err));
-    })
+    });
 
     app.delete('/api/delete-favours/:id', (req, res, next) => {
         // Delete a favour
@@ -43,7 +43,7 @@ module.exports = function (app, passport) {
             .catch(err => res.status(400).json('Error ' + err));
         })
         .catch(err => res.status(400).json('Error:' + err));
-    })
+    });
 
     app.post('/api/add-my-favours', (req, res, next) => {
         // Create a debt
@@ -51,25 +51,30 @@ module.exports = function (app, passport) {
             "Pho": 1,
             "Pizza": 2,
             "Sushi": 3
-        }
+        };
 
-        db.Favour.create({
-            description: req.body.description,
-            offererId: Number(req.body.user_id),
-            receiverId: Number(req.body.receiverId)
-        }).then(favourInstance => {
-            favourInstance.save().catch(err => console.log(err))
-            console.log(favourInstance.id);
-            db.FavourReward.create({
-                rewardId: item_list[req.body.reward],
-                quantity: Number(req.body.quantity),
-                favourId: favourInstance.id
-            }).then(favourRewardInstance => {
-                favourRewardInstance.save().then(() => res.json("Favour Added")).catch(err => console.log(err))
-            }).catch(err => console.log(err));
+        db.User.findOne({
+            where: {
+                email: req.body.receiverEmail
+            }
+        }).then(receiver => {
+            db.Favour.create({
+                description: req.body.description,
+                offererId: Number(req.body.user_id),
+                receiverId: receiver.id
+            }).then(favourInstance => {
+                console.log(favourInstance)
+                favourInstance.save().catch(err => console.log(err));
+                db.FavourReward.create({
+                    rewardId: item_list[req.body.reward],
+                    quantity: Number(req.body.quantity),
+                    favourId: favourInstance.id
+                }).then(favourRewardInstance => {
+                    favourRewardInstance.save().then(() => res.json("Favour Added")).catch(err => console.log(err))
+                }).catch(err => console.log(err));
+            }).catch(err => res.status(400).json('Error ' + err));
         }).catch(err => res.status(400).json('Error ' + err));
-    })
+    });
 
-
-}
+};
 
